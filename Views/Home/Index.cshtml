@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var pic = User?.Claims.FirstOrDefault(x => x.Type == "urn:google:picture").Value;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@foreach (var claim in User.Claims)
+{
+    <div>
+        <span>@claim.Type</span>
+        - 
+        <span>@claim.Value</span>
+    </div>
+}
+
+@if(Context.User.Identity.IsAuthenticated)
+{
+    <span>Hello @User.Identity.Name</span>
+}
