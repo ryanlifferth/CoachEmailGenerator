@@ -5,17 +5,6 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoachEmailGenerator", "CoachEmailGenerator.csproj", "{B7C7C53A-29C9-4CAF-875B-8AF2593269B1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8E17D7DE-9118-4A03-A49A-E113353F3BA3}"
-	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-		README.md = README.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{312DD66E-A727-4E7B-8229-BE5B78A5CA6C}"
-	ProjectSection(SolutionItems) = preProject
-		README-IMG\admin-sections.png = README-IMG\admin-sections.png
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,9 +18,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{312DD66E-A727-4E7B-8229-BE5B78A5CA6C} = {8E17D7DE-9118-4A03-A49A-E113353F3BA3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {43799A32-F8E0-4D97-AE69-8E88C21507AF}
