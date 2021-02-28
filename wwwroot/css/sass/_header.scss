@@ -1,18 +1,89 @@
-﻿.user-icon {
-    cursor: pointer;
+﻿$nav-user-color: #0C6288;
+$nav-user-login-font-color: rgba(255,255,255,0.7);
+$nav-user-logout-font-color: rgba(0,0,0,0.7);
 
-    img {
-        background-size: 35px 35px;
-        border: 0;
-        border-radius: 50%;
-        height: 35px;
-        margin: 0;
-        position: relative;
-        width: 35px;
-        z-index: 0;
+.user {
+    color: $nav-user-color;
+    padding-top: 2px;
 
-        &:hover, &:focus {
-            box-shadow: 0 0 2px 3px rgba(0, 0, 0, 0.15);
+    .account-action {
+        display: inline-block;
+        //font-family: Roboto;
+        margin: 0 9px 0 0;
+        vertical-align: top;
+
+        .name {
+            color: $nav-user-color;
+            display: block;
+            //font-family: Roboto;
+            font-size: 14px;
+            font-weight: 400;
+            //margin-top: 3px;
+            text-transform: uppercase;
+        }
+
+        .logout {
+            color: $nav-user-logout-font-color;
+            display: block;
+            font-size: 13px;
+            margin: -3px 0 0 0;
+            text-align: right;
+
+            .fal {
+                margin-left: 3px;
+            }
+
+            &:hover {
+                color: #62B0E8;
+                //text-shadow: 0 0 1px rgba(241,91,40,0.2);
+                .fal {
+                    color: #b44d12;
+                }
+            }
+        }
+
+        .login {
+            color: $nav-user-login-font-color;
+            display: block;
+            font-size: 20px;
+            margin: -4px 0 0 0;
+            text-align: right;
+
+            .fal {
+                margin-left: 3px;
+            }
+
+            &:hover {
+                color: #799900;
+                //text-shadow: 0 0 1px rgba(241,91,40,0.2);
+                .fal {
+                    color: #F15B28;
+                }
+            }
+        }
+    }
+
+    .user-icon {
+        cursor: pointer;
+
+        img {
+            //border: 1px solid rgba(0,0,0,0.4);
+            border-radius: 45px;
+            //box-shadow: 0 0 3px rgba(0,0,0,0.7);
+            display: inline-block;
+            height: 85px;
+            margin: 3px 0 0;
+            overflow: hidden;
+            padding: 2px;
+            //transform: rotate(10deg);
+            transition: all .2s ease;
+            vertical-align: inherit;
+
+            &:hover {
+                transform: rotate(-8deg);
+                transition: all .2s ease;
+                //background-color: rgba(207,220,66,0.5);
+            }
         }
     }
 }

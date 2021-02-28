@@ -22,16 +22,54 @@ a {
   padding-top: calc(90px + 10px);
   min-height: calc(100vh - (42px + 20px)); }
 
-.user-icon {
-  cursor: pointer; }
-  .user-icon img {
-    background-size: 35px 35px;
-    border: 0;
-    border-radius: 50%;
-    height: 35px;
-    margin: 0;
-    position: relative;
-    width: 35px;
-    z-index: 0; }
-    .user-icon img:hover, .user-icon img:focus {
-      box-shadow: 0 0 2px 3px rgba(0, 0, 0, 0.15); }
+.user {
+  color: #0C6288;
+  padding-top: 2px; }
+  .user .account-action {
+    display: inline-block;
+    margin: 0 9px 0 0;
+    vertical-align: top; }
+    .user .account-action .name {
+      color: #0C6288;
+      display: block;
+      font-size: 14px;
+      font-weight: 400;
+      text-transform: uppercase; }
+    .user .account-action .logout {
+      color: rgba(0, 0, 0, 0.7);
+      display: block;
+      font-size: 13px;
+      margin: -3px 0 0 0;
+      text-align: right; }
+      .user .account-action .logout .fal {
+        margin-left: 3px; }
+      .user .account-action .logout:hover {
+        color: #62B0E8; }
+        .user .account-action .logout:hover .fal {
+          color: #b44d12; }
+    .user .account-action .login {
+      color: rgba(255, 255, 255, 0.7);
+      display: block;
+      font-size: 20px;
+      margin: -4px 0 0 0;
+      text-align: right; }
+      .user .account-action .login .fal {
+        margin-left: 3px; }
+      .user .account-action .login:hover {
+        color: #799900; }
+        .user .account-action .login:hover .fal {
+          color: #F15B28; }
+  .user .user-icon {
+    cursor: pointer; }
+    .user .user-icon img {
+      border-radius: 45px;
+      display: inline-block;
+      height: 85px;
+      margin: 3px 0 0;
+      overflow: hidden;
+      padding: 2px;
+      transition: all .2s ease;
+      vertical-align: inherit; }
+      .user .user-icon img:hover {
+        transform: rotate(-8deg);
+        transition: all .2s ease; }
