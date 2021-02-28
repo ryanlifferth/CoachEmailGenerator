@@ -40,3 +40,15 @@ a {
 
 
 @import 'header';
+
+footer {
+    background-color: rgba(216, 218, 219, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    color: #818182;
+    font-size: 13px;
+    margin-top: 20px;
+    max-height: 33px;
+    padding: 6px 2rem 4px;
+    text-transform: lowercase;
+}
+

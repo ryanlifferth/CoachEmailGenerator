@@ -86,7 +86,6 @@ header {
         img {
             border: 1px solid rgba(0,0,0,0.2);
             border-radius: 50%;
-            //box-shadow: 0 0 3px rgba(0,0,0,0.7);
             display: inline-block;
             height: $user-img-height;
             margin: -8px 0 0;
@@ -105,22 +104,22 @@ header {
         }
 
         .img-overhang {
-            height: $user-img-shadow-overhang-height;
-            width: $user-img-height;
-            position: absolute;
             bottom: calc(#{$user-img-shadow-overhang-height} * -1);
+            height: $user-img-shadow-overhang-height;
             overflow: hidden;
+            position: absolute;
+            width: $user-img-height;
 
             .img-overhang-shadow {
-                height: $user-img-height;
-                width: $user-img-height;
-                display: block;
                 align-items: baseline;
-                position: absolute;
                 bottom: 2px;
                 //border: 1px solid rgba(0,0,0,0.2);
                 border-radius: 50%;
                 box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.17);
+                display: block;
+                height: $user-img-height;
+                position: absolute;
+                width: $user-img-height;
             }
         }
     }

@@ -83,17 +83,27 @@ header {
         transform: rotate(8deg);
         transition: all .2s ease; }
     .user .user-icon .img-overhang {
-      height: calc((75px - 58px) + 3px);
-      width: 75px;
-      position: absolute;
       bottom: calc(calc((75px - 58px) + 3px) * -1);
-      overflow: hidden; }
+      height: calc((75px - 58px) + 3px);
+      overflow: hidden;
+      position: absolute;
+      width: 75px; }
       .user .user-icon .img-overhang .img-overhang-shadow {
-        height: 75px;
-        width: 75px;
-        display: block;
         align-items: baseline;
-        position: absolute;
         bottom: 2px;
         border-radius: 50%;
-        box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.17); }
+        box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.17);
+        display: block;
+        height: 75px;
+        position: absolute;
+        width: 75px; }
+
+footer {
+  background-color: rgba(216, 218, 219, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  color: #818182;
+  font-size: 13px;
+  margin-top: 20px;
+  max-height: 33px;
+  padding: 6px 2rem 4px;
+  text-transform: lowercase; }
