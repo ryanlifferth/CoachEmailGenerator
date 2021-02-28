@@ -18,6 +18,18 @@ header {
     margin-bottom: $header-margin;
 }
 
+nav.navbar {
+
+    .navbar-brand {
+        position: absolute;
+
+        img {
+            width: 40px;
+        }
+    }
+
+}
+
 .user {
     color: $nav-user-color;
     padding-top: 2px;

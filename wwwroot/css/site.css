@@ -29,6 +29,11 @@ header {
   height: 58px;
   margin-bottom: 10px; }
 
+nav.navbar .navbar-brand {
+  position: absolute; }
+  nav.navbar .navbar-brand img {
+    width: 40px; }
+
 .user {
   color: #0C6288;
   padding-top: 2px; }
