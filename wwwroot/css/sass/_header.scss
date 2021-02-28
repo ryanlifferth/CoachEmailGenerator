@@ -1,6 +1,22 @@
-﻿$nav-user-color: #0C6288;
+﻿@import 'variables';
+
+$nav-bg-color: #fff;
+
+$nav-user-color: #0C6288;
 $nav-user-login-font-color: rgba(255,255,255,0.7);
 $nav-user-logout-font-color: rgba(0,0,0,0.7);
+
+$user-img-height: 75px;
+$user-img-shadow-overhang-height: calc((#{$user-img-height} - #{$header-height}) + 3px);
+
+header {
+    background-color: $nav-bg-color!important;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    //box-shadow: 0 0px 6px -3px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 6px -3px rgba(0,0,0,0.2);
+    height: $header-height;
+    margin-bottom: $header-margin;
+}
 
 .user {
     color: $nav-user-color;
@@ -9,7 +25,7 @@ $nav-user-logout-font-color: rgba(0,0,0,0.7);
     .account-action {
         display: inline-block;
         //font-family: Roboto;
-        margin: 0 9px 0 0;
+        margin: 3px 9px 0 0;
         vertical-align: top;
 
         .name {
@@ -17,7 +33,7 @@ $nav-user-logout-font-color: rgba(0,0,0,0.7);
             display: block;
             //font-family: Roboto;
             font-size: 14px;
-            font-weight: 400;
+            font-weight: 600;
             //margin-top: 3px;
             text-transform: uppercase;
         }
@@ -35,6 +51,7 @@ $nav-user-logout-font-color: rgba(0,0,0,0.7);
 
             &:hover {
                 color: #62B0E8;
+                text-decoration: none;
                 //text-shadow: 0 0 1px rgba(241,91,40,0.2);
                 .fal {
                     color: #b44d12;
@@ -67,22 +84,43 @@ $nav-user-logout-font-color: rgba(0,0,0,0.7);
         cursor: pointer;
 
         img {
-            //border: 1px solid rgba(0,0,0,0.4);
-            border-radius: 45px;
+            border: 1px solid rgba(0,0,0,0.2);
+            border-radius: 50%;
             //box-shadow: 0 0 3px rgba(0,0,0,0.7);
             display: inline-block;
-            height: 85px;
-            margin: 3px 0 0;
+            height: $user-img-height;
+            margin: -8px 0 0;
             overflow: hidden;
-            padding: 2px;
+            position: absolute;
+            //padding: 2px;
             //transform: rotate(10deg);
             transition: all .2s ease;
             vertical-align: inherit;
 
             &:hover {
-                transform: rotate(-8deg);
+                transform: rotate(8deg);
                 transition: all .2s ease;
                 //background-color: rgba(207,220,66,0.5);
+            }
+        }
+
+        .img-overhang {
+            height: $user-img-shadow-overhang-height;
+            width: $user-img-height;
+            position: absolute;
+            bottom: calc(#{$user-img-shadow-overhang-height} * -1);
+            overflow: hidden;
+
+            .img-overhang-shadow {
+                height: $user-img-height;
+                width: $user-img-height;
+                display: block;
+                align-items: baseline;
+                position: absolute;
+                bottom: 2px;
+                //border: 1px solid rgba(0,0,0,0.2);
+                border-radius: 50%;
+                box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.17);
             }
         }
     }
