@@ -34,8 +34,8 @@ a {
 // Body container
 .body-content {
     padding-top: calc(#{$header-height} + #{$header-margin});
-    //min-height: calc(100vh - (#{$footer-height} + #{$footer-margin}));
-    min-height: calc(100vh - (#{$footer-height} + 1px)); // 1px for footer margin
+    min-height: calc(100vh - (#{$footer-height} + #{$footer-margin}));
+    //min-height: calc(100vh - (#{$footer-height} + 1px)); // 1px for footer margin
 }
 
 
@@ -46,8 +46,8 @@ footer {
     border-top: 1px solid rgba(0, 0, 0, 0.05);
     color: #818182;
     font-size: 13px;
-    margin-top: 20px;
-    max-height: 33px;
+    margin-top: $footer-margin;
+    max-height: $footer-height;
     padding: 6px 2rem 4px;
     text-transform: lowercase;
 }

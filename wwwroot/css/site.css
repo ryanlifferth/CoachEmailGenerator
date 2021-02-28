@@ -20,7 +20,7 @@ a {
 
 .body-content {
   padding-top: calc(58px + 10px);
-  min-height: calc(100vh - (24px + 1px)); }
+  min-height: calc(100vh - (30px + 20px)); }
 
 header {
   background-color: #fff !important;
@@ -104,6 +104,6 @@ footer {
   color: #818182;
   font-size: 13px;
   margin-top: 20px;
-  max-height: 33px;
+  max-height: 30px;
   padding: 6px 2rem 4px;
   text-transform: lowercase; }
