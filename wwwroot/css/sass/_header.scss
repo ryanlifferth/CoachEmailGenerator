@@ -7,29 +7,72 @@ $nav-user-login-font-color: rgba(255,255,255,0.7);
 $nav-user-logout-font-color: rgba(0,0,0,0.7);
 
 $user-img-height: 75px;
-$user-img-shadow-overhang-height: calc((#{$user-img-height} - #{$header-height}) + 3px);
+//$user-img-shadow-overhang-height: calc((#{$user-img-height} - #{$header-height}) + 3px);
+$user-img-shadow-overhang-height: 20px;
+// snow colors
+// Navy:  #003057
+// Orange:  #F47920
+// Accent Orange: #FAA634
+//@font-face {
+//    font-family: 'Snow College Badgers';
+//    src: local('../font/Snow_College_Badgers.otf');
+//}
 
 header {
     background-color: $nav-bg-color!important;
     border-bottom: 1px solid rgba(0,0,0,0.1);
     //box-shadow: 0 0px 6px -3px rgb(0 0 0 / 20%);
     box-shadow: 0 0 6px -3px rgba(0,0,0,0.2);
-    height: $header-height;
+    //height: $header-height;
     margin-bottom: $header-margin;
 }
 
 nav.navbar {
+    padding: 4px 0 6px 0;
 
     .navbar-brand {
-        position: absolute;
+        color: #003057;
+        display: block;
+        //font-family: 'Snow College Badgers';
+        font-family: Lato, Roboto, 'Open Sans';
+        line-height: normal;
+        margin: 0 10px 0 0;
+        padding: 0 0 0 42px;
+        position: relative;
+        text-align: right;
+        text-shadow: 0 0 2px rgba(0,0,0,0.4);
+
+        .coach {
+            color: #f47920;
+            display: block;
+            font-size: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .emailer {
+            color: #003057;
+            display: block;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 8px;
+            margin-right: -6px;
+            margin-top: -5px;
+            text-transform: lowercase;
+        }
 
         img {
-            width: 40px;
-            //filter: sepia(70%) brightness(90%) contrast(90%) hue-rotate(190deg) saturate(700%);
-            filter: invert(3%) sepia(130%) saturate(5225%) hue-rotate(193deg) brightness(95%) contrast(102%); // navy
-            //snow navy:  #003768
+            filter: invert(10%) sepia(70%) saturate(4000%) hue-rotate(195deg) brightness(50%) drop-shadow(0 0 2px #f47920);
+            left: 0;
+            position: absolute;
+            top: 6px;
+            transform: rotate(4deg);
+            width: 45px;
             //https://codepen.io/sosuke/pen/Pjoqqp
-
+            //filter: sepia(70%) brightness(90%) contrast(90%) hue-rotate(190deg) saturate(700%);
+            //filter: invert(3%) sepia(130%) saturate(5225%) hue-rotate(193deg) brightness(95%) contrast(102%); // navy from black
+            //filter:  invert(9%) sepia(77%) saturate(4738%) hue-rotate(193deg) brightness(95%) contrast(102%); // this one comes out light blue for this image
+            //snow navy:  #003768
         }
     }
 }
@@ -61,7 +104,7 @@ nav.navbar {
             margin: -3px 0 0 0;
             text-align: right;
 
-            .fal {
+            .far {
                 margin-left: 3px;
             }
 
@@ -69,8 +112,9 @@ nav.navbar {
                 color: #62B0E8;
                 text-decoration: none;
                 //text-shadow: 0 0 1px rgba(241,91,40,0.2);
-                .fal {
-                    color: #b44d12;
+                .far {
+                    //color: #b44d12;  //red
+                    color: #F47920; // snow orange
                 }
             }
         }
@@ -104,7 +148,7 @@ nav.navbar {
             border-radius: 50%;
             display: inline-block;
             height: $user-img-height;
-            margin: -8px 0 0;
+            margin: -10px 0 0;
             overflow: hidden;
             position: absolute;
             //padding: 2px;
@@ -128,10 +172,10 @@ nav.navbar {
 
             .img-overhang-shadow {
                 align-items: baseline;
-                bottom: 2px;
+                bottom: 6px;
                 //border: 1px solid rgba(0,0,0,0.2);
                 border-radius: 50%;
-                box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.17);
+                box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.19);
                 display: block;
                 height: $user-img-height;
                 position: absolute;

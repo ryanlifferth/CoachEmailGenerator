@@ -1,6 +1,7 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Lato|Montserrat|Open+Sans:300,400,500,600|Roboto|Merriweather+Sans:300,400,500,600|Titillium+Web:300,400,500,600,700');
 @import 'variables';
 
+//Lato, Montserrat, Roboto, 'Merriweather Sans', 'Titillium Web'
 
 //$body-bg-color: #f2f6fa;
 //$body-bg-color: rgba(243,242,239,1);  // linkedin bg
@@ -50,5 +51,13 @@ footer {
     max-height: $footer-height;
     padding: 6px 2rem 4px;
     text-transform: lowercase;
+
+    .copy {
+        color: #F47920;
+    }
+
+    .name {
+        color: #62B0E8;
+    }
 }
 

@@ -19,21 +19,49 @@ a {
   cursor: pointer; }
 
 .body-content {
-  padding-top: calc(58px + 10px);
+  padding-top: calc(64px + 10px);
   min-height: calc(100vh - (30px + 20px)); }
 
 header {
   background-color: #fff !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 6px -3px rgba(0, 0, 0, 0.2);
-  height: 58px;
   margin-bottom: 10px; }
 
-nav.navbar .navbar-brand {
-  position: absolute; }
-  nav.navbar .navbar-brand img {
-    width: 40px;
-    filter: invert(3%) sepia(130%) saturate(5225%) hue-rotate(193deg) brightness(95%) contrast(102%); }
+nav.navbar {
+  padding: 4px 0 6px 0; }
+  nav.navbar .navbar-brand {
+    color: #003057;
+    display: block;
+    font-family: Lato, Roboto, 'Open Sans';
+    line-height: normal;
+    margin: 0 10px 0 0;
+    padding: 0 0 0 42px;
+    position: relative;
+    text-align: right;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.4); }
+    nav.navbar .navbar-brand .coach {
+      color: #f47920;
+      display: block;
+      font-size: 30px;
+      font-weight: 600;
+      text-transform: uppercase; }
+    nav.navbar .navbar-brand .emailer {
+      color: #003057;
+      display: block;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 8px;
+      margin-right: -6px;
+      margin-top: -5px;
+      text-transform: lowercase; }
+    nav.navbar .navbar-brand img {
+      filter: invert(10%) sepia(70%) saturate(4000%) hue-rotate(195deg) brightness(50%) drop-shadow(0 0 2px #f47920);
+      left: 0;
+      position: absolute;
+      top: 6px;
+      transform: rotate(4deg);
+      width: 45px; }
 
 .user {
   color: #0C6288;
@@ -54,13 +82,13 @@ nav.navbar .navbar-brand {
       font-size: 13px;
       margin: -3px 0 0 0;
       text-align: right; }
-      .user .account-action .logout .fal {
+      .user .account-action .logout .far {
         margin-left: 3px; }
       .user .account-action .logout:hover {
         color: #62B0E8;
         text-decoration: none; }
-        .user .account-action .logout:hover .fal {
-          color: #b44d12; }
+        .user .account-action .logout:hover .far {
+          color: #F47920; }
     .user .account-action .login {
       color: rgba(255, 255, 255, 0.7);
       display: block;
@@ -80,7 +108,7 @@ nav.navbar .navbar-brand {
       border-radius: 50%;
       display: inline-block;
       height: 75px;
-      margin: -8px 0 0;
+      margin: -10px 0 0;
       overflow: hidden;
       position: absolute;
       transition: all .2s ease;
@@ -89,16 +117,16 @@ nav.navbar .navbar-brand {
         transform: rotate(8deg);
         transition: all .2s ease; }
     .user .user-icon .img-overhang {
-      bottom: calc(calc((75px - 58px) + 3px) * -1);
-      height: calc((75px - 58px) + 3px);
+      bottom: calc(20px * -1);
+      height: 20px;
       overflow: hidden;
       position: absolute;
       width: 75px; }
       .user .user-icon .img-overhang .img-overhang-shadow {
         align-items: baseline;
-        bottom: 2px;
+        bottom: 6px;
         border-radius: 50%;
-        box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.17);
+        box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.19);
         display: block;
         height: 75px;
         position: absolute;
@@ -113,3 +141,7 @@ footer {
   max-height: 30px;
   padding: 6px 2rem 4px;
   text-transform: lowercase; }
+  footer .copy {
+    color: #F47920; }
+  footer .name {
+    color: #62B0E8; }
