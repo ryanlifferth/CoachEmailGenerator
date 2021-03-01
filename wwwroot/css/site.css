@@ -32,7 +32,8 @@ header {
 nav.navbar .navbar-brand {
   position: absolute; }
   nav.navbar .navbar-brand img {
-    width: 40px; }
+    width: 40px;
+    filter: invert(3%) sepia(130%) saturate(5225%) hue-rotate(193deg) brightness(95%) contrast(102%); }
 
 .user {
   color: #0C6288;

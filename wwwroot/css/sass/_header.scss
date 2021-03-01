@@ -25,9 +25,13 @@ nav.navbar {
 
         img {
             width: 40px;
+            //filter: sepia(70%) brightness(90%) contrast(90%) hue-rotate(190deg) saturate(700%);
+            filter: invert(3%) sepia(130%) saturate(5225%) hue-rotate(193deg) brightness(95%) contrast(102%); // navy
+            //snow navy:  #003768
+            //https://codepen.io/sosuke/pen/Pjoqqp
+
         }
     }
-
 }
 
 .user {
