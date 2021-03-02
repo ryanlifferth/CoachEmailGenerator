@@ -1,4 +1,5 @@
 using CoachEmailGenerator.Common;
+using CoachEmailGenerator.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
@@ -66,6 +67,9 @@ namespace CoachEmailGenerator
                 });
 
             services.AddControllersWithViews();
+
+            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddTransient<GmailApiService>();
 
         }
 

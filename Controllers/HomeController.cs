@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using CoachEmailGenerator.Services;
 
 namespace CoachEmailGenerator.Controllers
 {
@@ -16,10 +17,12 @@ namespace CoachEmailGenerator.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private GmailApiService _gmailApiService;
         
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, GmailApiService gmailApiService)
         {
             _logger = logger;
+            _gmailApiService = gmailApiService;
 
             //var opts = config.GetSection("TinyDrive");
         }
@@ -36,6 +39,7 @@ namespace CoachEmailGenerator.Controllers
             var s = Id.ToString();
             var r = template.Email;
 
+            
 
             return View();
         }
