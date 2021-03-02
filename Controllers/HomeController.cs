@@ -16,14 +16,27 @@ namespace CoachEmailGenerator.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+
+            //var opts = config.GetSection("TinyDrive");
         }
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Index(int Id, [Bind("Id, Email")] EmailTemplate template)
+        {
+            var s = Id.ToString();
+            var r = template.Email;
+
+
             return View();
         }
 

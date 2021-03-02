@@ -1,23 +1,40 @@
-﻿@{
+﻿@model CoachEmailGenerator.Models.EmailTemplate
+@{
     ViewData["Title"] = "Home Page";
     var pic = User?.Claims.FirstOrDefault(x => x.Type == "urn:google:picture").Value;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+
+
+
+
+<form asp-route="Index" method="post">
+
+    <input type="hidden" asp-for="Id" value="3" />
+
+    <textarea asp-for="Email"></textarea>
+
+    <input type="submit" value="Save" />
+</form>
+
+
 
 @foreach (var claim in User.Claims)
 {
     <div>
         <span>@claim.Type</span>
-        - 
+        -
         <span>@claim.Value</span>
     </div>
 }
 
-@if(Context.User.Identity.IsAuthenticated)
+@if (Context.User.Identity.IsAuthenticated)
 {
     <span>Hello @User.Identity.Name</span>
+}
+
+
+@section Scripts {
+    <script src="~/js/tiny.js" asp-append-version="true"></script>
 }
