@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using CoachEmailGenerator.Services;
+using Google.Apis.Auth.OAuth2;
 
 namespace CoachEmailGenerator.Controllers
 {
@@ -34,12 +35,15 @@ namespace CoachEmailGenerator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(int Id, [Bind("Id, Email")] EmailTemplate template)
+        public async Task<IActionResult> Index(int Id, [Bind("Id, Email")] EmailTemplate template)
         {
             var s = Id.ToString();
-            var r = template.Email;
+            var emailText = template.Email;
 
-            
+            var userEmailAddress = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var cred = GoogleCredential.FromAccessToken(accessToken);
+            _gmailApiService.CreateEmail(cred, emailText, userEmailAddress);
 
             return View();
         }

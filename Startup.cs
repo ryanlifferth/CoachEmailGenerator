@@ -1,5 +1,6 @@
 using CoachEmailGenerator.Common;
 using CoachEmailGenerator.Services;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
@@ -25,6 +26,8 @@ namespace CoachEmailGenerator
         }
 
         public IConfiguration Configuration { get; }
+        public GoogleCredential GoogleCredential { get; set; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -43,9 +46,13 @@ namespace CoachEmailGenerator
                 .AddCookie()
                 .AddGoogle(options =>
                 {
-                    options.ClientId = "771637093207-p5smkieio5328bc0g53mkcqmpgpn6pej.apps.googleusercontent.com";
-                    options.ClientSecret = "mskJrsnekCoi1zc2YWP4ShFx";
+                    options.ClientId = Configuration["GoogleApiAuth:ClientId"];
+                    options.ClientSecret = Configuration["GoogleApiAuth:ClientSecret"];
 
+                    options.Scope.Add("email");
+                    options.Scope.Add("profile");
+                    options.Scope.Add("https://mail.google.com");
+                    
                     options.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
                     options.ClaimActions.MapJsonKey("urn:google:locale", "locale", "string");
                     options.SaveTokens = true;
@@ -62,6 +69,9 @@ namespace CoachEmailGenerator
 
                         ctx.Properties.StoreTokens(tokens);
 
+                        // Get Google Creds for email execution
+                        //GoogleCredential = GoogleCredential.FromAccessToken(ctx.AccessToken);
+                        
                         return Task.CompletedTask;
                     };
                 });
