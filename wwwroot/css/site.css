@@ -102,7 +102,9 @@ nav.navbar {
         .user .account-action .login:hover .fal {
           color: #F15B28; }
   .user .user-icon {
-    cursor: pointer; }
+    cursor: pointer;
+    display: inline;
+    margin-right: 65px; }
     .user .user-icon img {
       border: 1px solid rgba(0, 0, 0, 0.2);
       border-radius: 50%;
