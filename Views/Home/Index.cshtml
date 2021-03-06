@@ -21,16 +21,16 @@
 
 @foreach (var claim in User.Claims)
 {
-    <div>
+    <!--<div>
         <span>@claim.Type</span>
         -
         <span>@claim.Value</span>
-    </div>
+    </div>-->
 }
 
 @if (Context.User.Identity.IsAuthenticated)
 {
-    <span>Hello @User.Identity.Name</span>
+    <!--<span>Hello @User.Identity.Name</span>-->
 }
 
 

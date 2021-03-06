@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CoachEmailGenerator.Services
@@ -33,8 +34,14 @@ namespace CoachEmailGenerator.Services
                 ApplicationName = "Coach Email Web Client"
             });
 
-            
-            CreateGmailDraft(service, userEmailAddress, emailText);
+            var tagValues = new Dictionary<string, string>()
+            {
+                { "coach-name", "RYAN LIFFERTH" },
+                { "school-name", "BYU" }
+            };
+            var scrubbedEmailText = ReplaceEmailTags(emailText, tagValues);
+
+            CreateGmailDraft(service, userEmailAddress, scrubbedEmailText);
 
         }
 
@@ -75,6 +82,21 @@ namespace CoachEmailGenerator.Services
             msg.To.Add(new MailAddress("coach@school.edu", "Coach Coachy"));
 
             return msg;
+        }
+
+        private string ReplaceEmailTags(string emailText, Dictionary<string, string> tagValues)
+        {
+            string scrubbedText = emailText;
+            string pattern = String.Empty;
+
+            foreach (var item in tagValues)
+            {
+                pattern = $"<span .*? data-school-info=\"{item.Key}\".*?>(.*?)<\\/span>";
+
+                scrubbedText = Regex.Replace(scrubbedText, pattern, item.Value);
+            }
+
+            return scrubbedText;
         }
 
     }
