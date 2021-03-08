@@ -7,9 +7,12 @@ namespace CoachEmailGenerator.Models
 {
     public class EmailTemplate
     {
-
-        public int Id { get; set; }
-        public string Email { get; set; }
+        public Guid Id { get; set; }
+        public string EmailAddress { get; set; }
+        public string EmailSubjectLine { get; set; }
+        public string EmailBody { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime LastEditedDate { get; set; }
 
     }
 }

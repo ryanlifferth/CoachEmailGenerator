@@ -11,9 +11,11 @@
 
 <form asp-route="Index" method="post">
 
-    <input type="hidden" asp-for="Id" value="3" />
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="EmailAddress" />
+    <input type="hidden" asp-for="EmailSubjectLine" />
 
-    <textarea asp-for="Email"></textarea>
+    <textarea asp-for="EmailBody"></textarea>
 
     <input type="submit" value="Save" />
 </form>
@@ -21,11 +23,11 @@
 
 @foreach (var claim in User.Claims)
 {
-    <!--<div>
+    <div>
         <span>@claim.Type</span>
         -
         <span>@claim.Value</span>
-    </div>-->
+    </div>
 }
 
 @if (Context.User.Identity.IsAuthenticated)

@@ -2,7 +2,7 @@
     "use strict";
     $(document).ready(function () {
         tinymce.init({
-            selector: 'textarea#Email',
+            selector: 'textarea#EmailBody',
             branding: false,
             menubar: false,
             //menubar: 'edit insert view format table tools help',
@@ -12,7 +12,7 @@
             setup: function (editor) {
 
                 var insertCoachName = function (tag, text) {
-                    editor.insertContent("<span data-school-info='" + tag + "' class='coach-button mceNonEditable'>[" + text + "]</span>&nbsp;");
+                    editor.insertContent("<span data-school-info='" + tag + "' class='coach-button mceNonEditable'>[" + text + "]</span>");
                 };
 
                 editor.addShortcut('meta+alt+N', 'Insert Coach Name', function () {

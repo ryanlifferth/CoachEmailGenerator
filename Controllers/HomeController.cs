@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoachEmailGenerator.Services;
 using Google.Apis.Auth.OAuth2;
+using System.IO;
+using System.Text.Json;
 
 namespace CoachEmailGenerator.Controllers
 {
@@ -19,31 +21,44 @@ namespace CoachEmailGenerator.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private GmailApiService _gmailApiService;
-        
-        public HomeController(ILogger<HomeController> logger, GmailApiService gmailApiService)
+        private SaveTemplateService _saveTemplateService;
+
+        public HomeController(ILogger<HomeController> logger, 
+            GmailApiService gmailApiService, 
+            SaveTemplateService saveTemplateService)
         {
             _logger = logger;
             _gmailApiService = gmailApiService;
+            _saveTemplateService = saveTemplateService;
 
             //var opts = config.GetSection("TinyDrive");
         }
 
         public IActionResult Index()
         {
-            return View();
+            var fileName = _saveTemplateService.GetUserNameFromEmail(User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value);
+            var filePath = Directory.GetCurrentDirectory() + "\\Data\\" + fileName;
+            var jsonString = System.IO.File.ReadAllText(filePath);
+            var template = JsonSerializer.Deserialize<EmailTemplate>(jsonString);
+
+            return View(template);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(int Id, [Bind("Id, Email")] EmailTemplate template)
+        public IActionResult Index(int Id, [Bind("Id, EmailAddress, EmailSubjectLine, EmailBody")] EmailTemplate template)
         {
             var s = Id.ToString();
-            var emailText = template.Email;
+            var emailText = template.EmailBody;
 
-            var userEmailAddress = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
-            var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var cred = GoogleCredential.FromAccessToken(accessToken);
-            _gmailApiService.CreateEmail(cred, emailText, userEmailAddress);
+            // Save to file
+            template.EmailAddress = string.IsNullOrEmpty(template.EmailAddress) ? User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value : template.EmailAddress;
+            _saveTemplateService.SaveTemplate(template);
+
+            //var userEmailAddress = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
+            //var accessToken = await HttpContext.GetTokenAsync("access_token");
+            //var cred = GoogleCredential.FromAccessToken(accessToken);
+            //_gmailApiService.CreateEmail(cred, emailText, userEmailAddress);
 
             return View();
         }

@@ -52,7 +52,8 @@ namespace CoachEmailGenerator
                     options.Scope.Add("email");
                     options.Scope.Add("profile");
                     options.Scope.Add("https://mail.google.com");
-                    
+
+
                     options.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
                     options.ClaimActions.MapJsonKey("urn:google:locale", "locale", "string");
                     options.SaveTokens = true;
@@ -80,6 +81,7 @@ namespace CoachEmailGenerator
 
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<GmailApiService>();
+            services.AddTransient<SaveTemplateService>();
 
         }
 

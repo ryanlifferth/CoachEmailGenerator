@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\" />
     <Folder Include="wwwroot\css\fonts\" />
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
