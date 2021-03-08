@@ -27,7 +27,7 @@ namespace CoachEmailGenerator.Services
             emailTemplate.LastEditedDate = now;
 
             var jsonString = JsonSerializer.Serialize(emailTemplate);
-            File.WriteAllText(path + "\\" + userName, jsonString);
+            File.WriteAllText(path + "\\" + userName + "-template.json", jsonString);
 
             return emailTemplate.Id;
         }

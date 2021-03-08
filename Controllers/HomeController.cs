@@ -37,9 +37,10 @@ namespace CoachEmailGenerator.Controllers
         public IActionResult Index()
         {
             var fileName = _saveTemplateService.GetUserNameFromEmail(User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value);
-            var filePath = Directory.GetCurrentDirectory() + "\\Data\\" + fileName;
-            var jsonString = System.IO.File.ReadAllText(filePath);
-            var template = JsonSerializer.Deserialize<EmailTemplate>(jsonString);
+            var filePath = Directory.GetCurrentDirectory() + "\\Data\\" + fileName + "-template.json";
+            
+            var jsonString = System.IO.File.Exists(filePath) ? System.IO.File.ReadAllText(filePath) : string.Empty;
+            var template = !string.IsNullOrEmpty(jsonString) ? JsonSerializer.Deserialize<EmailTemplate>(jsonString) : null;
 
             return View(template);
         }
