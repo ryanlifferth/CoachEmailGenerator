@@ -3,19 +3,77 @@
     display: table;
 
     .school-item {
-        display: flex;
-        flex-direction: row;
+        //display: flex;
+        display: table-row;
 
         .school-col {
-            //flex: 1;
+            flex: 1;
+            display: table-cell;
 
             &.school {
                 flex: 1;
+                font-weight: 600;
+                padding-right: 40px;
+                text-transform: uppercase;
+
+                .short-name {
+                    color: rgba(0,0,0,0.4);
+                    display: block;
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin-top: -3px;
+                    padding-left: 3px;
+                }
             }
 
             &.coach {
                 flex: 1;
+                font-size: 15px;
+                padding-bottom: 12px;
+                padding-right: 40px;
+
+                .email,
+                .phone {
+                    color: rgba(0, 0, 0, 0.5);
+                    display: block;
+                    font-size: 14px;
+                    margin-top: -2px;
+                }
             }
+
+            &.actions {
+                padding-right: 40px;
+
+                .icons {
+                    display: block;
+                    position: relative;
+                    top: 8px;
+
+                    .icon {
+                        --fa-primary-color: #255984;
+                        --fa-secondary-color: #255984;
+                        cursor: pointer;
+
+                        &.edit {
+                            --fa-primary-color: #f47920;
+                            --fa-secondary-opacity: 0.8;
+                            margin-right: 12px;
+
+                            &:hover {
+                                text-shadow: 0 0 2px rgba(244, 121, 32, 0.8);
+                            }
+                        }
+
+                        &:hover {
+                            text-shadow: 0 0 1px rgba(37, 89, 132, 0.8);
+                        }
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            background-color: rgba(0,0,0,0.02);
         }
     }
 }

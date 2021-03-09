@@ -5,28 +5,34 @@
 
 <form asp-route="Index" method="post">
 
-    New school goes here
 
     <div class="school-list">
         @foreach (var school in Model)
         {
             <div class="school-item">
-                <div class="school school-col">
+                <div class="school-col school">
                     @school.SchoolName
                     <span class="short-name">@school.SchoolNameShort</span>
                 </div>
-                <div class="coach school-col">
+                <div class="school-col coach">
                     @school.HeadCoach.Name
                     <span class="email">@school.HeadCoach.Email</span>
                     <span class="phone">@school.HeadCoach.PhoneNumber</span>
                 </div>
+                <div class="school-col actions">
+                    <div class="icons">
+                        <span class="icon fad fa-edit edit"></span>
+                        <span class="icon fad fa-trash-alt"></span>
+                    </div>
+                </div>
+
+                <input type="hidden" asp-for="@school.SchoolName" />
+                <input type="hidden" asp-for="@school.SchoolNameShort" />
+                <input type="hidden" asp-for="@school.HeadCoach.Name" />
+                <input type="hidden" asp-for="@school.HeadCoach.Email" />
+                <input type="hidden" asp-for="@school.HeadCoach.PhoneNumber" />
             </div>
 
-            <input type="hidden" asp-for="@school.SchoolName" />
-            <input type="hidden" asp-for="@school.SchoolNameShort" />
-            <input type="hidden" asp-for="@school.HeadCoach.Name" />
-            <input type="hidden" asp-for="@school.HeadCoach.Email" />
-            <input type="hidden" asp-for="@school.HeadCoach.PhoneNumber" />
         }
     </div>
 
