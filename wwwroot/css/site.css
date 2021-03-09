@@ -134,6 +134,16 @@ nav.navbar {
         position: absolute;
         width: 75px; }
 
+.school-list {
+  display: table; }
+  .school-list .school-item {
+    display: flex;
+    flex-direction: row; }
+    .school-list .school-item .school-col.school {
+      flex: 1; }
+    .school-list .school-item .school-col.coach {
+      flex: 1; }
+
 footer {
   background-color: rgba(216, 218, 219, 0.1);
   border-top: 1px solid rgba(0, 0, 0, 0.05);

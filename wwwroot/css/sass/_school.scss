@@ -1,0 +1,21 @@
+﻿
+.school-list {
+    display: table;
+
+    .school-item {
+        display: flex;
+        flex-direction: row;
+
+        .school-col {
+            //flex: 1;
+
+            &.school {
+                flex: 1;
+            }
+
+            &.coach {
+                flex: 1;
+            }
+        }
+    }
+}
