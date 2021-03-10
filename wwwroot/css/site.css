@@ -162,6 +162,25 @@ nav.navbar {
         position: absolute;
         width: 75px; }
 
+.add-new {
+  text-align: right;
+  width: 650px; }
+  .add-new .icon {
+    margin-right: 5px; }
+  .add-new button {
+    background-color: rgba(12, 99, 136, 0.8);
+    border: 1px solid rgba(12, 99, 136, 0.4);
+    font-size: 14px; }
+    .add-new button.btn-primary:hover {
+      background-color: rgba(12, 99, 136, 0.7); }
+    .add-new button.btn-primary:focus, .add-new button.btn-primary.focus {
+      background-color: rgba(12, 99, 136, 0.7);
+      border-color: rgba(12, 99, 136, 0.4);
+      box-shadow: 0 0 0 0.2rem rgba(12, 99, 136, 0.3); }
+    .add-new button.btn-primary:not(:disabled):not(.disabled):active {
+      background-color: rgba(12, 99, 136, 0.9);
+      border: 1px solid rgba(12, 99, 136, 0.5); }
+
 .school-list {
   display: table; }
   .school-list .school-item {
@@ -202,13 +221,26 @@ nav.navbar {
       .school-list .school-item .school-col.coach {
         flex: 1;
         font-size: 15px;
-        padding-right: 40px; }
+        padding-right: 30px; }
         .school-list .school-item .school-col.coach .email,
         .school-list .school-item .school-col.coach .phone {
           color: rgba(0, 0, 0, 0.5);
           display: block;
           font-size: 14px;
           margin-top: -2px; }
+      .school-list .school-item .school-col.enabled {
+        padding-right: 40px; }
+        .school-list .school-item .school-col.enabled .custom-control {
+          position: relative;
+          top: 10px; }
+          .school-list .school-item .school-col.enabled .custom-control label {
+            color: rgba(0, 0, 0, 0.5);
+            font-size: 14px;
+            left: 0;
+            position: relative; }
+        .school-list .school-item .school-col.enabled .custom-control-input:checked ~ .custom-control-label::before {
+          border-color: #0C6288;
+          background-color: #0C6288; }
       .school-list .school-item .school-col.actions {
         padding-right: 40px; }
         .school-list .school-item .school-col.actions .icons {
@@ -242,6 +274,20 @@ nav.navbar {
       text-transform: uppercase; }
     .school-list .school-item:hover {
       background-color: rgba(0, 0, 0, 0.02); }
+    .school-list .school-item.new-school-item .actions .icons .icon.close {
+      --fa-primary-color: darkred;
+      --fa-secondary-color: #f47920;
+      float: none;
+      top: 3px;
+      position: relative; }
+      .school-list .school-item.new-school-item .actions .icons .icon.close:hover {
+        --fa-secondary-color: #d66614 !important;
+        text-shadow: none; }
+
+.modal .modal-dialog .modal-content .modal-body {
+  text-align: center; }
+  .modal .modal-dialog .modal-content .modal-body img {
+    width: 300px; }
 
 footer {
   background-color: rgba(216, 218, 219, 0.1);

@@ -18,11 +18,16 @@ namespace CoachEmailGenerator.Controllers.api
 
         private readonly ILogger<HomeController> _logger;
         private SaveTemplateService _saveTemplateService;
+        private string _filePath = string.Empty;
 
         public SchoolInfoController(ILogger<HomeController> logger, SaveTemplateService saveTemplateService)
         {
             _logger = logger;
             _saveTemplateService = saveTemplateService;
+
+            // Get the local file location/path
+            //_filePath = Directory.GetCurrentDirectory() + "\\Data\\" + fileName + "-schools.json";
+            _filePath = Directory.GetCurrentDirectory() + "\\Data\\";
         }
 
         public IActionResult Index()
@@ -30,19 +35,35 @@ namespace CoachEmailGenerator.Controllers.api
             return View();
         }
 
-        [HttpPost("SaveTheSchool")]
-        public IActionResult SaveTheSchool(School school)
+        [HttpPost("SaveIsEnabled")]
+        public IActionResult SaveIsEnabled(string userEmail, Guid schoolId, bool isEnabled)
         {
             // Load JSON from file
-            var fileName = _saveTemplateService.GetUserNameFromEmail(User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value);
-            var filePath = Directory.GetCurrentDirectory() + "\\Data\\" + fileName + "-schools.json";
+            var schools = LoadSchoolListFromJsonSource(userEmail);
 
-            var jsonString = System.IO.File.Exists(filePath) ? System.IO.File.ReadAllText(filePath) : string.Empty;
-            var allSchools = !string.IsNullOrEmpty(jsonString) ? JsonSerializer.Deserialize<List<School>>(jsonString) : null;
-
-            if (allSchools != null)
+            if (schools != null)
             {
-                foreach (var item in allSchools.Where(x => x.Id == school.Id))
+                foreach (var item in schools.Where(x => x.Id == schoolId))
+                {
+                    item.IsEnabled = isEnabled;
+                }
+            }
+
+            // save the file
+            SaveSchoolListBackToJsonSource(userEmail, schools);
+
+            return Ok();
+        }
+
+        [HttpPost("SaveTheSchool")]
+        public IActionResult SaveTheSchool(string userEmail, School school)
+        {
+            // Load JSON from file
+            var schools = LoadSchoolListFromJsonSource(userEmail);
+
+            if (schools != null && school.Id != Guid.Empty)
+            {
+                foreach (var item in schools.Where(x => x.Id == school.Id))
                 {
                     item.SchoolName = school.SchoolName;
                     item.SchoolNameShort = school.SchoolNameShort;
@@ -53,11 +74,53 @@ namespace CoachEmailGenerator.Controllers.api
                 }
             }
 
+            if (school != null && school.Id == Guid.Empty)
+            {
+                // This is a new School, so add it to the object
+                school.Id = Guid.NewGuid();
+                schools.Add(school);
+            }
+
             // save the file
-            jsonString = JsonSerializer.Serialize(allSchools);
-            System.IO.File.WriteAllText(filePath, jsonString);
+            SaveSchoolListBackToJsonSource(userEmail, schools);
 
             return Ok();
+        }
+
+        [HttpPost("DeleteTheSchool")]
+        public IActionResult DeleteTheSchool(string userEmail, Guid schoolId)
+        {
+            // Load JSON from file
+            var schools = LoadSchoolListFromJsonSource(userEmail);
+
+            if (schools != null && schoolId != Guid.Empty)
+            {
+                schools.Remove(schools.FirstOrDefault(x => x.Id == schoolId));
+            }
+
+            // save the file
+            SaveSchoolListBackToJsonSource(userEmail, schools);
+
+            return Ok();
+        }
+
+        private List<School> LoadSchoolListFromJsonSource(string userEmail)
+        {
+            // Load JSON from file
+            var fileName = _saveTemplateService.GetUserNameFromEmail(userEmail) + "-schools.json";
+            var fullFilePath = _filePath + fileName;
+
+            var jsonString = System.IO.File.Exists(fullFilePath) ? System.IO.File.ReadAllText(fullFilePath) : string.Empty;
+            
+            return !string.IsNullOrEmpty(jsonString) ? JsonSerializer.Deserialize<List<School>>(jsonString) : null;
+        }
+
+        private void SaveSchoolListBackToJsonSource(string userEmail, List<School> schools)
+        {
+            var fileName = _saveTemplateService.GetUserNameFromEmail(userEmail) + "-schools.json";
+            var fullFilePath = _filePath + fileName;
+
+            System.IO.File.WriteAllText(fullFilePath, JsonSerializer.Serialize(schools));
         }
 
     }

@@ -1,12 +1,55 @@
 ﻿@model List<CoachEmailGenerator.Models.School>
 @{
     ViewData["Title"] = "School Page";
+    var userEmail = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
 }
 
 <form asp-route="Index" method="post">
 
+    <div class="add-new">
+        <button type="button" class="btn btn-primary btn-add-school">
+            <span class="far fa-plus icon"></span>
+            Add new school
+        </button>
+    </div>
 
     <div class="school-list">
+
+        <div class="school-item new-school-item d-none">
+            <div class="school-col school">
+                <div class="edits">
+                    <label for="">School Name</label>
+                    <input type="text" id="newSchoolName" class="full-width school-name" />
+                    <label for="">School Abbreviation</label>
+                    <input type="text" id="newSchoolNameShort" class="school-name-short" />
+                </div>
+            </div>
+            <div class="school-col coach">
+                <div class="edits">
+                    <label for="">Head Coach</label>
+                    <input type="text" id="newHeadCoachName" class="full-width coach-name" />
+                    <label for="">Email</label>
+                    <input type="text" id="newSHeadCoachEmail" class="full-width coach-email" />
+                    <label for="">Phone</label>
+                    <input type="text" id="newHeadCoachPhoneNumber" class="coach-phone" />
+                </div>
+            </div>
+            <div class="school-col actions">
+                <div class="icons">
+                    <span class="icon fad fa-save save"></span>
+                    <span class="icon fad fa-window-close close"></span>
+                    <span class="saving">
+                        <span class="fad fa-spinner fa-pulse"></span>
+                        Saving...
+                    </span>
+                </div>
+            </div>
+
+            <input type="hidden" id="newId" class="id" value="00000000-0000-0000-0000-000000000000" />
+
+        </div>
+
+
         @if (Model != null)
         {
             @foreach (var school in Model)
@@ -19,7 +62,7 @@
                         <div class="edits">
                             <label asp-for="@school.SchoolName">School Name</label>
                             <input type="text" asp-for="@school.SchoolName" class="full-width school-name" />
-                            <label asp-for="@school.SchoolName">School Name</label>
+                            <label asp-for="@school.SchoolName">School Abbreviation</label>
                             <input type="text" asp-for="@school.SchoolNameShort" class="school-name-short" />
                         </div>
                     </div>
@@ -37,11 +80,17 @@
                             <input type="text" asp-for="@school.HeadCoach.PhoneNumber" class="coach-phone" />
                         </div>
                     </div>
+                    <div class="school-col enabled">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" asp-for="@school.IsEnabled" id="@($"enabled{school.Id}")" class="custom-control-input enabled-checkbox" />
+                            <label asp-for="@school.IsEnabled" for="@($"enabled{school.Id}")" class="custom-control-label">Enabled</label>
+                        </div>
+                    </div>
                     <div class="school-col actions">
                         <div class="icons">
                             <span class="icon fad fa-save save d-none"></span>
                             <span class="icon fad fa-edit edit"></span>
-                            <span class="icon fad fa-trash-alt"></span>
+                            <span class="icon fad fa-trash-alt delete" data-toggle="modal" data-target="#confirmDeleteModal"></span>
                             <span class="saving d-none">
                                 <span class="fad fa-spinner fa-pulse"></span>
                                 Saving...
@@ -57,6 +106,22 @@
         }
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="~/img/are-you-sure.jpg" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">No, don't delete</button>
+                    <button type="button" class="btn btn-danger yes-delete">Yes, delete this school</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <input type="submit" value="Save" />
 </form>
 
@@ -64,6 +129,9 @@
 @section Scripts {
     <script type="text/javascript">
         $(document).ready(function () {
+            var _targetId = "";
+            var _targetSaving = [];
+
 
             $(".edit").click(function () {
                 //alert($(this).parent().parent().siblings(".school").children(".full-name").html());
@@ -87,6 +155,8 @@
             $(".save").click(function () {
                 $(this).siblings(".saving").removeClass("d-none");
 
+                var saveType = $(this).parent().parent().siblings(".id").attr("id") === "newId" ? "new" : "update";
+
                 // First save the data by calling the API
                 var id = $(this).parent().parent().siblings(".id").val();
 
@@ -95,7 +165,7 @@
                 var $this = $(this);
 
                 var schoolJson = {
-                    "Id": $(this).parent().parent().siblings(".id").val(),
+                    "Id": id,
                     "SchoolName": $school.children(".edits").children(".school-name").val(),
                     "SchoolNameShort": $school.children(".edits").children(".school-name-short").val(),
                     "HeadCoach": {
@@ -107,27 +177,21 @@
                     "IsEnabled": true
                 };
 
+
                 $.ajax({
                     type: "POST",
-                    url: "../api/SchoolInfo/SaveTheSchool",
+                    url: "../api/SchoolInfo/SaveTheSchool" + "?userEmail=@(userEmail)",
                     data: JSON.stringify(schoolJson),
                     contentType: "application/json",
                     error: function (msg) {
                         alert('error' + msg);
                     },
                     success: function (data) {
-                        // Update values rather than reload the page (better user experience)
-                        $school.children(".full-name").text($school.children(".edits").children(".school-name").val()).show();
-                        $school.children(".short-name").text($school.children(".edits").children(".school-name-short").val()).show();
-                        $school.children(".edits").hide();
-
-                        $coach.children(".coach-name").text($coach.children(".edits").children(".coach-name").val()).show();
-                        $coach.children(".email").text($coach.children(".edits").children(".coach-email").val()).show();
-                        $coach.children(".phone").text($coach.children(".edits").children(".coach-phone").val()).show();
-                        $coach.children(".edits").hide();
-
-                        $this.addClass("d-none");
-                        $this.siblings(".edit").removeClass("d-none");
+                        if (saveType === "new") {
+                            window.location.href = "School";
+                        } else {
+                            saveUpdateSuccessful($this, $school, $coach);
+                        }
                     },
                     complete: function () {
                         $this.siblings(".saving").addClass("d-none");
@@ -136,7 +200,109 @@
 
             });
 
+            $(".enabled-checkbox").on('change', function () {
+                var $saving = $(this).parent().parent().siblings(".actions").children(".icons").children(".saving");
+                $saving.removeClass("d-none");
 
+                var id = $(this).parent().parent().siblings(".id").val();
+                var $this = $(this);
+
+                var isEnabled = false;
+                if ($(this).is(':checked') === true) {
+                    isEnabled = true;
+                } else {
+                    isEnabled = false;
+                }
+
+                //var enabledJson = {
+                //    "userEmail": "@userEmail",
+                //    "schoolId": id,
+                //    "IsEnabled": isEnabled
+                //};
+
+                // Save the data
+                $.ajax({
+                    type: "POST",
+                    url: "../api/SchoolInfo/SaveIsEnabled" + "?userEmail=@(userEmail)&schoolId=" + id + "&isEnabled=" + isEnabled,
+                    //data: JSON.stringify(enabledJson),
+                    //contentType: "application/json",
+                    //contentType: "application/x-www-form-urlencoded",
+                    //data: "userEmail=@(userEmail)&schoolId=" + id + "&isEnabled=" + isEnabled,
+                    error: function (msg) {
+                        alert('error' + msg);
+                    },
+                    success: function (data) {
+
+                    },
+                    complete: function () {
+                        $saving.addClass("d-none");
+                    }
+                });
+
+
+            })
+
+            $("#confirmDeleteModal").on("show.bs.modal", function (e) {
+                _targetId = e.relatedTarget.parentElement.parentElement.nextElementSibling.value;
+                _targetSaving = e.relatedTarget.nextElementSibling;
+            });
+
+            $(".yes-delete").on("click", function () {
+                if (_targetSaving !== []) $(_targetSaving).removeClass("d-none");
+
+                if (_targetId !== "") {
+                    //alert('delete id: ' + _targetId);
+
+                    $("#confirmDeleteModal").modal('hide');
+
+                    // Save the data
+                    $.ajax({
+                        type: "POST",
+                        url: "../api/SchoolInfo/DeleteTheSchool" + "?userEmail=@(userEmail)&schoolId=" + _targetId,
+                        error: function (msg) {
+                            alert('error' + msg);
+                        },
+                        success: function (data) {
+                            window.location.href = "School";
+                        },
+                        complete: function () {
+                            _targetId = "";
+                            //$saving.addClass("d-none");
+                            if (_targetSaving !== []) $(_targetSaving).addClass("d-none");
+                            _targetSaving = [];
+                        }
+                    });
+                }
+            });
+
+            $(".btn-add-school").on("click", function () {
+                $(".new-school-item").children(".school, .coach").children(".edits").show();
+                $(".new-school-item").removeClass("d-none");
+            });
+
+            $(".new-school-item").children(".actions").children(".icons").children(".close").on("click", function () {
+                $(".new-school-item").addClass("d-none");
+            });
+
+            var saveNewSuccessful = function ($this, $school, $coach) {
+                // Create a new element and insert it
+
+            }
+
+            var saveUpdateSuccessful = function ($this, $school, $coach) {
+                // Update values rather than reload the page (better user experience)
+                $school.children(".full-name").text($school.children(".edits").children(".school-name").val()).show();
+                $school.children(".short-name").text($school.children(".edits").children(".school-name-short").val()).show();
+                $school.children(".edits").hide();
+
+                $coach.children(".coach-name").text($coach.children(".edits").children(".coach-name").val()).show();
+                $coach.children(".email").text($coach.children(".edits").children(".coach-email").val()).show();
+                $coach.children(".phone").text($coach.children(".edits").children(".coach-phone").val()).show();
+                $coach.children(".edits").hide();
+
+                $this.addClass("d-none");
+                $this.siblings(".edit").removeClass("d-none");
+            }
 
         });
     </script>

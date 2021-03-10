@@ -1,4 +1,34 @@
 ﻿
+.add-new {
+    text-align: right;
+    width: 650px;
+
+    .icon {
+        margin-right: 5px;
+    }
+
+    button {
+        background-color: rgba(12, 99, 136, 0.8);
+        border: 1px solid rgba(12, 99, 136, 0.4);
+        font-size: 14px;
+
+        &.btn-primary:hover {
+            background-color: rgba(12, 99, 136, 0.7);
+        }
+
+        &.btn-primary:focus, &.btn-primary.focus {
+            background-color: rgba(12, 99, 136, 0.7);
+            border-color: rgba(12, 99, 136, 0.4);
+            box-shadow: 0 0 0 0.2rem rgba(12, 99, 136, 0.30);
+        }
+
+        &.btn-primary:not(:disabled):not(.disabled):active {
+            background-color: rgba(12, 99, 136, 0.9);
+            border: 1px solid rgba(12, 99, 136, 0.5);
+        }
+    }
+}
+
 .school-list {
     display: table;
 
@@ -55,7 +85,7 @@
             &.coach {
                 flex: 1;
                 font-size: 15px;
-                padding-right: 40px;
+                padding-right: 30px;
 
                 .email,
                 .phone {
@@ -63,6 +93,27 @@
                     display: block;
                     font-size: 14px;
                     margin-top: -2px;
+                }
+            }
+
+            &.enabled {
+                padding-right: 40px;
+
+                .custom-control {
+                    position: relative;
+                    top: 10px;
+
+                    label {
+                        color: rgba(0, 0, 0, 0.5);
+                        font-size: 14px;
+                        left: 0;
+                        position: relative;
+                    }
+                }
+
+                .custom-control-input:checked ~ .custom-control-label::before {
+                    border-color: #0C6288;
+                    background-color: #0C6288;
                 }
             }
 
@@ -118,6 +169,48 @@
 
         &:hover {
             background-color: rgba(0,0,0,0.02);
+        }
+
+        &.new-school-item {
+            .actions {
+                .icons {
+                    .icon {
+                        &.close {
+                            --fa-primary-color: darkred;
+                            --fa-secondary-color: #f47920;
+
+                            //left: -15px;
+                            float: none;
+                            top: 3px;
+                            position: relative;
+
+                            &:hover {
+                                --fa-secondary-color: #d66614 !important;
+
+                                text-shadow: none;
+                            }
+                        }
+                    }
+
+                    .saving {
+                        
+                    }
+                }
+            }
+        }
+    }
+}
+
+.modal {
+    .modal-dialog {
+        .modal-content {
+            .modal-body {
+                text-align: center;
+
+                img {
+                    width: 300px;
+                }
+            }
         }
     }
 }
