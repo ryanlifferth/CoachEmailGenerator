@@ -22,6 +22,13 @@ a {
   padding-top: calc(64px + 10px);
   min-height: calc(100vh - (30px + 20px)); }
 
+a {
+  color: #2680c2;
+  text-decoration: none; }
+  a:hover {
+    color: #62B0E8;
+    text-decoration: none; }
+
 header {
   background-color: #fff !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -29,14 +36,14 @@ header {
   margin-bottom: 10px; }
 
 nav.navbar {
-  padding: 4px 0 6px 0; }
+  padding: 4px 0 0 0; }
   nav.navbar .navbar-brand {
     color: #003057;
     display: block;
     font-family: Lato, Roboto, 'Open Sans';
     line-height: normal;
     margin: 0 10px 0 0;
-    padding: 0 0 0 42px;
+    padding: 0 0 6px 42px;
     position: relative;
     text-align: right;
     text-shadow: 0 0 2px rgba(0, 0, 0, 0.4); }
@@ -62,6 +69,27 @@ nav.navbar {
       top: 6px;
       transform: rotate(4deg);
       width: 45px; }
+  nav.navbar .navbar-nav {
+    flex-direction: row;
+    justify-content: normal;
+    padding: 12px 10px 0 40px; }
+    nav.navbar .navbar-nav a.nav-item {
+      border-bottom: 2px solid transparent;
+      color: #7c96b1;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      padding: 11px 30px 11px;
+      text-align: center;
+      text-transform: lowercase; }
+      nav.navbar .navbar-nav a.nav-item:hover {
+        border-bottom: 2px solid rgba(78, 161, 198, 0.4);
+        color: #70879e; }
+      nav.navbar .navbar-nav a.nav-item.active {
+        border-bottom: 2px solid #e66a6a;
+        color: #0C6288;
+        cursor: default;
+        font-weight: 600; }
 
 .user {
   color: #0C6288;

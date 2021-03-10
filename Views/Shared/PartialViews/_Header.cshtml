@@ -1,12 +1,9 @@
 ﻿@{
-    //    bool showBackHomeChevronLink = this.ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant() == "home" &&
-    //                                   this.ViewContext.RouteData.Values["action"].ToString().ToLowerInvariant() == "index" ?
-    //                                   false :
-    //                                   true;
+    var thisController = this.ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant();
+    var thisAction = this.ViewContext.RouteData.Values["action"].ToString().ToLowerInvariant();
 
     var username = User?.Identity.Name;
     var usericon = User?.Claims.FirstOrDefault(x => x.Type == "urn:google:picture").Value;
-
 }
 
 <header class="fixed-top">
@@ -18,6 +15,11 @@
             <span class="emailer">Emailer</span>
             <!-- <img src="~/images/logo-web.png" height="50" /> -->
         </a>
+
+        <div class="navbar-nav">
+            <a asp-controller="Home" class="nav-item @(thisController == "home" ? "active" : "")">Email Template</a>
+            <a asp-controller="School" class="nav-item @(thisController == "school" ? "active" : "")">Schools</a>
+        </div>
 
 
         <div class="user ml-auto">

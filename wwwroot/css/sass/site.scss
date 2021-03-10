@@ -39,6 +39,15 @@ a {
     //min-height: calc(100vh - (#{$footer-height} + 1px)); // 1px for footer margin
 }
 
+a {
+    color: #2680c2;
+    text-decoration: none;
+
+    &:hover {
+        color: #62B0E8;
+        text-decoration: none;
+    }
+}
 
 @import 'header';
 

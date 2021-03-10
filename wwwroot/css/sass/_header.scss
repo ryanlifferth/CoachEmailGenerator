@@ -28,7 +28,7 @@ header {
 }
 
 nav.navbar {
-    padding: 4px 0 6px 0;
+    padding: 4px 0 0 0;
 
     .navbar-brand {
         color: #003057;
@@ -37,7 +37,7 @@ nav.navbar {
         font-family: Lato, Roboto, 'Open Sans';
         line-height: normal;
         margin: 0 10px 0 0;
-        padding: 0 0 0 42px;
+        padding: 0 0 6px 42px;
         position: relative;
         text-align: right;
         text-shadow: 0 0 2px rgba(0,0,0,0.4);
@@ -73,6 +73,37 @@ nav.navbar {
             //filter: invert(3%) sepia(130%) saturate(5225%) hue-rotate(193deg) brightness(95%) contrast(102%); // navy from black
             //filter:  invert(9%) sepia(77%) saturate(4738%) hue-rotate(193deg) brightness(95%) contrast(102%); // this one comes out light blue for this image
             //snow navy:  #003768
+        }
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+        justify-content: normal;
+        padding: 12px 10px 0 40px;
+
+        a.nav-item {
+            border-bottom: 2px solid transparent;
+            color: #7c96b1;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 11px 30px 11px;
+            //padding: 14px 16px 9px;
+            text-align: center;
+            text-transform: lowercase;
+
+            &:hover {
+                //border-bottom: 2px solid #c3d500;
+                border-bottom: 2px solid rgba(78, 161, 198, 0.4);
+                color: #70879e;
+            }
+
+            &.active {
+                border-bottom: 2px solid #e66a6a;
+                color: #0C6288;
+                cursor: default;
+                font-weight: 600;
+            }
         }
     }
 }
