@@ -109,6 +109,13 @@
             }
         }
 
+        .saving {
+            font-size: 13px;
+            font-weight: 500;
+            margin-left: 12px;
+            text-transform: uppercase;
+        }
+
         &:hover {
             background-color: rgba(0,0,0,0.02);
         }

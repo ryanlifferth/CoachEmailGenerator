@@ -207,6 +207,11 @@ nav.navbar {
               top: 1px; }
               .school-list .school-item .school-col.actions .icons .icon.save:hover {
                 text-shadow: 0 0 2px rgba(244, 121, 32, 0.8); }
+    .school-list .school-item .saving {
+      font-size: 13px;
+      font-weight: 500;
+      margin-left: 12px;
+      text-transform: uppercase; }
     .school-list .school-item:hover {
       background-color: rgba(0, 0, 0, 0.02); }
 

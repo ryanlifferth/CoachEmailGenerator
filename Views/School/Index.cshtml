@@ -42,10 +42,15 @@
                             <span class="icon fad fa-save save d-none"></span>
                             <span class="icon fad fa-edit edit"></span>
                             <span class="icon fad fa-trash-alt"></span>
+                            <span class="saving d-none">
+                                <span class="fad fa-spinner fa-pulse"></span>
+                                Saving...
+                            </span>
                         </div>
                     </div>
 
                     <input type="hidden" asp-for="@school.Id" class="id" />
+
                 </div>
 
             }
@@ -80,26 +85,55 @@
 
 
             $(".save").click(function () {
+                $(this).siblings(".saving").removeClass("d-none");
+
                 // First save the data by calling the API
                 var id = $(this).parent().parent().siblings(".id").val();
 
-                var school = $(this).parent().parent().siblings(".school");
-                var coach = $(this).parent().parent().siblings(".coach");
+                var $school = $(this).parent().parent().siblings(".school");
+                var $coach = $(this).parent().parent().siblings(".coach");
+                var $this = $(this);
 
-                // Update values rather than reload the page (better user experience)
+                var schoolJson = {
+                    "Id": $(this).parent().parent().siblings(".id").val(),
+                    "SchoolName": $school.children(".edits").children(".school-name").val(),
+                    "SchoolNameShort": $school.children(".edits").children(".school-name-short").val(),
+                    "HeadCoach": {
+                        "Name": $coach.children(".edits").children(".coach-name").val(),
+                        "Email": $coach.children(".edits").children(".coach-email").val(),
+                        "PhoneNumber": $coach.children(".edits").children(".coach-phone").val()
+                    },
+                    "AssistantCoach": null,
+                    "IsEnabled": true
+                };
 
+                $.ajax({
+                    type: "POST",
+                    url: "../api/SchoolInfo/SaveTheSchool",
+                    data: JSON.stringify(schoolJson),
+                    contentType: "application/json",
+                    error: function (msg) {
+                        alert('error' + msg);
+                    },
+                    success: function (data) {
+                        // Update values rather than reload the page (better user experience)
+                        $school.children(".full-name").text($school.children(".edits").children(".school-name").val()).show();
+                        $school.children(".short-name").text($school.children(".edits").children(".school-name-short").val()).show();
+                        $school.children(".edits").hide();
 
-                school.children(".full-name").text(school.children(".edits").children(".school-name").val()).show();
-                school.children(".short-name").text(school.children(".edits").children(".school-name-short").val()).show();
-                school.children(".edits").hide();
+                        $coach.children(".coach-name").text($coach.children(".edits").children(".coach-name").val()).show();
+                        $coach.children(".email").text($coach.children(".edits").children(".coach-email").val()).show();
+                        $coach.children(".phone").text($coach.children(".edits").children(".coach-phone").val()).show();
+                        $coach.children(".edits").hide();
 
-                coach.children(".coach-name").text(coach.children(".edits").children(".coach-name").val()).show();
-                coach.children(".email").text(coach.children(".edits").children(".coach-email").val()).show();
-                coach.children(".phone").text(coach.children(".edits").children(".coach-phone").val()).show();
-                coach.children(".edits").hide();
+                        $this.addClass("d-none");
+                        $this.siblings(".edit").removeClass("d-none");
+                    },
+                    complete: function () {
+                        $this.siblings(".saving").addClass("d-none");
+                    }
+                });
 
-                $(this).addClass("d-none");
-                $(this).siblings(".edit").removeClass("d-none");
             });
 
 
