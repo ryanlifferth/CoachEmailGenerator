@@ -7,34 +7,103 @@
 
 
     <div class="school-list">
-        @foreach (var school in Model)
+        @if (Model != null)
         {
-            <div class="school-item">
-                <div class="school-col school">
-                    @school.SchoolName
-                    <span class="short-name">@school.SchoolNameShort</span>
-                </div>
-                <div class="school-col coach">
-                    @school.HeadCoach.Name
-                    <span class="email">@school.HeadCoach.Email</span>
-                    <span class="phone">@school.HeadCoach.PhoneNumber</span>
-                </div>
-                <div class="school-col actions">
-                    <div class="icons">
-                        <span class="icon fad fa-edit edit"></span>
-                        <span class="icon fad fa-trash-alt"></span>
+            @foreach (var school in Model)
+            {
+                <div class="school-item">
+                    <div class="school-col school">
+                        <span class="full-name">@school.SchoolName</span>
+                        <span class="short-name">@school.SchoolNameShort</span>
+
+                        <div class="edits">
+                            <label asp-for="@school.SchoolName">School Name</label>
+                            <input type="text" asp-for="@school.SchoolName" class="full-width school-name" />
+                            <label asp-for="@school.SchoolName">School Name</label>
+                            <input type="text" asp-for="@school.SchoolNameShort" class="school-name-short" />
+                        </div>
                     </div>
+                    <div class="school-col coach">
+                        <span class="coach-name">@school.HeadCoach.Name</span>
+                        <span class="email">@school.HeadCoach.Email</span>
+                        <span class="phone">@school.HeadCoach.PhoneNumber</span>
+
+                        <div class="edits">
+                            <label asp-for="@school.HeadCoach.Name">Head Coach</label>
+                            <input type="text" asp-for="@school.HeadCoach.Name" class="full-width coach-name" />
+                            <label asp-for="@school.HeadCoach.Email">Email</label>
+                            <input type="text" asp-for="@school.HeadCoach.Email" class="full-width coach-email" />
+                            <label asp-for="@school.HeadCoach.PhoneNumber">Phone</label>
+                            <input type="text" asp-for="@school.HeadCoach.PhoneNumber" class="coach-phone" />
+                        </div>
+                    </div>
+                    <div class="school-col actions">
+                        <div class="icons">
+                            <span class="icon fad fa-save save d-none"></span>
+                            <span class="icon fad fa-edit edit"></span>
+                            <span class="icon fad fa-trash-alt"></span>
+                        </div>
+                    </div>
+
+                    <input type="hidden" asp-for="@school.Id" class="id" />
                 </div>
 
-                <input type="hidden" asp-for="@school.SchoolName" />
-                <input type="hidden" asp-for="@school.SchoolNameShort" />
-                <input type="hidden" asp-for="@school.HeadCoach.Name" />
-                <input type="hidden" asp-for="@school.HeadCoach.Email" />
-                <input type="hidden" asp-for="@school.HeadCoach.PhoneNumber" />
-            </div>
-
+            }
         }
     </div>
 
     <input type="submit" value="Save" />
 </form>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".edit").click(function () {
+                //alert($(this).parent().parent().siblings(".school").children(".full-name").html());
+
+                var school = $(this).parent().parent().siblings(".school");
+                school.children(".full-name").hide();
+                school.children(".short-name").hide();
+                school.children(".edits").show();
+
+                var coach = $(this).parent().parent().siblings(".coach");
+                coach.children(".coach-name").hide();
+                coach.children(".email").hide();
+                coach.children(".phone").hide();
+                coach.children(".edits").show();
+
+                $(this).addClass("d-none");
+                $(this).siblings(".save").removeClass("d-none");
+            });
+
+
+            $(".save").click(function () {
+                // First save the data by calling the API
+                var id = $(this).parent().parent().siblings(".id").val();
+
+                var school = $(this).parent().parent().siblings(".school");
+                var coach = $(this).parent().parent().siblings(".coach");
+
+                // Update values rather than reload the page (better user experience)
+
+
+                school.children(".full-name").text(school.children(".edits").children(".school-name").val()).show();
+                school.children(".short-name").text(school.children(".edits").children(".school-name-short").val()).show();
+                school.children(".edits").hide();
+
+                coach.children(".coach-name").text(coach.children(".edits").children(".coach-name").val()).show();
+                coach.children(".email").text(coach.children(".edits").children(".coach-email").val()).show();
+                coach.children(".phone").text(coach.children(".edits").children(".coach-phone").val()).show();
+                coach.children(".edits").hide();
+
+                $(this).addClass("d-none");
+                $(this).siblings(".edit").removeClass("d-none");
+            });
+
+
+
+        });
+    </script>
+}

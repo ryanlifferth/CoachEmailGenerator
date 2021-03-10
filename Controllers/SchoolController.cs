@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace CoachEmailGenerator.Controllers.api
+namespace CoachEmailGenerator.Controllers
 {
     public class SchoolController : Controller
     {
@@ -37,15 +37,15 @@ namespace CoachEmailGenerator.Controllers.api
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index([Bind("SchoolName, SchoolNameShort, HeadCoach.Name, HeadCoach.Email, HeadCoach.PhoneNumber, IsEnabled")] EmailTemplate template)
+        public IActionResult Index([Bind("Id, SchoolName, SchoolNameShort, HeadCoach.Name, HeadCoach.Email, HeadCoach.PhoneNumber, IsEnabled")] EmailTemplate template)
         {
 
             /************ TEMP CODE **************/
             var schools = new List<School>()
             {
-                new School { SchoolName = "Brigham Young University", SchoolNameShort = "BYU", HeadCoach = new Coach { Name = "Coach Smith", Email = "coach@byu.edu", PhoneNumber = "801-555-1234" }, IsEnabled = true },
-                new School { SchoolName = "Utah Valley University", SchoolNameShort = "UVU", HeadCoach = new Coach { Name = "Greg Maas", Email = "greg.maas@uvu.edu" }, IsEnabled = true },
-                new School { SchoolName = "Seattle University", SchoolNameShort = "SU", HeadCoach = new Coach { Name = "Pete Fewing", Email = "fewingp@seattleu.edu", PhoneNumber = "206-296-5498" }, IsEnabled = true }
+                new School { Id = Guid.NewGuid(), SchoolName = "Brigham Young University", SchoolNameShort = "BYU", HeadCoach = new Coach { Name = "Coach Smith", Email = "coach@byu.edu", PhoneNumber = "801-555-1234" }, IsEnabled = true },
+                new School { Id = Guid.NewGuid(), SchoolName = "Utah Valley University", SchoolNameShort = "UVU", HeadCoach = new Coach { Name = "Greg Maas", Email = "greg.maas@uvu.edu" }, IsEnabled = true },
+                new School { Id = Guid.NewGuid(), SchoolName = "Seattle University", SchoolNameShort = "SU", HeadCoach = new Coach { Name = "Pete Fewing", Email = "fewingp@seattleu.edu", PhoneNumber = "206-296-5498" }, IsEnabled = true }
             };
             
             var fileName = _saveTemplateService.GetUserNameFromEmail(User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value);

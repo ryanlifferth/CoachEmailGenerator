@@ -7,6 +7,7 @@ namespace CoachEmailGenerator.Models
 {
     public class School
     {
+        public Guid Id { get; set; }
         public string SchoolName { get; set; }
         public string SchoolNameShort { get; set; }
         public Coach HeadCoach { get; set; }

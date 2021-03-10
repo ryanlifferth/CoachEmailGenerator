@@ -9,10 +9,36 @@
         .school-col {
             flex: 1;
             display: table-cell;
+            padding-bottom: 12px;
+
+            .edits {
+                display: none;
+                position: relative;
+                top: -7px;
+
+                label {
+                    color: #888;
+                    display: block;
+                    font-size: 10px;
+                    font-weight: 500;
+                    margin: 0 0 -2px 2px;
+                    text-transform: capitalize;
+                }
+
+                input[type="text"] {
+                    font-size: 14px;
+
+                    &.full-width {
+                        min-width: 300px;
+                        width: 100%;
+                    }
+                }
+            }
 
             &.school {
                 flex: 1;
                 font-weight: 600;
+                padding-left: 10px;
                 padding-right: 40px;
                 text-transform: uppercase;
 
@@ -29,7 +55,6 @@
             &.coach {
                 flex: 1;
                 font-size: 15px;
-                padding-bottom: 12px;
                 padding-right: 40px;
 
                 .email,
@@ -66,6 +91,18 @@
 
                         &:hover {
                             text-shadow: 0 0 1px rgba(37, 89, 132, 0.8);
+                            text-decoration: none;
+                        }
+
+                        &.save {
+                            font-size: 19px;
+                            margin-right: 12px;
+                            position: relative;
+                            top: 1px;
+
+                            &:hover {
+                                text-shadow: 0 0 2px rgba(244, 121, 32, 0.8);
+                            }
                         }
                     }
                 }
