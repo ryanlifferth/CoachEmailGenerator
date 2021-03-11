@@ -43,7 +43,31 @@
                                 onAction: function () {
                                     insertCoachName('school-name', 'SCHOOL');
                                 }
+                            },
+                            {
+                                type: 'menuitem',
+                                text: 'Coach Email',
+                                shortcut: 'meta+alt+E',
+                                onAction: function () {
+                                    insertCoachName('coach-email', 'COACH EMAIL');
+                                }
+                            },
+                            {
+                                type: 'menuitem',
+                                text: 'Coach Phone',
+                                shortcut: 'meta+alt+P',
+                                onAction: function () {
+                                    insertCoachName('coach-phone', 'COACH PHONE');
+                                }
+                            },
+                            {
+                                type: 'menuitem',
+                                text: 'School Name Short',
+                                onAction: function () {
+                                    insertCoachName('school-name-short', 'SCHOOL NAME SHORT');
+                                }
                             }
+
                         ];
                         callback(items);
                     }

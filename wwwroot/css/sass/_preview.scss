@@ -1,0 +1,42 @@
+﻿
+.preview-pane {
+    background-color: rgba(255,255,255,0.9);
+    border: 1px solid #888;
+    box-shadow: 2px 2px 5px 0 rgba(0,0,0,0.4);
+    display: block;
+    padding: 20px;
+
+    .email-header {
+        font-size: 14px;
+        margin-bottom: 30px; 
+
+        label {
+            color: #000;
+            display: inline-block;
+            font-weight: 600;
+            margin: 0;
+            width: 18%;
+        }
+
+        .header-item {
+            display: inline-block;
+        }
+    }
+
+    .email-body {
+    }
+
+
+    .coach-button {
+        background-color: silver;
+        color: #000;
+        font-weight: 500;
+
+        &.hover-val {
+            background-color: #fff!important;
+            //color: #555559!important;
+            //font-weight: 400!important;
+
+        }
+    }
+}

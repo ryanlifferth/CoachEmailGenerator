@@ -1,0 +1,97 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Preview Emails";
+    var pic = User?.Claims.FirstOrDefault(x => x.Type == "urn:google:picture").Value;
+
+    List<School> schools = Model.Schools;
+    EmailTemplate template = Model.Template;
+
+}
+
+
+<form asp-route="Index" method="post">
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                @foreach (var school in schools.Where(x => x.IsEnabled == true))
+                {
+                    <div class="school-item"
+                         data-school-name="@school.SchoolName"
+                         data-school-name-short="@school.SchoolNameShort"
+                         data-coach-name="@school.HeadCoach.Name"
+                         data-coach-email="@school.HeadCoach.Email"
+                         data-coach-phone="@school.HeadCoach.PhoneNumber">
+                        @school.SchoolName
+
+                    </div>
+                }
+            </div>
+            <div class="col-8">
+
+                <div class="preview-pane">
+                    <div class="email-header">
+                        <div class="header-row">
+                            <label>From:</label>
+                            <span class="header-item from">@template.EmailAddress</span>
+                        </div>
+                        <div class="header-row">
+                            <label>To:</label>
+                            <span class="header-item to">[COACH TO]</span>
+                        </div>
+                        <div class="header-row">
+                            <label>Subject:</label>
+                            <span class="header-item subject">@template.EmailSubjectLine</span>
+                        </div>
+                    </div>
+
+                    <div class="email-body">
+                        @Html.Raw(template.EmailBody)
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <input type="submit" value="SEND EMAIL" />
+</form>
+
+
+@section Scripts {
+    <script>
+
+        $(document).ready(function () {
+
+            var _schoolNameEl = document.querySelector(".coach-button[data-school-info='school-name']");
+            var _schoolNameDefaultVal = (_schoolNameEl) ? _schoolNameEl.innerText : undefined;
+            var _schoolNameShortEl = document.querySelector(".coach-button[data-school-info='school-name-short']");
+            var _schoolNameShortDefaultVal = (_schoolNameShortEl) ? _schoolNameShortEl.innerText : undefined;
+            var _coachNameEl = document.querySelector(".coach-button[data-school-info='coach-name']");
+            var _coachNameDefaultVal = (_coachNameEl) ? _coachNameEl.innerText : undefined;
+            var _coachEmailEl = document.querySelector(".coach-button[data-school-info='coach-email']");
+            var _coachEmailDefaultVal = (_coachEmailEl) ? _coachEmailEl.innerText : undefined;
+            var _coachPhoneEl = document.querySelector(".coach-button[data-school-info='coach-phone']");
+            var _coachPhoneDefaultVal = (_coachPhoneEl) ? _coachPhoneEl.innerText : undefined;
+
+            $(".school-item").hover(function () { // mouse over
+                if (_schoolNameEl) _schoolNameEl.innerText = $(this).data("school-name"); _schoolNameEl.classList.add("hover-val");
+                if (_schoolNameShortEl) _schoolNameShortEl.innerText = $(this).data("school-name-short"); _schoolNameShortEl.classList.add("hover-val");
+                if (_coachNameEl) _coachNameEl.innerText = $(this).data("coach-name"); _coachNameEl.classList.add("hover-val");
+                if (_coachEmailEl) _coachEmailEl.innerText = $(this).data("coach-email"); _coachEmailEl.classList.add("hover-val");
+                if (_coachPhoneEl) _coachPhoneEl.innerText = $(this).data("coach-phone"); _coachPhoneEl.classList.add("hover-val");
+
+
+            }, function () {  //mouse out
+                if (_schoolNameEl && _schoolNameDefaultVal) _schoolNameEl.innerText = _schoolNameDefaultVal; _schoolNameEl.classList.remove("hover-val");
+                if (_schoolNameShortEl && _schoolNameShortDefaultVal) _schoolNameShortEl.innerText = _schoolNameShortDefaultVal; _schoolNameShortEl.classList.remove("hover-val");
+                if (_coachNameEl && _coachNameDefaultVal) _coachNameEl.innerText = _coachNameDefaultVal; _coachNameEl.classList.remove("hover-val");
+                if (_coachEmailEl && _coachEmailDefaultVal) _coachEmailEl.innerText = _coachEmailDefaultVal; _coachEmailEl.classList.remove("hover-val");
+                if (_coachPhoneEl && _coachPhoneDefaultVal) _coachPhoneEl.innerText = _coachPhoneDefaultVal; _coachPhoneEl.classList.remove("hover-val");
+            });
+
+
+        });
+
+    </script>
+}

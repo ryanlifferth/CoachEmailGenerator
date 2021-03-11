@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,7 +32,15 @@ namespace CoachEmailGenerator.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var userEmail = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
+            var template = _saveTemplateService.LoadTemplateFromJsonSource(userEmail);
+            var schools = _saveTemplateService.LoadSchoolListFromJsonSource(userEmail);
+
+            dynamic previewModel = new ExpandoObject();
+            previewModel.Template = template;
+            previewModel.Schools = schools;
+
+            return View(previewModel);
         }
 
 

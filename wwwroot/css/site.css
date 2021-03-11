@@ -289,6 +289,30 @@ nav.navbar {
   .modal .modal-dialog .modal-content .modal-body img {
     width: 300px; }
 
+.preview-pane {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #888;
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.4);
+  display: block;
+  padding: 20px; }
+  .preview-pane .email-header {
+    font-size: 14px;
+    margin-bottom: 30px; }
+    .preview-pane .email-header label {
+      color: #000;
+      display: inline-block;
+      font-weight: 600;
+      margin: 0;
+      width: 18%; }
+    .preview-pane .email-header .header-item {
+      display: inline-block; }
+  .preview-pane .coach-button {
+    background-color: silver;
+    color: #000;
+    font-weight: 500; }
+    .preview-pane .coach-button.hover-val {
+      background-color: #fff !important; }
+
 footer {
   background-color: rgba(216, 218, 219, 0.1);
   border-top: 1px solid rgba(0, 0, 0, 0.05);

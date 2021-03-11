@@ -20,7 +20,6 @@ namespace CoachEmailGenerator.Controllers
         private readonly ILogger<HomeController> _logger;
         private GmailApiService _gmailApiService;
         private DataService _saveTemplateService;
-        private string _filePath = string.Empty;
 
         public EmailTemplateController(ILogger<HomeController> logger,
             GmailApiService gmailApiService,
