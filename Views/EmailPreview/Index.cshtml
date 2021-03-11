@@ -6,6 +6,25 @@
     List<School> schools = Model.Schools;
     EmailTemplate template = Model.Template;
 
+    // Modify the EmailSubjectLine for the preview page for proper behavior
+    var subjectLine = template.EmailSubjectLine;
+    var results = subjectLine.Split('[', ']').Where((item, index) => index % 2 != 0).Select(x => '[' + x + ']').ToList();
+
+    foreach (var item in results)
+    {
+        // get the right tag
+        var tag = item.ToUpper() switch
+        {
+            var x when
+            x == "[SCHOOL]" => "school-name",
+            "[SCHOOL NAME SHORT]" => "school-name-short",
+            "[COACH NAME]" => "coach-name",
+            "[COACH EMAIL]" => "coach-email",
+            "[COACH PHONE]" => "coach-phone"
+        };
+
+        subjectLine = subjectLine.Replace(item, $@"<span class=""coach-button"" data-school-info=""{tag}"">{item}</span>");
+    }
 }
 
 
@@ -41,7 +60,7 @@
                         </div>
                         <div class="header-row">
                             <label>Subject:</label>
-                            <span class="header-item subject">@template.EmailSubjectLine</span>
+                            <span class="header-item subject">@Html.Raw(subjectLine)</span>
                         </div>
                     </div>
 
