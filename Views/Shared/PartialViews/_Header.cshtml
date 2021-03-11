@@ -2,14 +2,15 @@
     var thisController = this.ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant();
     var thisAction = this.ViewContext.RouteData.Values["action"].ToString().ToLowerInvariant();
 
-    var username = User?.Identity.Name;
-    var usericon = User?.Claims.FirstOrDefault(x => x.Type == "urn:google:picture").Value;
+    var isAuthenticated = User?.Identity?.IsAuthenticated ?? false;
+    var username = User?.Identity?.Name;
+    var usericon = User?.Claims?.FirstOrDefault(x => x.Type == "urn:google:picture")?.Value;
 }
 
 <header class="fixed-top">
     <nav class="navbar container">
 
-        <a href="#" class="navbar-brand logo">
+        <a asp-controller="Home" class="navbar-brand logo">
             <img src="~/img/coach-icon3.png" srcset="~/img/coach-icon3.svg" />
             <span class="coach">Coach</span>
             <span class="emailer">Emailer</span>
@@ -17,27 +18,29 @@
         </a>
 
         <div class="navbar-nav">
-            <a asp-controller="Home" class="nav-item @(thisController == "home" ? "active" : "")">Email Template</a>
+            <a asp-controller="email-template" class="nav-item @(thisController == "emailtemplate" ? "active" : "")">email Template</a>
             <a asp-controller="School" class="nav-item @(thisController == "school" ? "active" : "")">Schools</a>
         </div>
 
 
         <div class="user ml-auto">
 
-            <span class="account-action">
-                <span class="name">@username</span>
-                <a href="logout.html" class="logout">
-                    Logout
-                    <span class="far fa-sign-out-alt"></span>
-                </a>
-            </span>
-            <span class="user-icon">
-                <img src="@usericon" />
-                <span class="img-overhang">
-                    <span class="img-overhang-shadow"></span>
+            @if (isAuthenticated)
+            {
+                <span class="account-action">
+                    <span class="name">@username</span>
+                    <a href="logout.html" class="logout">
+                        Logout
+                        <span class="far fa-sign-out-alt"></span>
+                    </a>
                 </span>
-            </span>
-
+                <span class="user-icon">
+                    <img src="@usericon" />
+                    <span class="img-overhang">
+                        <span class="img-overhang-shadow"></span>
+                    </span>
+                </span>
+            }
         </div>
 
     </nav>

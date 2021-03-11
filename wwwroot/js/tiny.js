@@ -4,6 +4,7 @@
         tinymce.init({
             selector: 'textarea#EmailBody',
             branding: false,
+            height: 400,
             menubar: false,
             //menubar: 'edit insert view format table tools help',
             toolbar: 'undo redo | bold italic underline | outdent indent | coachButton | fontselect fontsizeselect forecolor backcolor | alignleft aligncenter alignright alignjustify formatselect',

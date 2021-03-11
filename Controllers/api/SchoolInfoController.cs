@@ -17,17 +17,13 @@ namespace CoachEmailGenerator.Controllers.api
     {
 
         private readonly ILogger<HomeController> _logger;
-        private SaveTemplateService _saveTemplateService;
-        private string _filePath = string.Empty;
+        private DataService _saveTemplateService;
 
-        public SchoolInfoController(ILogger<HomeController> logger, SaveTemplateService saveTemplateService)
+        public SchoolInfoController(ILogger<HomeController> logger, DataService saveTemplateService)
         {
             _logger = logger;
             _saveTemplateService = saveTemplateService;
 
-            // Get the local file location/path
-            //_filePath = Directory.GetCurrentDirectory() + "\\Data\\" + fileName + "-schools.json";
-            _filePath = Directory.GetCurrentDirectory() + "\\Data\\";
         }
 
         public IActionResult Index()
@@ -39,7 +35,7 @@ namespace CoachEmailGenerator.Controllers.api
         public IActionResult SaveIsEnabled(string userEmail, Guid schoolId, bool isEnabled)
         {
             // Load JSON from file
-            var schools = LoadSchoolListFromJsonSource(userEmail);
+            var schools = _saveTemplateService.LoadSchoolListFromJsonSource(userEmail);
 
             if (schools != null)
             {
@@ -50,7 +46,7 @@ namespace CoachEmailGenerator.Controllers.api
             }
 
             // save the file
-            SaveSchoolListBackToJsonSource(userEmail, schools);
+            _saveTemplateService.SaveSchoolListBackToJsonSource(userEmail, schools);
 
             return Ok();
         }
@@ -59,7 +55,7 @@ namespace CoachEmailGenerator.Controllers.api
         public IActionResult SaveTheSchool(string userEmail, School school)
         {
             // Load JSON from file
-            var schools = LoadSchoolListFromJsonSource(userEmail);
+            var schools = _saveTemplateService.LoadSchoolListFromJsonSource(userEmail);
 
             if (schools != null && school.Id != Guid.Empty)
             {
@@ -82,7 +78,7 @@ namespace CoachEmailGenerator.Controllers.api
             }
 
             // save the file
-            SaveSchoolListBackToJsonSource(userEmail, schools);
+            _saveTemplateService.SaveSchoolListBackToJsonSource(userEmail, schools);
 
             return Ok();
         }
@@ -91,7 +87,7 @@ namespace CoachEmailGenerator.Controllers.api
         public IActionResult DeleteTheSchool(string userEmail, Guid schoolId)
         {
             // Load JSON from file
-            var schools = LoadSchoolListFromJsonSource(userEmail);
+            var schools = _saveTemplateService.LoadSchoolListFromJsonSource(userEmail);
 
             if (schools != null && schoolId != Guid.Empty)
             {
@@ -99,29 +95,12 @@ namespace CoachEmailGenerator.Controllers.api
             }
 
             // save the file
-            SaveSchoolListBackToJsonSource(userEmail, schools);
+            _saveTemplateService.SaveSchoolListBackToJsonSource(userEmail, schools);
 
             return Ok();
         }
 
-        private List<School> LoadSchoolListFromJsonSource(string userEmail)
-        {
-            // Load JSON from file
-            var fileName = _saveTemplateService.GetUserNameFromEmail(userEmail) + "-schools.json";
-            var fullFilePath = _filePath + fileName;
-
-            var jsonString = System.IO.File.Exists(fullFilePath) ? System.IO.File.ReadAllText(fullFilePath) : string.Empty;
-            
-            return !string.IsNullOrEmpty(jsonString) ? JsonSerializer.Deserialize<List<School>>(jsonString) : null;
-        }
-
-        private void SaveSchoolListBackToJsonSource(string userEmail, List<School> schools)
-        {
-            var fileName = _saveTemplateService.GetUserNameFromEmail(userEmail) + "-schools.json";
-            var fullFilePath = _filePath + fileName;
-
-            System.IO.File.WriteAllText(fullFilePath, JsonSerializer.Serialize(schools));
-        }
+        
 
     }
 }

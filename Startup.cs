@@ -81,7 +81,7 @@ namespace CoachEmailGenerator
 
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<GmailApiService>();
-            services.AddTransient<SaveTemplateService>();
+            services.AddTransient<DataService>();
 
         }
 

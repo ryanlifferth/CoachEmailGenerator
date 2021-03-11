@@ -1,5 +1,6 @@
 ﻿using CoachEmailGenerator.Models;
 using CoachEmailGenerator.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,14 +12,15 @@ using System.Threading.Tasks;
 
 namespace CoachEmailGenerator.Controllers
 {
+    [Authorize]
     public class SchoolController : Controller
     {
 
         private readonly ILogger<HomeController> _logger;
-        private SaveTemplateService _saveTemplateService;
+        private DataService _saveTemplateService;
 
         public SchoolController(ILogger<HomeController> logger,
-            SaveTemplateService saveTemplateService)
+            DataService saveTemplateService)
         {
             _logger = logger;
             _saveTemplateService = saveTemplateService;
@@ -26,13 +28,10 @@ namespace CoachEmailGenerator.Controllers
 
         public IActionResult Index()
         {
-            var fileName = _saveTemplateService.GetUserNameFromEmail(User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value);
-            var filePath = Directory.GetCurrentDirectory() + "\\Data\\" + fileName + "-schools.json";
+            var userEmail = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
+            var schools = _saveTemplateService.LoadSchoolListFromJsonSource(userEmail);
 
-            var jsonString = System.IO.File.Exists(filePath) ? System.IO.File.ReadAllText(filePath) : string.Empty;
-            var school = !string.IsNullOrEmpty(jsonString) ? JsonSerializer.Deserialize<List<School>>(jsonString) : null;
-
-            return View(school);
+            return View(schools);
         }
 
         [HttpPost]

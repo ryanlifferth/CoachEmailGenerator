@@ -1,0 +1,22 @@
+﻿@model CoachEmailGenerator.Models.EmailTemplate
+@{
+    ViewData["Title"] = "email Template";
+    var pic = User?.Claims.FirstOrDefault(x => x.Type == "urn:google:picture").Value;
+}
+
+<form asp-route="Index" method="post">
+
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="EmailAddress" />
+    <input type="hidden" asp-for="EmailSubjectLine" />
+
+
+    <textarea asp-for="EmailBody"></textarea>
+
+    <input type="submit" value="Save" />
+</form>
+
+
+@section Scripts {
+    <script src="~/js/tiny.js" asp-append-version="true"></script>
+}
