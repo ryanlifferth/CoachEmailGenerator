@@ -1,6 +1,7 @@
 ﻿(function ($) {
     "use strict";
     $(document).ready(function () {
+        
         tinymce.init({
             selector: 'textarea#EmailBody',
             branding: false,

@@ -162,6 +162,14 @@ nav.navbar {
         position: absolute;
         width: 75px; }
 
+.subject-line {
+  margin: 0 0 10px 0; }
+  .subject-line label {
+    font-size: 14px;
+    margin: 0 0 0 3px; }
+  .subject-line .input-group {
+    margin: 0; }
+
 .add-new {
   text-align: right;
   width: 650px; }
@@ -267,6 +275,17 @@ nav.navbar {
               top: 1px; }
               .school-list .school-item .school-col.actions .icons .icon.save:hover {
                 text-shadow: 0 0 2px rgba(244, 121, 32, 0.8); }
+            .school-list .school-item .school-col.actions .icons .icon.close-edit {
+              --fa-primary-color: darkred;
+              --fa-secondary-color: #f47920;
+              font-size: 20px;
+              float: none;
+              left: 12px;
+              position: relative;
+              top: 2px; }
+              .school-list .school-item .school-col.actions .icons .icon.close-edit:hover {
+                --fa-secondary-color: #d66614 !important;
+                text-shadow: none; }
     .school-list .school-item .saving {
       font-size: 13px;
       font-weight: 500;
@@ -288,6 +307,23 @@ nav.navbar {
   text-align: center; }
   .modal .modal-dialog .modal-content .modal-body img {
     width: 300px; }
+
+.school-item-preview {
+  cursor: pointer;
+  padding: 4px 10px; }
+  .school-item-preview .school {
+    display: block;
+    font-size: 18px;
+    font-weight: bold; }
+  .school-item-preview .coach {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    position: relative;
+    top: -5px;
+    left: 3px; }
+  .school-item-preview:hover {
+    background-color: rgba(0, 0, 0, 0.02); }
 
 .preview-pane {
   background-color: rgba(255, 255, 255, 0.9);

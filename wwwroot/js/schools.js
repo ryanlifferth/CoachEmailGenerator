@@ -22,6 +22,26 @@
 
         $(this).addClass("d-none");
         $(this).siblings(".save").removeClass("d-none");
+        $(this).siblings(".close-edit").removeClass("d-none");
+    });
+
+    $(".close-edit").click(function () {
+        //alert($(this).parent().parent().siblings(".school").children(".full-name").html());
+
+        var school = $(this).parent().parent().siblings(".school");
+        school.children(".full-name").show();
+        school.children(".short-name").show();
+        school.children(".edits").hide();
+
+        var coach = $(this).parent().parent().siblings(".coach");
+        coach.children(".coach-name").show();
+        coach.children(".email").show();
+        coach.children(".phone").show();
+        coach.children(".edits").hide();
+
+        $(this).addClass("d-none");
+        $(this).siblings(".save").addClass("d-none");
+        $(this).siblings(".edit").removeClass("d-none");
     });
 
 

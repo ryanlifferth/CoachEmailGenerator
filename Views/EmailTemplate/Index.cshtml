@@ -8,10 +8,29 @@
 
     <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="EmailAddress" />
-    <input type="hidden" asp-for="EmailSubjectLine" />
 
 
-    <textarea asp-for="EmailBody"></textarea>
+    <div class="subject-line">
+        <label>Email Subject</label>
+        <div class="input-group">
+            <input type="text" asp-for="EmailSubjectLine" class="form-control subject-line" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown">Coach Info</button>
+                <div class="dropdown-menu coach-dropdown">
+                    <a class="dropdown-item" href="#">Coach Name</a>
+                    <a class="dropdown-item" href="#">School</a>
+                    <a class="dropdown-item" href="#">Coach email</a>
+                    <a class="dropdown-item" href="#">Coach phone</a>
+                    <a class="dropdown-item" href="#">School Name Short</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="email-body">
+        <label>Email Body</label>
+        <textarea asp-for="EmailBody"></textarea>
+    </div>
 
     <input type="submit" value="Save" />
 </form>
@@ -19,4 +38,22 @@
 
 @section Scripts {
     <script src="~/js/tiny.js" asp-append-version="true"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $(".coach-dropdown .dropdown-item").on("click", function () {
+                var valToInsert = "[" + $(this).text().toUpperCase() + "]";
+                var currentVal = $(this).parent().parent().siblings(".subject-line").val();
+                $(this).parent().parent().siblings(".subject-line").val(currentVal + " " + valToInsert);
+
+                var strLength = currentVal.length + valToInsert.length + 1;
+
+                $(this).parent().parent().siblings(".subject-line").focus();
+                $(this).parent().parent().siblings(".subject-line")[0].setSelectionRange(strLength, strLength);
+
+            });
+
+        });
+    </script>
 }

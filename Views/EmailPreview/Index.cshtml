@@ -16,14 +16,14 @@
             <div class="col">
                 @foreach (var school in schools.Where(x => x.IsEnabled == true))
                 {
-                    <div class="school-item"
+                    <div class="school-item-preview"
                          data-school-name="@school.SchoolName"
                          data-school-name-short="@school.SchoolNameShort"
                          data-coach-name="@school.HeadCoach.Name"
                          data-coach-email="@school.HeadCoach.Email"
                          data-coach-phone="@school.HeadCoach.PhoneNumber">
-                        @school.SchoolName
-
+                        <span class="school">@school.SchoolName</span>
+                        <span class="coach">Coach @school.HeadCoach.Name</span>
                     </div>
                 }
             </div>
@@ -73,13 +73,19 @@
             var _coachEmailDefaultVal = (_coachEmailEl) ? _coachEmailEl.innerText : undefined;
             var _coachPhoneEl = document.querySelector(".coach-button[data-school-info='coach-phone']");
             var _coachPhoneDefaultVal = (_coachPhoneEl) ? _coachPhoneEl.innerText : undefined;
+            var _coachEmailHeaderDefaultVal = $(".preview-pane .email-header .header-row .to").innerText;
 
-            $(".school-item").hover(function () { // mouse over
+            $(".school-item-preview").hover(function () { // mouse over
                 if (_schoolNameEl) _schoolNameEl.innerText = $(this).data("school-name"); _schoolNameEl.classList.add("hover-val");
                 if (_schoolNameShortEl) _schoolNameShortEl.innerText = $(this).data("school-name-short"); _schoolNameShortEl.classList.add("hover-val");
                 if (_coachNameEl) _coachNameEl.innerText = $(this).data("coach-name"); _coachNameEl.classList.add("hover-val");
                 if (_coachEmailEl) _coachEmailEl.innerText = $(this).data("coach-email"); _coachEmailEl.classList.add("hover-val");
                 if (_coachPhoneEl) _coachPhoneEl.innerText = $(this).data("coach-phone"); _coachPhoneEl.classList.add("hover-val");
+
+                var coachRegEx = $(this).data("coach-name").match("[^ ]* (.*)");
+                if (coachRegEx && coachRegEx.length >= 1) _coachNameEl.innerText = "Coach " + coachRegEx[1];
+
+                $(".preview-pane .email-header .header-row .to").text($(this).data("coach-email"));
 
 
             }, function () {  //mouse out
@@ -88,6 +94,9 @@
                 if (_coachNameEl && _coachNameDefaultVal) _coachNameEl.innerText = _coachNameDefaultVal; _coachNameEl.classList.remove("hover-val");
                 if (_coachEmailEl && _coachEmailDefaultVal) _coachEmailEl.innerText = _coachEmailDefaultVal; _coachEmailEl.classList.remove("hover-val");
                 if (_coachPhoneEl && _coachPhoneDefaultVal) _coachPhoneEl.innerText = _coachPhoneDefaultVal; _coachPhoneEl.classList.remove("hover-val");
+
+                $(".preview-pane .email-header .header-row .to").text(_coachEmailHeaderDefaultVal);
+
             });
 
 

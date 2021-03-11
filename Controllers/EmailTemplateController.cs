@@ -43,7 +43,6 @@ namespace CoachEmailGenerator.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(int Id, [Bind("Id, EmailAddress, EmailSubjectLine, EmailBody")] EmailTemplate template)
         {
-            var s = Id.ToString();
             var emailText = template.EmailBody;
 
             // Save to file
