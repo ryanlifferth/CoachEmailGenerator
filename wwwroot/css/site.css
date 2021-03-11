@@ -170,6 +170,9 @@ nav.navbar {
   .subject-line .input-group {
     margin: 0; }
 
+.btn-outline-secondary {
+  border-color: #ced4da; }
+
 .add-new {
   text-align: right;
   width: 650px; }
