@@ -32,6 +32,7 @@ namespace CoachEmailGenerator.Controllers
 
         public IActionResult Index()
         {
+            // Test
             var userEmail = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
             var template = _saveTemplateService.LoadTemplateFromJsonSource(userEmail);
             var schools = _saveTemplateService.LoadSchoolListFromJsonSource(userEmail);
