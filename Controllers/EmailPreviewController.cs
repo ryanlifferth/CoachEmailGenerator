@@ -1,5 +1,7 @@
 ﻿using CoachEmailGenerator.Models;
 using CoachEmailGenerator.Services;
+using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -42,6 +44,23 @@ namespace CoachEmailGenerator.Controllers
             previewModel.Schools = schools;
 
             return View(previewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SendEmail()
+        {
+            var userEmail = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
+            var template = _saveTemplateService.LoadTemplateFromJsonSource(userEmail);
+            var schools = _saveTemplateService.LoadSchoolListFromJsonSource(userEmail);
+
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var cred = GoogleCredential.FromAccessToken(accessToken);
+            //_gmailApiService.CreateEmail(cred, emailText, userEmail);
+            _gmailApiService.CreateEmail(cred, userEmail, template, schools);
+
+            //return View();
+            return Redirect("EmailPreview");
         }
 
 

@@ -49,11 +49,6 @@ namespace CoachEmailGenerator.Controllers
             template.EmailAddress = string.IsNullOrEmpty(template.EmailAddress) ? User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value : template.EmailAddress;
             _saveTemplateService.SaveTemplate(template);
 
-            //var userEmailAddress = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
-            //var accessToken = await HttpContext.GetTokenAsync("access_token");
-            //var cred = GoogleCredential.FromAccessToken(accessToken);
-            //_gmailApiService.CreateEmail(cred, emailText, userEmailAddress);
-
             return View();
         }
 

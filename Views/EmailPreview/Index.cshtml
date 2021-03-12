@@ -20,7 +20,8 @@
             "[SCHOOL NAME SHORT]" => "school-name-short",
             "[COACH NAME]" => "coach-name",
             "[COACH EMAIL]" => "coach-email",
-            "[COACH PHONE]" => "coach-phone"
+            "[COACH PHONE]" => "coach-phone",
+            _ => ""
         };
 
         subjectLine = subjectLine.Replace(item, $@"<span class=""coach-button"" data-school-info=""{tag}"">{item}</span>");
