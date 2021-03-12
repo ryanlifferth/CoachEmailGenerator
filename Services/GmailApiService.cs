@@ -125,10 +125,13 @@ namespace CoachEmailGenerator.Services
 
             foreach (var item in tags2)
             {
-                pattern = $"<span .*? data-school-info=\"{item.Key}\">(.|\n)*?<\\/span>";
+                // Example of match
                 //<span class="coach-button mceNonEditable" data-school-info="coach-email">[COACH EMAIL]</span>
-                //scrubbedText = Regex.Replace(scrubbedText, pattern, item.Value);
+                
                 // TODO:  I can't get the REGEX to work properly.  Matches some and not others (actually matches long strings of <span data-school-info....).
+                //pattern = $"<span .*? data-school-info=\"{item.Key}\">(.|\n)*?<\\/span>";
+                //scrubbedText = Regex.Replace(scrubbedText, pattern, item.Value);
+                
                 var replacePattern = $@"<span class=""coach-button mceNonEditable"" data-school-info=""{item.Key}"">{item.Value.Key}</span>";
                 scrubbedText = scrubbedText.Replace(replacePattern, item.Value.Value);
             }
@@ -151,7 +154,8 @@ namespace CoachEmailGenerator.Services
                     "[SCHOOL NAME SHORT]" => string.IsNullOrEmpty(school.SchoolNameShort) ? string.Empty : school.SchoolNameShort,
                     "[COACH NAME]" => string.IsNullOrEmpty(school.HeadCoach.Name) ? string.Empty : school.HeadCoach.Name,
                     "[COACH EMAIL]" => string.IsNullOrEmpty(school.HeadCoach.Email) ? string.Empty : school.HeadCoach.Email,
-                    "[COACH PHONE]" => string.IsNullOrEmpty(school.HeadCoach.PhoneNumber) ? string.Empty : school.HeadCoach.PhoneNumber
+                    "[COACH PHONE]" => string.IsNullOrEmpty(school.HeadCoach.PhoneNumber) ? string.Empty : school.HeadCoach.PhoneNumber,
+                    _ => ""
                 };
 
                 scrubbedSubjectLine = scrubbedSubjectLine.Replace(item, schoolValue);

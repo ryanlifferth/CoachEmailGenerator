@@ -6,6 +6,9 @@
     List<School> schools = Model.Schools;
     EmailTemplate template = Model.Template;
 
+    var createdSuccessfully = (TempData["CreatedEmail"] != null) ? TempData["CreatedEmail"].ToString() : string.Empty;
+    TempData["CreatedEmail"] = null;  // clear it out
+
     // Modify the EmailSubjectLine for the preview page for proper behavior
     var subjectLine = template.EmailSubjectLine;
     var results = subjectLine.Split('[', ']').Where((item, index) => index % 2 != 0).Select(x => '[' + x + ']').ToList();
@@ -34,6 +37,11 @@
     <div class="container">
         <div class="row">
             <div class="col">
+                @if (!string.IsNullOrEmpty(createdSuccessfully))
+                {
+                    <span class="bg-success">@createdSuccessfully</span>
+                }
+
                 @foreach (var school in schools.Where(x => x.IsEnabled == true))
                 {
                     <div class="school-item-preview"
