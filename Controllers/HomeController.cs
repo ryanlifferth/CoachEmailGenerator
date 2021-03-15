@@ -13,6 +13,7 @@ using CoachEmailGenerator.Services;
 using Google.Apis.Auth.OAuth2;
 using System.IO;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authentication.Google;
 
 namespace CoachEmailGenerator.Controllers
 {
@@ -20,7 +21,7 @@ namespace CoachEmailGenerator.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger) 
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
 
@@ -32,7 +33,21 @@ namespace CoachEmailGenerator.Controllers
             return View();
         }
 
-        
+        public async Task Login()
+        {
+            await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme, new AuthenticationProperties()
+            {
+                RedirectUri = "/"
+            });
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
         public IActionResult Privacy()
         {
             return View();

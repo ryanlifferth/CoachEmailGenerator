@@ -30,7 +30,7 @@
             {
                 <span class="account-action">
                     <span class="name">@username</span>
-                    <a href="logout.html" class="logout">
+                    <a asp-controller="Home" asp-action="Logout" class="logout">
                         Logout
                         <span class="far fa-sign-out-alt"></span>
                     </a>
@@ -40,6 +40,15 @@
                     <span class="img-overhang">
                         <span class="img-overhang-shadow"></span>
                     </span>
+                </span>
+            }
+            else
+            {
+                <span class="account-action">
+                    <a asp-controller="Home" asp-action="Login" class="login">
+                        Login
+                        <span class="far fa-sign-in-alt"></span>
+                    </a>
                 </span>
             }
         </div>

@@ -2,6 +2,12 @@
 
 
 
+### Google OAuth2
+
+Resources:
+- https://dotnetthoughts.net/aspnetcore-social-authentication-without-identity/
+- https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/social-without-identity?view=aspnetcore-5.0
+- https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-5.0
 
 ### TinyMCE
 
