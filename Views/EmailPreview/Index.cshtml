@@ -93,7 +93,7 @@
 
             var _schoolNameEl = document.querySelector(".coach-button[data-school-info='school-name']");
             var _schoolNameDefaultVal = (_schoolNameEl) ? _schoolNameEl.innerText : undefined;
-            var _schoolNameShortEl = document.querySelector(".coach-button[data-school-info='school-name-short']");
+            var _schoolNameShortEl = document.querySelectorAll(".coach-button[data-school-info='school-name-short']");
             var _schoolNameShortDefaultVal = (_schoolNameShortEl) ? _schoolNameShortEl.innerText : undefined;
             var _coachNameEl = document.querySelector(".coach-button[data-school-info='coach-name']");
             var _coachNameDefaultVal = (_coachNameEl) ? _coachNameEl.innerText : undefined;
@@ -104,8 +104,24 @@
             var _coachEmailHeaderDefaultVal = $(".preview-pane .email-header .header-row .to").innerText;
 
             $(".school-item-preview").hover(function () { // mouse over
+                var $this = this;
+                var dataItems = ['school-name',
+                    'school-name-short',
+                    'coach-name',
+                    'coach-email',
+                    'coach-phone'];
+
+
+                document.querySelectorAll(".coach-button[data-school-info='school-name']").forEach(function (item) {
+                    replaceHolderWithValue(item, $($this).data("school-name"));
+                });
+
+                document.querySelectorAll(".coach-button[data-school-info='school-name-short']").forEach(function (item) {
+                    replaceHolderWithValue(item, $($this).data("school-name-short"));
+                });
+
                 if (_schoolNameEl) _schoolNameEl.innerText = $(this).data("school-name"); _schoolNameEl.classList.add("hover-val");
-                if (_schoolNameShortEl) _schoolNameShortEl.innerText = $(this).data("school-name-short"); _schoolNameShortEl.classList.add("hover-val");
+                //if (_schoolNameShortEl) _schoolNameShortEl.innerText = $(this).data("school-name-short"); _schoolNameShortEl.classList.add("hover-val");
                 if (_coachNameEl) _coachNameEl.innerText = $(this).data("coach-name"); _coachNameEl.classList.add("hover-val");
                 if (_coachEmailEl) _coachEmailEl.innerText = $(this).data("coach-email"); _coachEmailEl.classList.add("hover-val");
                 if (_coachPhoneEl) _coachPhoneEl.innerText = $(this).data("coach-phone"); _coachPhoneEl.classList.add("hover-val");
@@ -118,7 +134,7 @@
 
             }, function () {  //mouse out
                 if (_schoolNameEl && _schoolNameDefaultVal) _schoolNameEl.innerText = _schoolNameDefaultVal; _schoolNameEl.classList.remove("hover-val");
-                if (_schoolNameShortEl && _schoolNameShortDefaultVal) _schoolNameShortEl.innerText = _schoolNameShortDefaultVal; _schoolNameShortEl.classList.remove("hover-val");
+                //if (_schoolNameShortEl && _schoolNameShortDefaultVal) _schoolNameShortEl.innerText = _schoolNameShortDefaultVal; _schoolNameShortEl.classList.remove("hover-val");
                 if (_coachNameEl && _coachNameDefaultVal) _coachNameEl.innerText = _coachNameDefaultVal; _coachNameEl.classList.remove("hover-val");
                 if (_coachEmailEl && _coachEmailDefaultVal) _coachEmailEl.innerText = _coachEmailDefaultVal; _coachEmailEl.classList.remove("hover-val");
                 if (_coachPhoneEl && _coachPhoneDefaultVal) _coachPhoneEl.innerText = _coachPhoneDefaultVal; _coachPhoneEl.classList.remove("hover-val");
@@ -126,6 +142,11 @@
                 $(".preview-pane .email-header .header-row .to").text(_coachEmailHeaderDefaultVal);
 
             });
+
+            function replaceHolderWithValue(el, value) {
+                el.innerText = value;
+                el.classList.add("hover-val");
+            }
 
 
         });
