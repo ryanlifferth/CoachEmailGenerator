@@ -10,8 +10,9 @@ namespace CoachEmailGenerator.Models
         public Guid Id { get; set; }
         public string SchoolName { get; set; }
         public string SchoolNameShort { get; set; }
-        public Coach HeadCoach { get; set; }
-        public Coach AssistantCoach { get; set; }
+        public string CoachName { get; set; }
+        public string CoachEmail { get; set; }
+        public string CoachPhoneNumber { get; set; }
         public bool IsEnabled { get; set; }
     }
 }

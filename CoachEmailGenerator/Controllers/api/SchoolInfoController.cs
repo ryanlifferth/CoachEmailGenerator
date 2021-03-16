@@ -63,9 +63,9 @@ namespace CoachEmailGenerator.Controllers.api
                 {
                     item.SchoolName = school.SchoolName;
                     item.SchoolNameShort = school.SchoolNameShort;
-                    item.HeadCoach.Name = school.HeadCoach.Name;
-                    item.HeadCoach.Email = school.HeadCoach.Email;
-                    item.HeadCoach.PhoneNumber = school.HeadCoach.PhoneNumber;
+                    item.CoachName = school.CoachName;
+                    item.CoachEmail = school.CoachEmail;
+                    item.CoachPhoneNumber = school.CoachPhoneNumber;
                     item.IsEnabled = school.IsEnabled;
                 }
             }

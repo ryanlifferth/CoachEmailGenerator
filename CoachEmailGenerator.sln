@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoachEmailGenerator", "CoachEmailGenerator.csproj", "{B7C7C53A-29C9-4CAF-875B-8AF2593269B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoachEmailGenerator", "CoachEmailGenerator\CoachEmailGenerator.csproj", "{CD77411B-EA8F-4C61-A3FC-6F976FBFC2DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B7C7C53A-29C9-4CAF-875B-8AF2593269B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B7C7C53A-29C9-4CAF-875B-8AF2593269B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B7C7C53A-29C9-4CAF-875B-8AF2593269B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B7C7C53A-29C9-4CAF-875B-8AF2593269B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD77411B-EA8F-4C61-A3FC-6F976FBFC2DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD77411B-EA8F-4C61-A3FC-6F976FBFC2DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD77411B-EA8F-4C61-A3FC-6F976FBFC2DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD77411B-EA8F-4C61-A3FC-6F976FBFC2DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

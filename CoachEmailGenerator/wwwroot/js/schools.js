@@ -62,12 +62,9 @@
             "Id": id,
             "SchoolName": $school.children(".edits").children(".school-name").val(),
             "SchoolNameShort": $school.children(".edits").children(".school-name-short").val(),
-            "HeadCoach": {
-                "Name": $coach.children(".edits").children(".coach-name").val(),
-                "Email": $coach.children(".edits").children(".coach-email").val(),
-                "PhoneNumber": $coach.children(".edits").children(".coach-phone").val()
-            },
-            "AssistantCoach": null,
+            "CoachName": $coach.children(".edits").children(".coach-name").val(),
+            "CoachEmail": $coach.children(".edits").children(".coach-email").val(),
+            "CoachPhoneNumber": $coach.children(".edits").children(".coach-phone").val(),
             "IsEnabled": true
         };
 
@@ -89,6 +86,7 @@
             },
             complete: function () {
                 $this.siblings(".saving").addClass("d-none");
+                $this.siblings(".close-edit").addClass("d-none");
             }
         });
 

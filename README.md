@@ -29,3 +29,4 @@ A couple of resources:
 Referenced docs:
 - https://docs.microsoft.com/en-us/azure/storage/tables/table-storage-overview
 - https://www.c-sharpcorner.com/article/azure-storage-tables/
+- https://stackoverflow.com/questions/30163618/azure-table-storage-tableentity-map-column-with-a-different-name/30180346

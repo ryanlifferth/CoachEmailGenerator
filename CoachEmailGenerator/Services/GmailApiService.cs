@@ -40,7 +40,7 @@ namespace CoachEmailGenerator.Services
                 var scrubbedEmailSubject = ScrubSubjectLineTags(emailTemplate.EmailSubjectLine, school);
                 var scrubbedEmailBodyText = ScrubEmailBodyTags(emailTemplate.EmailBody, school);
 
-                CreateGmailDraft(service, userEmailAddress, scrubbedEmailBodyText, scrubbedEmailSubject, school.HeadCoach.Email);
+                CreateGmailDraft(service, userEmailAddress, scrubbedEmailBodyText, scrubbedEmailSubject, school.CoachEmail);
             }
 
             //var tagValues = new Dictionary<string, string>()
@@ -99,10 +99,10 @@ namespace CoachEmailGenerator.Services
             string scrubbedText = emailText;
             string pattern = String.Empty;
 
-            var headCoachLastName = (Regex.Match(school.HeadCoach.Name, "[^ ]* (.*)") != null &&
-                                     Regex.Match(school.HeadCoach.Name, "[^ ]* (.*)").Length >= 1) ? 
-                                     Regex.Match(school.HeadCoach.Name, "[^ ]* (.*)").Groups[1].Value :
-                                     school.HeadCoach.Name;
+            var headCoachLastName = (Regex.Match(school.CoachName, "[^ ]* (.*)") != null &&
+                                     Regex.Match(school.CoachName, "[^ ]* (.*)").Length >= 1) ? 
+                                     Regex.Match(school.CoachName, "[^ ]* (.*)").Groups[1].Value :
+                                     school.CoachName;
             var coachName = "Coach " + headCoachLastName;
 
             var tags = new Dictionary<string, string>
@@ -110,8 +110,8 @@ namespace CoachEmailGenerator.Services
                     { "school-name", school.SchoolName },
                     { "school-name-short",  string.IsNullOrEmpty(school.SchoolNameShort) ? string.Empty : school.SchoolNameShort },
                     { "coach-name", coachName },
-                    { "coach-email", string.IsNullOrEmpty(school.HeadCoach.Email) ? string.Empty : school.HeadCoach.Email },
-                    { "coach-phone", string.IsNullOrEmpty(school.HeadCoach.PhoneNumber) ? string.Empty : school.HeadCoach.PhoneNumber }
+                    { "coach-email", string.IsNullOrEmpty(school.CoachEmail) ? string.Empty : school.CoachEmail },
+                    { "coach-phone", string.IsNullOrEmpty(school.CoachPhoneNumber) ? string.Empty : school.CoachPhoneNumber }
                 };
 
             var tags2 = new Dictionary<string, KeyValuePair<string, string>>
@@ -119,8 +119,8 @@ namespace CoachEmailGenerator.Services
                     { "school-name", new KeyValuePair<string, string>("[SCHOOL]", school.SchoolName) },
                     { "school-name-short", new KeyValuePair<string, string>("[SCHOOL NAME SHORT]",string.IsNullOrEmpty(school.SchoolNameShort) ? string.Empty : school.SchoolNameShort) },
                     { "coach-name", new KeyValuePair<string, string>("[COACH NAME]",coachName) },
-                    { "coach-email", new KeyValuePair<string, string>("[COACH EMAIL]",string.IsNullOrEmpty(school.HeadCoach.Email) ? string.Empty : school.HeadCoach.Email) },
-                    { "coach-phone", new KeyValuePair<string, string>("[COACH PHONE]",string.IsNullOrEmpty(school.HeadCoach.PhoneNumber) ? string.Empty : school.HeadCoach.PhoneNumber) }
+                    { "coach-email", new KeyValuePair<string, string>("[COACH EMAIL]",string.IsNullOrEmpty(school.CoachEmail) ? string.Empty : school.CoachEmail) },
+                    { "coach-phone", new KeyValuePair<string, string>("[COACH PHONE]",string.IsNullOrEmpty(school.CoachPhoneNumber) ? string.Empty : school.CoachPhoneNumber) }
                 };
 
             foreach (var item in tags2)
@@ -152,9 +152,9 @@ namespace CoachEmailGenerator.Services
                     var x when
                     x == "[SCHOOL]" => school.SchoolName,
                     "[SCHOOL NAME SHORT]" => string.IsNullOrEmpty(school.SchoolNameShort) ? string.Empty : school.SchoolNameShort,
-                    "[COACH NAME]" => string.IsNullOrEmpty(school.HeadCoach.Name) ? string.Empty : school.HeadCoach.Name,
-                    "[COACH EMAIL]" => string.IsNullOrEmpty(school.HeadCoach.Email) ? string.Empty : school.HeadCoach.Email,
-                    "[COACH PHONE]" => string.IsNullOrEmpty(school.HeadCoach.PhoneNumber) ? string.Empty : school.HeadCoach.PhoneNumber,
+                    "[COACH NAME]" => string.IsNullOrEmpty(school.CoachName) ? string.Empty : school.CoachName,
+                    "[COACH EMAIL]" => string.IsNullOrEmpty(school.CoachEmail) ? string.Empty : school.CoachEmail,
+                    "[COACH PHONE]" => string.IsNullOrEmpty(school.CoachPhoneNumber) ? string.Empty : school.CoachPhoneNumber,
                     _ => ""
                 };
 
