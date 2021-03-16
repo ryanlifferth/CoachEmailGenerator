@@ -1,0 +1,119 @@
+﻿
+.status-bar {
+    margin-bottom: 20px;
+    margin-top: 13px;
+    padding-right: 15%;
+
+    .status-item {
+        color: silver;
+        font-size: 14px;
+        font-weight: 400;
+        text-transform: uppercase;
+        white-space: nowrap;
+
+        a {
+            color: silver;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+        &.active {
+            color: #0C6288;
+            font-weight: 600;
+
+            a {
+                color: #0C6288;
+
+                &:hover {
+                    color: #0C6288;
+                }
+            }
+        }
+
+        &.this {
+            color: #000;
+            font-weight: 600;
+
+            a {
+                color: #000;
+
+                &:hover {
+                    color: #000;
+                }
+            }
+        }
+
+        &.middle {
+            text-align: center;
+        }
+
+        &.last {
+            text-align: right;
+        }
+
+        &:hover {
+            color: silver;
+            text-decoration: none;
+        }
+
+        &.spacer {
+            flex: 0;
+            padding: 0;
+
+            .first-spacer {
+                display: inline-block;
+                width: 70px;
+            }
+        }
+    }
+
+    .status-circle {
+        color: #dadada;
+        flex: 0;
+        //margin-right: -1px;
+        //padding: 0;
+        padding: 0 6px;
+
+        &.active {
+            color: #e66a6a;
+        }
+
+        .icon {
+            font-size: 10px;
+        }
+
+        &.first {
+            //margin-left: 95px;
+        }
+
+        &.last {
+            margin-right: 55px;
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .status-line {
+        border-top: solid 2px #dadada;
+        flex: 1;
+        margin-bottom: -13px;
+        margin-top: 13px;
+
+        &.active {
+            border-color: #e66a6a;
+        }
+
+        &.first {
+            flex: 0;
+        }
+
+        .first-spacer {
+            display: inline-block;
+            width: 90px;
+        }
+    }
+}

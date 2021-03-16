@@ -77,7 +77,8 @@ namespace CoachEmailGenerator
                     };
                 });
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
 
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<GmailApiService>();

@@ -72,7 +72,8 @@ nav.navbar {
   nav.navbar .navbar-nav {
     flex-direction: row;
     justify-content: normal;
-    padding: 12px 10px 0 40px; }
+    padding: 12px 10px 0 40px;
+    display: none; }
     nav.navbar .navbar-nav a.nav-item {
       border-bottom: 2px solid transparent;
       color: #7c96b1;
@@ -167,6 +168,72 @@ nav.navbar {
         position: absolute;
         width: 75px; }
 
+.status-bar {
+  margin-bottom: 20px;
+  margin-top: 13px;
+  padding-right: 15%; }
+  .status-bar .status-item {
+    color: silver;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    white-space: nowrap; }
+    .status-bar .status-item a {
+      color: silver; }
+      .status-bar .status-item a:hover {
+        text-decoration: none; }
+    .status-bar .status-item.active {
+      color: #0C6288;
+      font-weight: 600; }
+      .status-bar .status-item.active a {
+        color: #0C6288; }
+        .status-bar .status-item.active a:hover {
+          color: #0C6288; }
+    .status-bar .status-item.this {
+      color: #000;
+      font-weight: 600; }
+      .status-bar .status-item.this a {
+        color: #000; }
+        .status-bar .status-item.this a:hover {
+          color: #000; }
+    .status-bar .status-item.middle {
+      text-align: center; }
+    .status-bar .status-item.last {
+      text-align: right; }
+    .status-bar .status-item:hover {
+      color: silver;
+      text-decoration: none; }
+    .status-bar .status-item.spacer {
+      flex: 0;
+      padding: 0; }
+      .status-bar .status-item.spacer .first-spacer {
+        display: inline-block;
+        width: 70px; }
+  .status-bar .status-circle {
+    color: #dadada;
+    flex: 0;
+    padding: 0 6px; }
+    .status-bar .status-circle.active {
+      color: #e66a6a; }
+    .status-bar .status-circle .icon {
+      font-size: 10px; }
+    .status-bar .status-circle.last {
+      margin-right: 55px; }
+    .status-bar .status-circle:hover {
+      text-decoration: none; }
+  .status-bar .status-line {
+    border-top: solid 2px #dadada;
+    flex: 1;
+    margin-bottom: -13px;
+    margin-top: 13px; }
+    .status-bar .status-line.active {
+      border-color: #e66a6a; }
+    .status-bar .status-line.first {
+      flex: 0; }
+    .status-bar .status-line .first-spacer {
+      display: inline-block;
+      width: 90px; }
+
 .subject-line {
   margin: 0 0 10px 0; }
   .subject-line label {
@@ -179,8 +246,9 @@ nav.navbar {
   border-color: #ced4da; }
 
 .add-new {
+  margin-bottom: 10px;
   text-align: right;
-  width: 650px; }
+  width: 750px; }
   .add-new .icon {
     margin-right: 5px; }
   .add-new button {

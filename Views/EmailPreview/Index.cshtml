@@ -31,7 +31,6 @@
     }
 }
 
-
 <form asp-route="Index" method="post">
 
     <div class="container">
@@ -82,7 +81,19 @@
         </div>
     </div>
 
-    <input type="submit" value="SEND EMAIL" />
+    <div class="buttons row">
+        <div class="col">
+            <button type="button" class="btn btn-outline-primary">
+                <span class="far fa-arrow-to-left"></span>
+                PREV
+            </button>
+        </div>
+        <div class="col text-right">
+            <button type="submit" class="btn btn-primary">
+                SEND EMAIL
+            </button>
+        </div>
+    </div>
 </form>
 
 

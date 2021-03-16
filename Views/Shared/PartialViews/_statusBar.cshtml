@@ -1,0 +1,50 @@
+﻿@{
+    var thisController = this.ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant();
+    var thisAction = this.ViewContext.RouteData.Values["action"].ToString().ToLowerInvariant();
+
+    var templateDone = thisController.ToLowerInvariant() == "emailtemplate" ||
+                       thisController.ToLowerInvariant() == "school" ||
+                       thisController.ToLower() == "emailpreview" ? "active" : string.Empty;
+    var schoolDone = thisController.ToLowerInvariant() == "school" ||
+                     thisController.ToLower() == "emailpreview" ? "active" : string.Empty;
+    var previewDone = thisController.ToLower() == "emailpreview" ? "active" : string.Empty;
+}
+
+<div class="container status-bar">
+    <div class="row">
+        <div class="col status-item first @templateDone @(thisController == "emailtemplate" ? "this" : string.Empty)">
+            <a asp-controller="email-template">
+                1.  Create an email template
+            </a>
+        </div>
+        <div class="col status-item spacer">
+            <span class="first-spacer">&nbsp;</span>
+        </div>
+        <div class="col status-item middle @schoolDone @(thisController == "school" ? "this" : string.Empty)">
+            <a asp-controller="school">
+                2.  Add your list of schools/coaches
+            </a>
+        </div>
+        <div class="col status-item last @previewDone @(thisController == "emailpreview" ? "this" : string.Empty)">
+            <a asp-controller="email-preview">
+                3.  Preview your email
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col status-line first @templateDone">
+            <span class="first-spacer">&nbsp;</span>
+        </div>
+        <div class="col status-circle first @templateDone">
+            <span class="fas fa-circle icon"></span>
+        </div>
+        <div class="col status-line @schoolDone">&nbsp;</div>
+        <div class="col status-circle middle @schoolDone">
+            <span class="fas fa-circle icon"></span>
+        </div>
+        <div class="col status-line @previewDone">&nbsp;</div>
+        <div class="col status-circle last @previewDone">
+            <span class="fas fa-circle icon"></span>
+        </div>
+    </div>
+</div>
