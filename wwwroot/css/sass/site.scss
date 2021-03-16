@@ -59,6 +59,14 @@ a {
 
 @import 'preview';
 
+.buttons {
+    margin: 10px 0 0 0;
+
+    .col {
+        padding: 0;
+    }
+}
+
 
 footer {
     background-color: rgba(216, 218, 219, 0.1);

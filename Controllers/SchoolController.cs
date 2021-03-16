@@ -39,21 +39,20 @@ namespace CoachEmailGenerator.Controllers
         public IActionResult Index([Bind("Id, SchoolName, SchoolNameShort, HeadCoach.Name, HeadCoach.Email, HeadCoach.PhoneNumber, IsEnabled")] EmailTemplate template)
         {
 
-            /************ TEMP CODE **************/
-            var schools = new List<School>()
-            {
-                new School { Id = Guid.NewGuid(), SchoolName = "Brigham Young University", SchoolNameShort = "BYU", HeadCoach = new Coach { Name = "Coach Smith", Email = "coach@byu.edu", PhoneNumber = "801-555-1234" }, IsEnabled = true },
-                new School { Id = Guid.NewGuid(), SchoolName = "Utah Valley University", SchoolNameShort = "UVU", HeadCoach = new Coach { Name = "Greg Maas", Email = "greg.maas@uvu.edu" }, IsEnabled = true },
-                new School { Id = Guid.NewGuid(), SchoolName = "Seattle University", SchoolNameShort = "SU", HeadCoach = new Coach { Name = "Pete Fewing", Email = "fewingp@seattleu.edu", PhoneNumber = "206-296-5498" }, IsEnabled = true }
-            };
+            ///************ TEMP CODE **************/
+            //var schools = new List<School>()
+            //{
+            //    new School { Id = Guid.NewGuid(), SchoolName = "Brigham Young University", SchoolNameShort = "BYU", HeadCoach = new Coach { Name = "Coach Smith", Email = "coach@byu.edu", PhoneNumber = "801-555-1234" }, IsEnabled = true },
+            //    new School { Id = Guid.NewGuid(), SchoolName = "Utah Valley University", SchoolNameShort = "UVU", HeadCoach = new Coach { Name = "Greg Maas", Email = "greg.maas@uvu.edu" }, IsEnabled = true },
+            //    new School { Id = Guid.NewGuid(), SchoolName = "Seattle University", SchoolNameShort = "SU", HeadCoach = new Coach { Name = "Pete Fewing", Email = "fewingp@seattleu.edu", PhoneNumber = "206-296-5498" }, IsEnabled = true }
+            //};
             
-            var fileName = _saveTemplateService.GetUserNameFromEmail(User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value);
-            var filePath = Directory.GetCurrentDirectory() + "\\Data\\" + fileName + "-schools.json";
+            //var fileName = _saveTemplateService.GetUserNameFromEmail(User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value);
+            //var filePath = Directory.GetCurrentDirectory() + "\\Data\\" + fileName + "-schools.json";
 
-            var jsonString = JsonSerializer.Serialize(schools);
-            System.IO.File.WriteAllText(filePath, jsonString);
-            /********** END TEMP CODE ************/
-
+            //var jsonString = JsonSerializer.Serialize(schools);
+            //System.IO.File.WriteAllText(filePath, jsonString);
+            ///********** END TEMP CODE ************/
 
             return View();
         }

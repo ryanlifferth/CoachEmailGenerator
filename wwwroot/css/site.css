@@ -236,11 +236,12 @@ nav.navbar {
 
 .subject-line {
   margin: 0 0 10px 0; }
-  .subject-line label {
-    font-size: 14px;
-    margin: 0 0 0 3px; }
   .subject-line .input-group {
     margin: 0; }
+
+label {
+  font-size: 14px;
+  margin: 0 0 0 3px; }
 
 .btn-outline-secondary {
   border-color: #ced4da; }
@@ -424,6 +425,11 @@ nav.navbar {
     font-weight: 500; }
     .preview-pane .coach-button.hover-val {
       background-color: #fff !important; }
+
+.buttons {
+  margin: 10px 0 0 0; }
+  .buttons .col {
+    padding: 0; }
 
 footer {
   background-color: rgba(216, 218, 219, 0.1);

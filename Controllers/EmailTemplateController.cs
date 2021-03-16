@@ -49,7 +49,8 @@ namespace CoachEmailGenerator.Controllers
             template.EmailAddress = string.IsNullOrEmpty(template.EmailAddress) ? User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value : template.EmailAddress;
             _saveTemplateService.SaveTemplate(template);
 
-            return View();
+            //return View();
+            return RedirectToAction("Index", "School");
         }
 
 
