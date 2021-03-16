@@ -1,4 +1,5 @@
-﻿using CoachEmailGenerator.Models;
+﻿using CoachEmailGenerator.Interfaces;
+using CoachEmailGenerator.Models;
 using CoachEmailGenerator.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,19 +18,19 @@ namespace CoachEmailGenerator.Controllers
     {
 
         private readonly ILogger<HomeController> _logger;
-        private DataService _saveTemplateService;
+        private IDataService _saveTemplateService;
 
         public SchoolController(ILogger<HomeController> logger,
-            DataService saveTemplateService)
+            IDataService dataService)
         {
             _logger = logger;
-            _saveTemplateService = saveTemplateService;
+            _saveTemplateService = dataService;
         }
 
         public IActionResult Index()
         {
             var userEmail = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
-            var schools = _saveTemplateService.LoadSchoolListFromJsonSource(userEmail);
+            var schools = _saveTemplateService.GetSchoolsByEmailAddress(userEmail);
 
             return View(schools);
         }

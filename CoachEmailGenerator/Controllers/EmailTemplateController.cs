@@ -1,4 +1,5 @@
-﻿using CoachEmailGenerator.Models;
+﻿using CoachEmailGenerator.Interfaces;
+using CoachEmailGenerator.Models;
 using CoachEmailGenerator.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,22 +20,22 @@ namespace CoachEmailGenerator.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private GmailApiService _gmailApiService;
-        private DataService _saveTemplateService;
+        private IDataService _saveTemplateService;
 
         public EmailTemplateController(ILogger<HomeController> logger,
             GmailApiService gmailApiService,
-            DataService saveTemplateService)
+            IDataService dataService)
         {
             _logger = logger;
             _gmailApiService = gmailApiService;
-            _saveTemplateService = saveTemplateService;
+            _saveTemplateService = dataService;
 
         }
 
         public IActionResult Index()
         {
             var userEmail = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
-            var template = _saveTemplateService.LoadTemplateFromJsonSource(userEmail);
+            var template = _saveTemplateService.GetEmailTemplateByEmailAddress(userEmail);
 
             return View(template);
         }
@@ -47,7 +48,7 @@ namespace CoachEmailGenerator.Controllers
 
             // Save to file
             template.EmailAddress = string.IsNullOrEmpty(template.EmailAddress) ? User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value : template.EmailAddress;
-            _saveTemplateService.SaveTemplate(template);
+            _saveTemplateService.SaveEmailTemplate(template);
 
             //return View();
             return RedirectToAction("Index", "School");

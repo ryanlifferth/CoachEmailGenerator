@@ -1,4 +1,5 @@
-﻿using CoachEmailGenerator.Models;
+﻿using CoachEmailGenerator.Interfaces;
+using CoachEmailGenerator.Models;
 using CoachEmailGenerator.Services;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication;
@@ -21,23 +22,23 @@ namespace CoachEmailGenerator.Controllers
 
         private readonly ILogger<HomeController> _logger;
         private GmailApiService _gmailApiService;
-        private DataService _saveTemplateService;
+        private IDataService _saveTemplateService;
 
         public EmailPreviewController(ILogger<HomeController> logger,
                 GmailApiService gmailApiService,
-                DataService saveTemplateService)
+                IDataService dataService)
         {
             _logger = logger;
             _gmailApiService = gmailApiService;
-            _saveTemplateService = saveTemplateService;
+            _saveTemplateService = dataService;
         }
 
         public IActionResult Index()
         {
             // Test
             var userEmail = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
-            var template = _saveTemplateService.LoadTemplateFromJsonSource(userEmail);
-            var schools = _saveTemplateService.LoadSchoolListFromJsonSource(userEmail);
+            var template = _saveTemplateService.GetEmailTemplateByEmailAddress(userEmail);
+            var schools = _saveTemplateService.GetSchoolsByEmailAddress(userEmail);
 
             dynamic previewModel = new ExpandoObject();
             previewModel.Template = template;
@@ -51,8 +52,8 @@ namespace CoachEmailGenerator.Controllers
         public async Task<IActionResult> SendEmail()
         {
             var userEmail = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
-            var template = _saveTemplateService.LoadTemplateFromJsonSource(userEmail);
-            var schools = _saveTemplateService.LoadSchoolListFromJsonSource(userEmail);
+            var template = _saveTemplateService.GetEmailTemplateByEmailAddress(userEmail);
+            var schools = _saveTemplateService.GetSchoolsByEmailAddress(userEmail);
 
             var accessToken = await HttpContext.GetTokenAsync("access_token");
             var cred = GoogleCredential.FromAccessToken(accessToken);

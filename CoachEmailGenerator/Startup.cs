@@ -1,4 +1,5 @@
 using CoachEmailGenerator.Common;
+using CoachEmailGenerator.Interfaces;
 using CoachEmailGenerator.Services;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication;
@@ -82,7 +83,9 @@ namespace CoachEmailGenerator
 
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<GmailApiService>();
-            services.AddTransient<DataService>();
+            services.AddTransient<IDataService, LocalDataService>();
+            //services.AddTransient<IDataService, Configuration["dataService"] == "Azure" ? AzureDataService : LocalDataService > ();
+            
 
         }
 

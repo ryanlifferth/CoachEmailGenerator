@@ -1,4 +1,5 @@
-﻿using CoachEmailGenerator.Models;
+﻿using CoachEmailGenerator.Interfaces;
+using CoachEmailGenerator.Models;
 using CoachEmailGenerator.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -17,12 +18,12 @@ namespace CoachEmailGenerator.Controllers.api
     {
 
         private readonly ILogger<HomeController> _logger;
-        private DataService _saveTemplateService;
+        private IDataService _saveTemplateService;
 
-        public SchoolInfoController(ILogger<HomeController> logger, DataService saveTemplateService)
+        public SchoolInfoController(ILogger<HomeController> logger, IDataService dataService)
         {
             _logger = logger;
-            _saveTemplateService = saveTemplateService;
+            _saveTemplateService = dataService;
 
         }
 
@@ -35,7 +36,7 @@ namespace CoachEmailGenerator.Controllers.api
         public IActionResult SaveIsEnabled(string userEmail, Guid schoolId, bool isEnabled)
         {
             // Load JSON from file
-            var schools = _saveTemplateService.LoadSchoolListFromJsonSource(userEmail);
+            var schools = _saveTemplateService.GetSchoolsByEmailAddress(userEmail);
 
             if (schools != null)
             {
@@ -46,7 +47,7 @@ namespace CoachEmailGenerator.Controllers.api
             }
 
             // save the file
-            _saveTemplateService.SaveSchoolListBackToJsonSource(userEmail, schools);
+            _saveTemplateService.SaveSchools(userEmail, schools);
 
             return Ok();
         }
@@ -55,7 +56,7 @@ namespace CoachEmailGenerator.Controllers.api
         public IActionResult SaveTheSchool(string userEmail, School school)
         {
             // Load JSON from file
-            var schools = _saveTemplateService.LoadSchoolListFromJsonSource(userEmail);
+            var schools = _saveTemplateService.GetSchoolsByEmailAddress(userEmail);
 
             if (schools != null && school.Id != Guid.Empty)
             {
@@ -78,7 +79,7 @@ namespace CoachEmailGenerator.Controllers.api
             }
 
             // save the file
-            _saveTemplateService.SaveSchoolListBackToJsonSource(userEmail, schools);
+            _saveTemplateService.SaveSchools(userEmail, schools);
 
             return Ok();
         }
@@ -87,7 +88,7 @@ namespace CoachEmailGenerator.Controllers.api
         public IActionResult DeleteTheSchool(string userEmail, Guid schoolId)
         {
             // Load JSON from file
-            var schools = _saveTemplateService.LoadSchoolListFromJsonSource(userEmail);
+            var schools = _saveTemplateService.GetSchoolsByEmailAddress(userEmail);
 
             if (schools != null && schoolId != Guid.Empty)
             {
@@ -95,7 +96,7 @@ namespace CoachEmailGenerator.Controllers.api
             }
 
             // save the file
-            _saveTemplateService.SaveSchoolListBackToJsonSource(userEmail, schools);
+            _saveTemplateService.SaveSchools(userEmail, schools);
 
             return Ok();
         }
