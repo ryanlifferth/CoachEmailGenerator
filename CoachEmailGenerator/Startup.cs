@@ -83,8 +83,16 @@ namespace CoachEmailGenerator
 
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<GmailApiService>();
-            services.AddTransient<IDataService, LocalDataService>();
-            //services.AddTransient<IDataService, Configuration["dataService"] == "Azure" ? AzureDataService : LocalDataService > ();
+            
+            if (Configuration["dataService"] == "Azure")
+            {
+                services.AddTransient<IDataService, AzureDataService>();
+            }
+            else
+            {
+                services.AddTransient<IDataService, LocalDataService>();
+            }
+            
             
 
         }
