@@ -1,4 +1,5 @@
-﻿using CoachEmailGenerator.Interfaces;
+﻿using CoachEmailGenerator.Helpers;
+using CoachEmailGenerator.Interfaces;
 using CoachEmailGenerator.Models;
 using CoachEmailGenerator.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -57,6 +58,10 @@ namespace CoachEmailGenerator.Controllers.api
         {
             // Load JSON from file
             var schools = _saveTemplateService.GetSchoolsByEmailAddress(userEmail);
+            if (schools == null)
+            {
+                schools = new List<School>();
+            }
 
             if (schools != null && school.Id != Guid.Empty)
             {
@@ -75,6 +80,8 @@ namespace CoachEmailGenerator.Controllers.api
             {
                 // This is a new School, so add it to the object
                 school.Id = Guid.NewGuid();
+                school.PartitionKey = Helper.GetUserNameFromEmail(userEmail);
+                school.RowKey = school.Id.ToString();
                 schools.Add(school);
             }
 

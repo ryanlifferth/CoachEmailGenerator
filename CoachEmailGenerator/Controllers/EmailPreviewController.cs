@@ -61,7 +61,7 @@ namespace CoachEmailGenerator.Controllers
             _gmailApiService.CreateEmail(cred, userEmail, template, schools);
 
             //return View();
-            TempData["CreatedEmail"] = "Emails have been created and are in your DRAFTS folder";
+            TempData["EmailSent"] = true;
             return RedirectToAction("Index");
         }
 

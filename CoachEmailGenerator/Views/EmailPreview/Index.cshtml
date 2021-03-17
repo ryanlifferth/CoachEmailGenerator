@@ -6,7 +6,8 @@
     List<School> schools = Model.Schools;
     EmailTemplate template = Model.Template;
 
-    var createdSuccessfully = (TempData["CreatedEmail"] != null) ? TempData["CreatedEmail"].ToString() : string.Empty;
+    var createdSuccessfully = (TempData["EmailSent"] != null && bool.Parse(TempData["EmailSent"].ToString()) != false) ? true : false;
+    //createdSuccessfully = true;  // for testing
     TempData["CreatedEmail"] = null;  // clear it out
 
     // Modify the EmailSubjectLine for the preview page for proper behavior
@@ -33,13 +34,17 @@
 
 <form asp-route="Index" method="post">
 
+    @if (createdSuccessfully)
+    {
+        <div class="container success">
+            <span class="fad fa-thumbs-up fa-2x"></span>
+            <h4>Sweet!</h4>  Your emails have been created and are in your GMail DRAFTS folder.
+        </div>
+    }
+
     <div class="container preview-container">
         <div class="row">
             <div class="col">
-                @if (!string.IsNullOrEmpty(createdSuccessfully))
-                {
-                    <span class="bg-success">@createdSuccessfully</span>
-                }
 
                 @foreach (var school in schools.Where(x => x.IsEnabled == true))
                 {

@@ -4,6 +4,8 @@
 
 ### Google OAuth2
 
+For Google API and auth, go to https://console.cloud.google.com
+
 Resources:
 - https://dotnetthoughts.net/aspnetcore-social-authentication-without-identity/
 - https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/social-without-identity?view=aspnetcore-5.0

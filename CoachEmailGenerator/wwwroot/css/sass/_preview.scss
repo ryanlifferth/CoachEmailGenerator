@@ -9,6 +9,27 @@
     }
 }
 
+.success {
+    color: mediumseagreen;
+    margin: 0 0 30px 0;
+    text-align: center;
+
+    h4 {
+        display: inline-block;
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    .fad {
+        --fa-primary-color: #255984;
+        --fa-secondary-color: dodgerblue;
+        --fa-secondary-opacity: 0.6;
+        margin-right: 5px;
+    }
+}
+
 .school-item-preview {
     cursor: pointer;
     padding: 4px 10px;
