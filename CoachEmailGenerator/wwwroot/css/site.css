@@ -1,4 +1,6 @@
-﻿@import url("https://fonts.googleapis.com/css?family=Lato|Montserrat|Open+Sans:300,400,500,600|Roboto|Merriweather+Sans:300,400,500,600|Titillium+Web:300,400,500,600,700");
+﻿@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Lato|Montserrat|Open+Sans:300,400,500,600|Roboto|Merriweather+Sans:300,400,500,600|Titillium+Web:300,400,500,600,700");
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Kaushan+Script&family=Ma+Shan+Zheng&display=swap");
 html {
   height: 100%;
   position: relative;
@@ -28,6 +30,101 @@ a {
   a:hover {
     color: #62B0E8;
     text-decoration: none; }
+
+.title-row .title {
+  font-family: 'Kaushan Script', 'Ma Shan Zheng', 'Berkshire Swash';
+  font-size: 20px;
+  margin-right: 25px;
+  white-space: nowrap; }
+  .title-row .title .number {
+    color: #F47920;
+    display: inline-block;
+    font-family: 'Merriweather Sans';
+    font-size: 100px;
+    font-weight: 600;
+    line-height: normal;
+    text-shadow: 2px 4px rgba(30, 55, 108, 0.7); }
+  .title-row .title .text {
+    color: #F47920;
+    display: inline-block;
+    font-size: 50px;
+    left: -3px;
+    position: relative;
+    text-shadow: 2px 1px rgba(30, 55, 108, 0.7);
+    top: -2px; }
+  .title-row .title span {
+    display: block;
+    line-height: 43px; }
+
+.title-row .intro-text {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 5px 20px 0 10px;
+  position: relative; }
+  .title-row .intro-text a.go {
+    border: 1px solid transparent;
+    border-radius: 5px;
+    bottom: -11px;
+    color: #255984;
+    font-family: 'Lato';
+    font-size: 22px;
+    font-weight: 600;
+    padding: 5px 15px;
+    position: absolute;
+    right: 17px;
+    text-transform: uppercase; }
+    .title-row .intro-text a.go:hover {
+      border-color: rgba(37, 89, 132, 0.3);
+      text-decoration: none;
+      text-shadow: 0 0 2px rgba(244, 121, 32, 0.8); }
+      .title-row .intro-text a.go:hover span {
+        --fa-secondary-opacity: 0.8; }
+    .title-row .intro-text a.go span {
+      --fa-primary-color: #255984;
+      --fa-secondary-color: #f47920;
+      --fa-secondary-opacity: 0.6;
+      margin-left: 4px; }
+
+.steps-container {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 50% 50%;
+  padding: 25px 5% 10px; }
+  .steps-container .steps {
+    margin-top: 10px; }
+    .steps-container .steps .icon {
+      padding: 5px 15px 5px 5px; }
+      .steps-container .steps .icon span {
+        background-color: rgba(0, 0, 0, 0.04);
+        border: 2px solid rgba(0, 0, 0, 0.05);
+        border-radius: 50px;
+        color: rgba(0, 0, 0, 0.6);
+        padding: 15px 13px; }
+    .steps-container .steps .instructions {
+      font-size: 14px; }
+      .steps-container .steps .instructions h4 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 0;
+        text-transform: uppercase; }
+      .steps-container .steps .instructions img.coach-img {
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        display: block;
+        float: right;
+        width: 140px; }
+      .steps-container .steps .instructions p {
+        margin: 7px ​0 0; }
+    .steps-container .steps .next {
+      text-align: right;
+      width: 100%; }
+      .steps-container .steps .next a {
+        margin-top: 50px; }
+        .steps-container .steps .next a.btn {
+          font-weight: 600;
+          padding: 10px 20px;
+          text-transform: uppercase; }
+        .steps-container .steps .next a span {
+          margin-left: 10px; }
 
 header {
   background-color: #fff !important;
@@ -430,6 +527,30 @@ label {
   margin: 10px 0 0 0; }
   .buttons .col {
     padding: 0; }
+
+a.nav-button {
+  border: 1px solid transparent;
+  border-radius: 5px;
+  bottom: -11px;
+  color: #255984;
+  font-family: 'Lato';
+  font-size: 22px;
+  font-weight: 600;
+  padding: 5px 15px;
+  position: absolute;
+  right: 17px;
+  text-transform: uppercase; }
+  a.nav-button:hover {
+    border-color: rgba(37, 89, 132, 0.3);
+    text-decoration: none;
+    text-shadow: 0 0 2px rgba(244, 121, 32, 0.8); }
+    a.nav-button:hover span {
+      --fa-secondary-opacity: 0.8; }
+  a.nav-button span {
+    --fa-primary-color: #255984;
+    --fa-secondary-color: #f47920;
+    --fa-secondary-opacity: 0.6;
+    margin-left: 4px; }
 
 footer {
   background-color: rgba(216, 218, 219, 0.1);

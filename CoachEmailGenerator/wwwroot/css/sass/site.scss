@@ -49,6 +49,8 @@ a {
     }
 }
 
+@import 'home';
+
 @import 'header';
 
 @import 'status-bar';
@@ -64,6 +66,38 @@ a {
 
     .col {
         padding: 0;
+    }
+}
+
+a.nav-button {
+    border: 1px solid transparent;
+    border-radius: 5px;
+    bottom: -11px;
+    color: #255984;
+    font-family: 'Lato';
+    font-size: 22px;
+    font-weight: 600;
+    padding: 5px 15px;
+    position: absolute;
+    right: 17px;
+    text-transform: uppercase;
+
+    &:hover {
+        border-color: rgba(37, 89, 132, 0.3);
+        text-decoration: none;
+        text-shadow: 0 0 2px rgba(244, 121, 32, 0.8);
+
+        span {
+            --fa-secondary-opacity: 0.8;
+        }
+    }
+
+    span {
+        //margin-left: 10px;
+        --fa-primary-color: #255984;
+        --fa-secondary-color: #f47920;
+        --fa-secondary-opacity: 0.6;
+        margin-left: 4px;
     }
 }
 

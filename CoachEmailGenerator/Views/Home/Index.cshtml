@@ -5,7 +5,100 @@
 }
 
 
-[TODO:  Instructions]
+<div class="d-flex flex-row title-row">
+    <div class="flex-column flex-grow-0 title">
+        <span class="number">3</span>
+        <div class="text">
+            <span class="first">quick</span>
+            <span class="second">steps</span>
+        </div>
+    </div>
+    <div class="flex-column flex-grow-1 intro-text">
+        The <b>Coach Emailer</b> can be used to create an email that will be sent to a list of
+        coaches (that you create).  The emails emails are created as <i>drafts</i> and placed in
+        your GMail <b>Drafts</b> folder.  To use this application, you must have a GMail account
+        and use it to login (above).  The <b>Coach Emailer</b> is simple to use and your emails
+        can be created in three simple steps.
+
+        <a asp-controller="email-template" class="go">
+            Let's go
+            <span class="fad fa-chevron-circle-right fa-lg"></span>
+        </a>
+    </div>
+</div>
+
+<div class="steps-container">
+
+    <div class="d-flex flex-row steps">
+        <div class="flex-column flex-grow-0 icon">
+            <span class="far fa-envelope-open-text fa-lg"></span>
+        </div>
+        <div class="flex-column flex-grow-1 instructions">
+            <img src="~/img/screenshot-coach-info.png" class="coach-img" />
+            <h4>Create your email</h4>
+            Create your email template, including the <b>Subject Line</b> and the <b>Email body</b>.  Use the
+            <b>Coach Info</b> dropdown to insert template/coach information into your email or subject line.
+        </div>
+    </div>
+
+    <div class="d-flex flex-row steps">
+        <div class="flex-column flex-grow-0 icon">
+            <span class="far fa-list-ul fa-lg"></span>
+        </div>
+        <div class="flex-column flex-grow-1 instructions">
+            <h4>Create your list of coaches</h4>
+            On the <b>List of Schools/Coaches</b> page, add a new school/coach by clicking on the <b>Add new school</b>
+            button.  Once you have entered the school and coach information, click the <b>Save</b>
+            <img src="~/img/screenshot-save.png" class="img-save" /> button.
+            <p>
+                You can update/edit any coach/school item by clicking the <b>Edit</b>
+                <img src="~/img/screenshot-edit.png" class="img-edit" /> button.  Make your changes and then click
+                the <b>Save</b><img src="~/img/screenshot-save.png" class="img-save" /> button to save your changes.
+            </p>
+            <p>
+                To delete a coach/school item, click on the <b>Delete</b> <img src="~/img/screenshot-delete.png" class="img-delete" /> button.
+            </p>
+        </div>
+    </div>
+
+
+    <div class="d-flex flex-row steps">
+        <div class="flex-column flex-grow-0 icon">
+            <span class="far fa-file-alt fa-lg"></span>
+        </div>
+        <div class="flex-column flex-grow-1 instructions">
+            <h4>Preview your email</h4>
+            On the preview page you can view what your final draft will look like by hovering over each school on the left-hand
+            side of the page.  When you hover over each individual school, the template values will be replaced by the actual
+            values for that school.
+            <p>
+                Once you are satisfied with the email, click the <b>SEND EMAIL</b> button.  The emails drafts will be created
+                in youre GMail <b>DRAFTS</b> folder.  To view each email, log in to your GMail account and navigate to the
+                <b>DRAFTS</b> folder.  From there you can click the send button for each email.
+            </p>
+            <p>
+                We decided not to <i>automatically</i> send the emails from this application to avoid accidental delivery of an
+                email and to give you a chance to personalize the email a bit for each school.
+            </p>
+        </div>
+    </div>
+
+    <div class="d-flex flex-row steps">
+
+        <span class="next">
+            <a asp-controller="email-template" class="btn btn-outline-primary">
+                Get started
+                <span class="far fa-arrow-to-right fa-lg"></span>
+            </a>
+        </span>
+
+    </div>
+
+</div>
+
+
+
+
 
 @foreach (var claim in User.Claims)
 {
@@ -14,9 +107,9 @@
         -
         <span>@claim.Value</span>
     </div>-->
-}
+    }
 
-@if (Context.User.Identity.IsAuthenticated)
-{
+    @if (Context.User.Identity.IsAuthenticated)
+    {
     <!--<span>Hello @User.Identity.Name</span>-->
-}
+    }
