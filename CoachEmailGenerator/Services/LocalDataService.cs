@@ -34,10 +34,10 @@ namespace CoachEmailGenerator.Services
             if (emailTemplate.Id == Guid.Empty)
             {
                 emailTemplate.Id = Guid.NewGuid();
-                emailTemplate.CreatedDate = now;
+                //emailTemplate.CreatedDate = now;
             }
 
-            emailTemplate.LastEditedDate = now;
+            //emailTemplate.LastEditedDate = now;
 
             var jsonString = JsonSerializer.Serialize(emailTemplate);
             File.WriteAllText(fullFilePath, jsonString);
@@ -62,6 +62,23 @@ namespace CoachEmailGenerator.Services
             var fullFilePath = _filePath + fileName;
 
             System.IO.File.WriteAllText(fullFilePath, JsonSerializer.Serialize(schools));
+        }
+
+        public void DeleteSchool(string userEmail, School school)
+        {
+            var fileName = Helper.GetUserNameFromEmail(userEmail) + "-schools.json";
+            var fullFilePath = _filePath + fileName;
+
+            var jsonString = System.IO.File.Exists(fullFilePath) ? System.IO.File.ReadAllText(fullFilePath) : string.Empty;
+            var schools = !string.IsNullOrEmpty(jsonString) ? JsonSerializer.Deserialize<List<School>>(jsonString) : null;
+
+            if (schools != null && school.Id != Guid.Empty)
+            {
+                schools.Remove(schools.FirstOrDefault(x => x.Id == school.Id));
+            }
+            
+            // save the file
+            SaveSchools(userEmail, schools);
         }
 
     }

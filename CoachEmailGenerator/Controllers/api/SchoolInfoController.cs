@@ -89,19 +89,25 @@ namespace CoachEmailGenerator.Controllers.api
         {
             // Load JSON from file
             var schools = _saveTemplateService.GetSchoolsByEmailAddress(userEmail);
+            var school = schools.Where(x => x.Id == schoolId).FirstOrDefault();
 
-            if (schools != null && schoolId != Guid.Empty)
+            //if (schools != null && schoolId != Guid.Empty)
+            //{
+            //    schools.Remove(schools.FirstOrDefault(x => x.Id == schoolId));
+            //}
+            //
+            //// save the file
+            //_saveTemplateService.SaveSchools(userEmail, schools);
+
+            if (school != null)
             {
-                schools.Remove(schools.FirstOrDefault(x => x.Id == schoolId));
+                _saveTemplateService.DeleteSchool(userEmail, school);
             }
-
-            // save the file
-            _saveTemplateService.SaveSchools(userEmail, schools);
 
             return Ok();
         }
 
-        
+
 
     }
 }

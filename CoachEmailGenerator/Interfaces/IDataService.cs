@@ -13,6 +13,7 @@ namespace CoachEmailGenerator.Interfaces
         public Guid SaveEmailTemplate(EmailTemplate emailTemplate);
         public List<School> GetSchoolsByEmailAddress(string userEmail);
         public void SaveSchools(string userEmail, List<School> schools);
+        public void DeleteSchool(string userEmail, School schools);
 
 
 
