@@ -33,7 +33,7 @@
 
 <form asp-route="Index" method="post">
 
-    <div class="container">
+    <div class="container preview-container">
         <div class="row">
             <div class="col">
                 @if (!string.IsNullOrEmpty(createdSuccessfully))
@@ -83,14 +83,15 @@
 
     <div class="buttons row">
         <div class="col">
-            <button type="button" class="btn btn-outline-primary">
-                <span class="far fa-arrow-to-left"></span>
-                PREV
-            </button>
+            <a asp-controller="school" class="nav-button prev">
+                <span class="fal fa-chevron-circle-left fa-lg"></span>
+                PREV: Schools
+            </a>
         </div>
         <div class="col text-right">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="nav-button send">
                 SEND EMAIL
+                <span class="fad fa-paper-plane fa-lg"></span>
             </button>
         </div>
     </div>

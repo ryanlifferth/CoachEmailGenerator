@@ -1,5 +1,4 @@
-﻿@charset "UTF-8";
-@import url("https://fonts.googleapis.com/css?family=Lato|Montserrat|Open+Sans:300,400,500,600|Roboto|Merriweather+Sans:300,400,500,600|Titillium+Web:300,400,500,600,700");
+﻿@import url("https://fonts.googleapis.com/css?family=Lato|Montserrat|Open+Sans:300,400,500,600|Roboto|Merriweather+Sans:300,400,500,600|Titillium+Web:300,400,500,600,700");
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Kaushan+Script&family=Ma+Shan+Zheng&display=swap");
 html {
   height: 100%;
@@ -113,7 +112,7 @@ a {
         float: right;
         width: 140px; }
       .steps-container .steps .instructions p {
-        margin: 7px ​0 0; }
+        margin: 7px 0 0 0; }
     .steps-container .steps .next {
       text-align: right;
       width: 100%; }
@@ -364,7 +363,8 @@ label {
       border: 1px solid rgba(12, 99, 136, 0.5); }
 
 .school-list {
-  display: table; }
+  display: table;
+  margin-bottom: 20px; }
   .school-list .school-item {
     display: table-row; }
     .school-list .school-item .school-col {
@@ -482,6 +482,12 @@ label {
   .modal .modal-dialog .modal-content .modal-body img {
     width: 300px; }
 
+.preview-container {
+  margin-bottom: 25px; }
+
+.nav-button.send {
+  border-color: rgba(37, 89, 132, 0.2); }
+
 .school-item-preview {
   cursor: pointer;
   padding: 4px 10px; }
@@ -528,29 +534,33 @@ label {
   .buttons .col {
     padding: 0; }
 
-a.nav-button {
+.nav-button {
   border: 1px solid transparent;
   border-radius: 5px;
-  bottom: -11px;
   color: #255984;
   font-family: 'Lato';
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
-  padding: 5px 15px;
-  position: absolute;
-  right: 17px;
-  text-transform: uppercase; }
-  a.nav-button:hover {
+  padding: 10px 15px; }
+  .nav-button:hover {
     border-color: rgba(37, 89, 132, 0.3);
+    color: #255984;
     text-decoration: none;
     text-shadow: 0 0 2px rgba(244, 121, 32, 0.8); }
-    a.nav-button:hover span {
+    .nav-button:hover span {
       --fa-secondary-opacity: 0.8; }
-  a.nav-button span {
+  .nav-button span {
     --fa-primary-color: #255984;
     --fa-secondary-color: #f47920;
     --fa-secondary-opacity: 0.6;
     margin-left: 4px; }
+  .nav-button.prev {
+    font-weight: 400; }
+    .nav-button.prev:hover {
+      text-shadow: none; }
+    .nav-button.prev span {
+      margin-left: 0;
+      margin-right: 4px; }
 
 footer {
   background-color: rgba(216, 218, 219, 0.1);
