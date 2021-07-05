@@ -56,6 +56,9 @@ namespace CoachEmailGenerator.Services
 
         private void CreateGmailDraft(GmailService service, string username, string emailBodyText, string emailSubject, string emailTo)
         {
+            try
+            {
+
             // Create the email body
             var email = CreateEmail(emailBodyText, emailSubject, emailTo);
             var message = new Message();
@@ -67,6 +70,11 @@ namespace CoachEmailGenerator.Services
             draft = service.Users.Drafts.Create(draft, username).Execute();
 
             Console.WriteLine($"Test draft created");
+            } 
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+            }
 
         }
 

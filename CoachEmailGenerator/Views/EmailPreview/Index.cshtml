@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col">
 
-                @foreach (var school in schools.Where(x => x.IsEnabled == true))
+                @foreach (var school in schools.Where(x => x.IsEnabled == true).OrderBy(s => s.SchoolName))
                 {
                     <div class="school-item-preview"
                          data-school-name="@school.SchoolName"
