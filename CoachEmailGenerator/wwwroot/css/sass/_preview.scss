@@ -1,6 +1,14 @@
 ﻿
 .preview-container {
     margin-bottom: 25px;
+
+    .row {
+        .preview-school-list {
+            border: 1px solid rgba(0,0,0,0.08);
+            max-height: 70vh;
+            overflow: auto;
+        }
+    }
 }
 
 .nav-button {
