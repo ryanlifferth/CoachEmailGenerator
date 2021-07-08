@@ -38,18 +38,22 @@ namespace CoachEmailGenerator.Controllers.api
         {
             // Load JSON from file
             var schools = _saveTemplateService.GetSchoolsByEmailAddress(userEmail);
-
+            
             if (schools != null)
             {
-                foreach (var item in schools.Where(x => x.Id == schoolId))
-                {
-                    item.IsEnabled = isEnabled;
-                }
+                var school = schools.Where(x => x.Id == schoolId).FirstOrDefault();
+                school.IsEnabled = isEnabled;
+                _saveTemplateService.SaveSchool(userEmail, school);
+
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
             }
 
             // save the file
-            _saveTemplateService.SaveSchools(userEmail, schools);
-
+            //_saveTemplateService.SaveSchools(userEmail, schools);
             return Ok();
         }
 

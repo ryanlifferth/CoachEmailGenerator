@@ -64,6 +64,30 @@ namespace CoachEmailGenerator.Services
             System.IO.File.WriteAllText(fullFilePath, JsonSerializer.Serialize(schools));
         }
 
+        public void SaveSchool(string userEmail, School school)
+        {
+            var fileName = Helper.GetUserNameFromEmail(userEmail) + "-schools.json";
+            var fullFilePath = _filePath + fileName;
+
+            var jsonString = System.IO.File.Exists(fullFilePath) ? System.IO.File.ReadAllText(fullFilePath) : string.Empty;
+            var schools = !string.IsNullOrEmpty(jsonString) ? JsonSerializer.Deserialize<List<School>>(jsonString) : null;
+
+            if (schools != null && school.Id != Guid.Empty)
+            {
+                foreach (var item in schools.Where(x => x.Id == school.Id))
+                {
+                    item.CoachEmail = school.CoachEmail;
+                    item.CoachName = school.CoachName;
+                    item.CoachPhoneNumber = school.CoachPhoneNumber;
+                    item.IsEnabled = school.IsEnabled;
+                    item.SchoolName = school.SchoolName;
+                    item.SchoolNameShort = school.SchoolNameShort;
+                }
+            }
+
+            System.IO.File.WriteAllText(fullFilePath, JsonSerializer.Serialize(schools));
+        }
+
         public void DeleteSchool(string userEmail, School school)
         {
             var fileName = Helper.GetUserNameFromEmail(userEmail) + "-schools.json";

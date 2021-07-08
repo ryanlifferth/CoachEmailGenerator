@@ -111,6 +111,23 @@ namespace CoachEmailGenerator.Services
 
         }
 
+        public void SaveSchool(string userEmail, School school)
+        {
+            _cloudTable = _cloudTableClient.GetTableReference("Schools");
+            if (string.IsNullOrEmpty(school.PartitionKey))
+            {
+                school.PartitionKey = Helper.GetUserNameFromEmail(userEmail);
+            }
+
+            if (string.IsNullOrEmpty(school.RowKey))
+            {
+                school.RowKey = school.Id.ToString();
+            }
+
+            var saveTask = Task.Run(async () => await _cloudTable.ExecuteAsync(TableOperation.InsertOrReplace(school)));
+            var result = saveTask.GetAwaiter().GetResult();
+        }
+
         public void DeleteSchool(string userEmail, School school)
         {
             _cloudTable = _cloudTableClient.GetTableReference("Schools");

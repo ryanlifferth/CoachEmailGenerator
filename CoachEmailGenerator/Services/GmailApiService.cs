@@ -35,7 +35,7 @@ namespace CoachEmailGenerator.Services
                 ApplicationName = "Coach Email Web Client"
             });
 
-            foreach (var school in schools)
+            foreach (var school in schools.Where(x => x.IsEnabled == true))
             {
                 var scrubbedEmailSubject = ScrubSubjectLineTags(emailTemplate.EmailSubjectLine, school);
                 var scrubbedEmailBodyText = ScrubEmailBodyTags(emailTemplate.EmailBody, school);

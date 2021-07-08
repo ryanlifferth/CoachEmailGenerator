@@ -54,7 +54,7 @@
 
         @if (Model != null)
         {
-            @foreach (var school in Model)
+            @foreach (var school in Model.OrderBy(s => s.SchoolName))
             {
                 <div class="school-item">
                     <div class="school-col school">
