@@ -8,14 +8,14 @@
 
     <input type="hidden" id="userEmail" value="@(userEmail)" />
 
-    <div class="add-new">
-        <button type="button" class="btn btn-primary btn-add-school">
-            <span class="far fa-plus icon"></span>
-            Add new school
-        </button>
-    </div>
-
     <div class="school-list">
+
+                <div class="add-new">
+                    <button type="button" class="btn btn-primary btn-add-school">
+                        <span class="far fa-plus icon"></span>
+                        Add new school
+                    </button>
+                </div>
 
         <div class="school-item new-school-item d-none">
             <div class="school-col school">
@@ -54,7 +54,8 @@
 
         @if (Model != null)
         {
-            @foreach (var school in Model.OrderBy(s => s.SchoolName))
+            var prop = System.ComponentModel.TypeDescriptor.GetProperties(typeof(School)).Find("SchoolName", true);
+            @foreach (var school in Model.OrderBy(s => prop.GetValue(s)))
             {
                 <div class="school-item">
                     <div class="school-col school">
@@ -99,6 +100,9 @@
                                 Saving...
                             </span>
                         </div>
+                    </div>
+                    <div class="school-col timestamp">
+                        @school.Timestamp.ToString("dd-MMM-yy HH:mmtt").ToUpper()
                     </div>
 
                     <input type="hidden" asp-for="@school.Id" class="id" />

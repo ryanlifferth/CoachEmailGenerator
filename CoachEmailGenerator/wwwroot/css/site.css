@@ -423,6 +423,11 @@ label {
         .school-list .school-item .school-col.enabled .custom-control-input:checked ~ .custom-control-label::before {
           border-color: #0C6288;
           background-color: #0C6288; }
+      .school-list .school-item .school-col.timestamp {
+        color: rgba(0, 0, 0, 0.3);
+        font-size: 13px;
+        margin-right: 5px;
+        vertical-align: middle; }
       .school-list .school-item .school-col.actions {
         padding-right: 40px; }
         .school-list .school-item .school-col.actions .icons {

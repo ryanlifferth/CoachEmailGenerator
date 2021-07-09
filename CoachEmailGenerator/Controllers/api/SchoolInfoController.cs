@@ -54,7 +54,6 @@ namespace CoachEmailGenerator.Controllers.api
 
             // save the file
             //_saveTemplateService.SaveSchools(userEmail, schools);
-            return Ok();
         }
 
         [HttpPost("SaveTheSchool")]
