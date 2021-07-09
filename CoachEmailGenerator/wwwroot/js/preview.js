@@ -72,5 +72,8 @@
         $('.preview-school-list').css({ 'maxHeight': previewPaneHeight + 'px' });
     }
 
+    // I hate this, but I'm being a bit lazy with my layout, so this is a hack
+    $(".school-count").width($(".preview-school-list").width());  // could also do outerWidth
+
 
 });

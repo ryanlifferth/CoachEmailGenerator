@@ -2,23 +2,59 @@
 @{
     ViewData["Title"] = "School Page";
     var userEmail = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
+
+    
+    var sortValue = String.IsNullOrEmpty(ViewData["Sort"].ToString()) ? "SchoolName" : ViewData["Sort"].ToString();
+    var sortList = new List<SelectListItem>
+    {
+        new SelectListItem() { Value = "Timestamp", Text = "Date Added", Selected = sortValue == "Timestamp" },
+        new SelectListItem() { Value = "SchoolName", Text = "School", Selected = sortValue == "SchoolName" },
+        new SelectListItem() { Value = "CoachName", Text = "Coach", Selected = sortValue == "CoachName" },
+        new SelectListItem() { Value = "IsEnabled", Text = "Enabled", Selected = sortValue == "IsEnabled" }
+    };
+
+    // Get the sort value
+    var sortProperty = System.ComponentModel.TypeDescriptor.GetProperties(typeof(School)).Find(sortValue, true);
+    if (sortProperty == null)
+    {
+        sortProperty = System.ComponentModel.TypeDescriptor.GetProperties(typeof(School)).Find("SchoolName", true);
+    }
+
+    var schools = sortValue == "IsEnabled" ? Model.OrderByDescending(s => s.IsEnabled) : Model.OrderBy(s => sortProperty.GetValue(s));
 }
 
 <form asp-route="Index" method="post">
 
     <input type="hidden" id="userEmail" value="@(userEmail)" />
 
+    
+
     <div class="school-list">
 
-                <div class="add-new">
-                    <button type="button" class="btn btn-primary btn-add-school">
-                        <span class="far fa-plus icon"></span>
-                        Add new school
-                    </button>
-                </div>
 
-        <div class="school-item new-school-item d-none">
-            <div class="school-col school">
+        <div class="school-list-action-header">
+            <div class="sort">
+                <span class="label">Sort By</span>
+                <select class="sort-by" asp-items="sortList">
+                </select>
+
+                <span class="count">
+                    <span class="number">@schools.Count()</span> schools
+                    (<span class="number enabled-count">@schools.Where(s => s.IsEnabled).Count()</span> active)
+                </span>
+            </div>
+
+            <div class="add-new">
+                <button type="button" class="btn btn-primary btn-add-school">
+                    <span class="far fa-plus icon"></span>
+                    Add new school
+                </button>
+            </div>
+        </div>
+
+
+        <div class="row-wrapper d-none new-school-item">
+            <div class="grid-item school">
                 <div class="edits">
                     <label for="">School Name</label>
                     <input type="text" id="newSchoolName" class="full-width school-name" />
@@ -26,7 +62,7 @@
                     <input type="text" id="newSchoolNameShort" class="school-name-short" />
                 </div>
             </div>
-            <div class="school-col coach">
+            <div class="grid-item coach">
                 <div class="edits">
                     <label for="">Head Coach</label>
                     <input type="text" id="newHeadCoachName" class="full-width coach-name" />
@@ -36,7 +72,7 @@
                     <input type="text" id="newHeadCoachPhoneNumber" class="coach-phone" />
                 </div>
             </div>
-            <div class="school-col actions">
+            <div class="grid-item actions new-school-actions">
                 <div class="icons">
                     <span class="icon fad fa-save save"></span>
                     <span class="icon fad fa-window-close close"></span>
@@ -46,19 +82,20 @@
                     </span>
                 </div>
             </div>
+            <div class="grid-item"></div>
+            <div class="grid-item"></div>
 
             <input type="hidden" id="newId" class="id" value="00000000-0000-0000-0000-000000000000" />
-
         </div>
 
 
         @if (Model != null)
         {
-            var prop = System.ComponentModel.TypeDescriptor.GetProperties(typeof(School)).Find("SchoolName", true);
-            @foreach (var school in Model.OrderBy(s => prop.GetValue(s)))
+            
+            @foreach (var school in schools)
             {
-                <div class="school-item">
-                    <div class="school-col school">
+                <div class="row-wrapper">
+                    <div class="grid-item school">
                         <span class="full-name">@school.SchoolName</span>
                         <span class="short-name">@school.SchoolNameShort</span>
 
@@ -69,7 +106,7 @@
                             <input type="text" asp-for="@school.SchoolNameShort" class="school-name-short" />
                         </div>
                     </div>
-                    <div class="school-col coach">
+                    <div class="grid-item coach">
                         <span class="coach-name">@school.CoachName</span>
                         <span class="email">@school.CoachEmail</span>
                         <span class="phone">@school.CoachPhoneNumber</span>
@@ -83,13 +120,13 @@
                             <input type="text" asp-for="@school.CoachPhoneNumber" class="coach-phone" />
                         </div>
                     </div>
-                    <div class="school-col enabled">
+                    <div class="grid-item enabled">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" asp-for="@school.IsEnabled" id="@($"enabled{school.Id}")" class="custom-control-input enabled-checkbox" />
                             <label asp-for="@school.IsEnabled" for="@($"enabled{school.Id}")" class="custom-control-label">Enabled</label>
                         </div>
                     </div>
-                    <div class="school-col actions">
+                    <div class="grid-item actions">
                         <div class="icons">
                             <span class="icon fad fa-save save d-none"></span>
                             <span class="icon fad fa-edit edit"></span>
@@ -101,18 +138,17 @@
                             </span>
                         </div>
                     </div>
-                    <div class="school-col timestamp">
+                    <div class="grid-item timestamp">
                         @school.Timestamp.ToString("dd-MMM-yy HH:mmtt").ToUpper()
                     </div>
 
                     <input type="hidden" asp-for="@school.Id" class="id" />
 
                 </div>
-
             }
         }
     </div>
-    
+
 
     <div class="buttons row">
         <div class="col">
@@ -129,7 +165,7 @@
         </div>
     </div>
 
-    
+
     <!-- Modal -->
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

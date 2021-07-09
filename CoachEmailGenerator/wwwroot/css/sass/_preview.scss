@@ -1,12 +1,25 @@
 ﻿
 .preview-container {
     margin-bottom: 25px;
+    position: relative;
 
     .row {
         .preview-school-list {
             border: 1px solid rgba(0,0,0,0.08);
             max-height: 70vh;
             overflow: auto;
+        }
+    }
+
+    .school-count {
+        color: rgba(0,0,0,0.4);
+        font-size: 13px;
+        position: absolute;
+        text-align: right;
+        top: -20px;
+
+        .number {
+            font-weight: 600;
         }
     }
 }

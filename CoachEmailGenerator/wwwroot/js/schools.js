@@ -99,12 +99,15 @@
         var userEmail = $("#userEmail").val();
         var id = $(this).parent().parent().siblings(".id").val();
         var $this = $(this);
+        var count = parseInt($(".enabled-count").text());
 
         var isEnabled = false;
         if ($(this).is(':checked') === true) {
             isEnabled = true;
+            if (!isNaN(count)) count++;
         } else {
             isEnabled = false;
+            if (!isNaN(count)) count--;
         }
 
         //var enabledJson = {
@@ -125,7 +128,8 @@
                 alert('error' + msg);
             },
             success: function (data) {
-
+                // update enabled count
+                if (!isNaN(count)) $(".enabled-count").text(count);
             },
             complete: function () {
                 $saving.addClass("d-none");
@@ -133,11 +137,19 @@
         });
 
 
-    })
+    });
+
+    $(".sort-by").on("change", function () {
+        window.location.href = location.href.split("?")[0] + '?sort=' + this.value;
+    });
 
     $("#confirmDeleteModal").on("show.bs.modal", function (e) {
-        _targetId = e.relatedTarget.parentElement.parentElement.nextElementSibling.value;
+        const related = e.relatedTarget.parentElement.parentElement;
+        _targetId = $(related).siblings('.id')[0].value;
+        //_targetId = e.relatedTarget.parentElement.parentElement.nextElementSibling.value;
         _targetSaving = e.relatedTarget.nextElementSibling;
+
+
     });
 
     $(".yes-delete").on("click", function () {
@@ -198,5 +210,6 @@
         $this.addClass("d-none");
         $this.siblings(".edit").removeClass("d-none");
     }
+
 
 });

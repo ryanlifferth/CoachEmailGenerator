@@ -43,8 +43,13 @@
     }
 
     <div class="container preview-container">
+        <div class="school-count">
+            <span class="number">@schools.Where(s => s.IsEnabled == true).Count()</span> schools
+        </div>
+
         <div class="row">
             <div class="col preview-school-list">
+
 
                 @foreach (var school in schools.Where(x => x.IsEnabled == true).OrderBy(s => s.SchoolName))
                 {

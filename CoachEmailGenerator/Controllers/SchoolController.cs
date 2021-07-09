@@ -32,6 +32,9 @@ namespace CoachEmailGenerator.Controllers
             var userEmail = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
             var schools = _saveTemplateService.GetSchoolsByEmailAddress(userEmail);
 
+            // See if there is sort in querystring
+            ViewData["Sort"] = String.IsNullOrEmpty(Request.Query["sort"].ToString()) ? "SchoolName" : Request.Query["sort"].ToString();
+
             return View(schools);
         }
 

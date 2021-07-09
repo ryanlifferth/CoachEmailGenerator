@@ -344,8 +344,7 @@ label {
 
 .add-new {
   margin-bottom: 10px;
-  text-align: right;
-  width: 750px; }
+  text-align: right; }
   .add-new .icon {
     margin-right: 5px; }
   .add-new button {
@@ -362,125 +361,155 @@ label {
       background-color: rgba(12, 99, 136, 0.9);
       border: 1px solid rgba(12, 99, 136, 0.5); }
 
+.sort {
+  margin-left: 10px; }
+  .sort .label {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 13px; }
+  .sort select {
+    font-size: 14px;
+    padding: 2px 4px; }
+  .sort .count {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 13px;
+    margin-left: 25px; }
+    .sort .count .number {
+      font-weight: 600; }
+
 .school-list {
-  display: table;
-  margin-bottom: 20px; }
-  .school-list .school-item {
-    display: table-row; }
-    .school-list .school-item .school-col {
-      flex: 1;
-      display: table-cell;
-      padding-bottom: 12px; }
-      .school-list .school-item .school-col .edits {
-        display: none;
-        position: relative;
-        top: -7px; }
-        .school-list .school-item .school-col .edits label {
-          color: #888;
-          display: block;
-          font-size: 10px;
-          font-weight: 500;
-          margin: 0 0 -2px 2px;
-          text-transform: capitalize; }
-        .school-list .school-item .school-col .edits input[type="text"] {
-          font-size: 14px; }
-          .school-list .school-item .school-col .edits input[type="text"].full-width {
-            min-width: 300px;
-            width: 100%; }
-      .school-list .school-item .school-col.school {
-        flex: 1;
-        font-weight: 600;
-        padding-left: 10px;
-        padding-right: 40px;
-        text-transform: uppercase; }
-        .school-list .school-item .school-col.school .short-name {
-          color: rgba(0, 0, 0, 0.4);
-          display: block;
-          font-size: 14px;
-          font-weight: 600;
-          margin-top: -3px;
-          padding-left: 3px; }
-      .school-list .school-item .school-col.coach {
-        flex: 1;
-        font-size: 15px;
-        padding-right: 30px; }
-        .school-list .school-item .school-col.coach .email,
-        .school-list .school-item .school-col.coach .phone {
-          color: rgba(0, 0, 0, 0.5);
-          display: block;
-          font-size: 14px;
-          margin-top: -2px; }
-      .school-list .school-item .school-col.enabled {
-        padding-right: 40px; }
-        .school-list .school-item .school-col.enabled .custom-control {
-          position: relative;
-          top: 10px; }
-          .school-list .school-item .school-col.enabled .custom-control label {
-            color: rgba(0, 0, 0, 0.5);
-            font-size: 14px;
-            left: 0;
-            position: relative; }
-        .school-list .school-item .school-col.enabled .custom-control-input:checked ~ .custom-control-label::before {
-          border-color: #0C6288;
-          background-color: #0C6288; }
-      .school-list .school-item .school-col.timestamp {
-        color: rgba(0, 0, 0, 0.3);
-        font-size: 13px;
-        margin-right: 5px;
-        vertical-align: middle; }
-      .school-list .school-item .school-col.actions {
-        padding-right: 40px; }
-        .school-list .school-item .school-col.actions .icons {
-          display: block;
-          position: relative;
-          top: 8px; }
-          .school-list .school-item .school-col.actions .icons .icon {
-            --fa-primary-color: #255984;
-            --fa-secondary-color: #255984;
-            cursor: pointer; }
-            .school-list .school-item .school-col.actions .icons .icon.edit {
-              --fa-primary-color: #f47920;
-              --fa-secondary-opacity: 0.8;
-              margin-right: 12px; }
-              .school-list .school-item .school-col.actions .icons .icon.edit:hover {
-                text-shadow: 0 0 2px rgba(244, 121, 32, 0.8); }
-            .school-list .school-item .school-col.actions .icons .icon:hover {
-              text-shadow: 0 0 1px rgba(37, 89, 132, 0.8);
-              text-decoration: none; }
-            .school-list .school-item .school-col.actions .icons .icon.save {
-              font-size: 19px;
-              margin-right: 12px;
-              position: relative;
-              top: 1px; }
-              .school-list .school-item .school-col.actions .icons .icon.save:hover {
-                text-shadow: 0 0 2px rgba(244, 121, 32, 0.8); }
-            .school-list .school-item .school-col.actions .icons .icon.close-edit {
-              --fa-primary-color: darkred;
-              --fa-secondary-color: #f47920;
-              font-size: 20px;
-              float: none;
-              left: 12px;
-              position: relative;
-              top: 2px; }
-              .school-list .school-item .school-col.actions .icons .icon.close-edit:hover {
-                --fa-secondary-color: #d66614 !important;
-                text-shadow: none; }
-    .school-list .school-item .saving {
-      font-size: 13px;
-      font-weight: 500;
-      margin-left: 12px;
-      text-transform: uppercase; }
-    .school-list .school-item:hover {
+  display: inline-grid;
+  grid-gap: 0;
+  grid-template-columns: repeat(5, auto); }
+  .school-list .row-wrapper {
+    display: contents; }
+    .school-list .row-wrapper:hover > div {
       background-color: rgba(0, 0, 0, 0.02); }
-    .school-list .school-item.new-school-item .actions .icons .icon.close {
-      --fa-primary-color: darkred;
-      --fa-secondary-color: #f47920;
-      float: none;
-      top: 3px;
-      position: relative; }
-      .school-list .school-item.new-school-item .actions .icons .icon.close:hover {
-        --fa-secondary-color: #d66614 !important;
-        text-shadow: none; }
+  .school-list .grid-header {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 13px;
+    padding: 6px 10px;
+    text-transform: uppercase; }
+  .school-list .school-list-action-header {
+    display: flex;
+    flex-flow: row;
+    grid-column: 1 / span 5;
+    justify-content: space-between; }
+  .school-list .grid-item {
+    color: rgba(0, 0, 0, 0.7);
+    padding-bottom: 10px; }
+    .school-list .grid-item .edits {
+      display: none;
+      position: relative;
+      top: -7px; }
+      .school-list .grid-item .edits label {
+        color: #888;
+        display: block;
+        font-size: 10px;
+        font-weight: 500;
+        margin: 0 0 -2px 2px;
+        text-transform: capitalize; }
+      .school-list .grid-item .edits input[type="text"] {
+        font-size: 14px; }
+        .school-list .grid-item .edits input[type="text"].full-width {
+          min-width: 300px;
+          width: 100%; }
+    .school-list .grid-item.school {
+      font-weight: 600;
+      padding-left: 10px;
+      padding-right: 40px;
+      text-transform: uppercase; }
+      .school-list .grid-item.school .short-name {
+        color: rgba(0, 0, 0, 0.4);
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: -3px;
+        padding-left: 3px; }
+    .school-list .grid-item.coach {
+      font-size: 15px;
+      padding-right: 30px; }
+      .school-list .grid-item.coach .email,
+      .school-list .grid-item.coach .phone {
+        color: rgba(0, 0, 0, 0.5);
+        display: block;
+        font-size: 14px;
+        margin-top: -2px; }
+    .school-list .grid-item.enabled {
+      padding-right: 40px; }
+      .school-list .grid-item.enabled .custom-control {
+        position: relative;
+        top: 10px; }
+        .school-list .grid-item.enabled .custom-control label {
+          color: rgba(0, 0, 0, 0.5);
+          font-size: 14px;
+          left: 0;
+          position: relative; }
+      .school-list .grid-item.enabled .custom-control-input:checked ~ .custom-control-label::before {
+        border-color: #0C6288;
+        background-color: #0C6288; }
+    .school-list .grid-item.actions {
+      padding-right: 40px; }
+      .school-list .grid-item.actions .icons {
+        display: block;
+        position: relative;
+        top: 8px; }
+        .school-list .grid-item.actions .icons .icon {
+          --fa-primary-color: #255984;
+          --fa-secondary-color: #255984;
+          cursor: pointer; }
+          .school-list .grid-item.actions .icons .icon.edit {
+            --fa-primary-color: #f47920;
+            --fa-secondary-opacity: 0.8;
+            margin-right: 12px; }
+            .school-list .grid-item.actions .icons .icon.edit:hover {
+              text-shadow: 0 0 2px rgba(244, 121, 32, 0.8); }
+          .school-list .grid-item.actions .icons .icon:hover {
+            text-shadow: 0 0 1px rgba(37, 89, 132, 0.8);
+            text-decoration: none; }
+          .school-list .grid-item.actions .icons .icon.save {
+            font-size: 19px;
+            margin-right: 12px;
+            position: relative;
+            top: 1px; }
+            .school-list .grid-item.actions .icons .icon.save:hover {
+              text-shadow: 0 0 2px rgba(244, 121, 32, 0.8); }
+          .school-list .grid-item.actions .icons .icon.close-edit {
+            --fa-primary-color: darkred;
+            --fa-secondary-color: #f47920;
+            font-size: 20px;
+            float: none;
+            left: 12px;
+            position: relative;
+            top: 2px; }
+            .school-list .grid-item.actions .icons .icon.close-edit:hover {
+              --fa-secondary-color: #d66614 !important;
+              text-shadow: none; }
+      .school-list .grid-item.actions.new-school-actions .icons .icon.close {
+        --fa-primary-color: darkred;
+        --fa-secondary-color: #f47920;
+        float: none;
+        top: 3px;
+        position: relative; }
+        .school-list .grid-item.actions.new-school-actions .icons .icon.close:hover {
+          --fa-secondary-color: #d66614 !important;
+          text-shadow: none; }
+      .school-list .grid-item.actions.new-school-actions .icons .saving {
+        position: relative;
+        top: 0;
+        left: 0; }
+    .school-list .grid-item.timestamp {
+      color: rgba(0, 0, 0, 0.3);
+      font-size: 13px;
+      padding: 10px 5px 0 0; }
+  .school-list .saving {
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: 12px;
+    text-transform: uppercase;
+    position: absolute;
+    left: -15px;
+    top: 23px;
+    white-space: nowrap; }
 
 .modal .modal-dialog .modal-content .modal-body {
   text-align: center; }
@@ -488,11 +517,20 @@ label {
     width: 300px; }
 
 .preview-container {
-  margin-bottom: 25px; }
+  margin-bottom: 25px;
+  position: relative; }
   .preview-container .row .preview-school-list {
     border: 1px solid rgba(0, 0, 0, 0.08);
     max-height: 70vh;
     overflow: auto; }
+  .preview-container .school-count {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 13px;
+    position: absolute;
+    text-align: right;
+    top: -20px; }
+    .preview-container .school-count .number {
+      font-weight: 600; }
 
 .nav-button.send {
   border-color: rgba(37, 89, 132, 0.2); }
