@@ -42,7 +42,7 @@ namespace CoachEmailGenerator.Services
 
         public List<School> GetSchoolsByEmailAddress(string userEmail)
         {
-            _cloudTable = _cloudTableClient.GetTableReference("UserSchools");
+            _cloudTable = _cloudTableClient.GetTableReference("Schools");
 
             var userName = Helper.GetUserNameFromEmail(userEmail);
             var queryCondition = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, userName);
@@ -81,7 +81,7 @@ namespace CoachEmailGenerator.Services
 
         public void SaveSchools(string userEmail, List<School> schools)
         {
-            _cloudTable = _cloudTableClient.GetTableReference("UserSchools");
+            _cloudTable = _cloudTableClient.GetTableReference("Schools");
             var batchOperation = new TableBatchOperation();
 
             foreach (var school in schools)
@@ -113,7 +113,7 @@ namespace CoachEmailGenerator.Services
 
         public void SaveSchool(string userEmail, School school)
         {
-            _cloudTable = _cloudTableClient.GetTableReference("UserSchools");
+            _cloudTable = _cloudTableClient.GetTableReference("Schools");
             if (string.IsNullOrEmpty(school.PartitionKey))
             {
                 school.PartitionKey = Helper.GetUserNameFromEmail(userEmail);
@@ -130,7 +130,7 @@ namespace CoachEmailGenerator.Services
 
         public void DeleteSchool(string userEmail, School school)
         {
-            _cloudTable = _cloudTableClient.GetTableReference("UserSchools");
+            _cloudTable = _cloudTableClient.GetTableReference("Schools");
             if (string.IsNullOrEmpty(school.PartitionKey))
             {
                 school.PartitionKey = Helper.GetUserNameFromEmail(userEmail);
