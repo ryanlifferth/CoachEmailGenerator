@@ -51,6 +51,38 @@
     }
 }
 
+#previewForm {
+    position: relative;
+}
+
+.emails-loading {
+    background: rgba(255,255,255,0.95);
+    border: 1px solid #888;
+    border-radius: 8px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    display: block;
+    left: 35%;
+    min-width: 20%;
+    padding: 13px 20px;
+    position: absolute;
+    top: -40px;
+    z-index: 99999;
+
+    .spinner {
+        --fa-primary-color: #0C6288;
+        --fa-secondary-color: #0C6288;
+    }
+
+    .text {
+        color: #f47920;
+        display: inline-block;
+        font-weight: 600;
+        position: relative;
+        padding: 0 0 0 10px;
+        top: -5px;
+    }
+}
+
 .school-item-preview {
     cursor: pointer;
     padding: 4px 10px;

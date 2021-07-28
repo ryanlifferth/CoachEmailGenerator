@@ -29,10 +29,11 @@
         };
 
         subjectLine = subjectLine.Replace(item, $@"<span class=""coach-button"" data-school-info=""{tag}"">{item}</span>");
+
     }
 }
 
-<form asp-route="Index" method="post">
+<form asp-route="Index" id="previewForm" method="post">
 
     @if (createdSuccessfully)
     {
@@ -42,6 +43,11 @@
         </div>
     }
 
+    <div class="emails-loading d-none">
+        <span class="fad fa-spinner fa-pulse fa-2x spinner"></span>
+        <span class="text">Creating emails...</span>
+    </div>
+
     <div class="container preview-container">
         <div class="school-count">
             <span class="number">@schools.Where(s => s.IsEnabled == true).Count()</span> schools
@@ -50,15 +56,14 @@
         <div class="row">
             <div class="col preview-school-list">
 
-
                 @foreach (var school in schools.Where(x => x.IsEnabled == true).OrderBy(s => s.SchoolName))
                 {
                     <div class="school-item-preview"
-                         data-school-name="@school.SchoolName"
-                         data-school-name-short="@school.SchoolNameShort"
-                         data-coach-name="@school.CoachName"
-                         data-coach-email="@school.CoachEmail"
-                         data-coach-phone="@school.CoachPhoneNumber">
+                     data-school-name="@school.SchoolName"
+                     data-school-name-short="@school.SchoolNameShort"
+                     data-coach-name="@school.CoachName"
+                     data-coach-email="@school.CoachEmail"
+                     data-coach-phone="@school.CoachPhoneNumber">
                         <span class="school">@school.SchoolName</span>
                         <span class="coach">Coach @school.CoachName</span>
                     </div>
@@ -109,5 +114,7 @@
 
 
 @section Scripts {
-    <script src="~/js/preview.js" asp-append-version="true"></script>
+<script src="~/js/preview.js" asp-append-version="true"></script>
+
+
 }

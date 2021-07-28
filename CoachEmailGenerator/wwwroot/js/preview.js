@@ -76,4 +76,12 @@
     $(".school-count").width($(".preview-school-list").width());  // could also do outerWidth
 
 
+    $("#previewForm").submit(function (e) {
+        e.preventDefault();
+
+        $(".emails-loading").removeClass("d-none");
+        this.submit();
+        
+    });
+
 });
