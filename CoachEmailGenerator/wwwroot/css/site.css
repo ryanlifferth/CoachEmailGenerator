@@ -532,8 +532,22 @@ label {
     .preview-container .school-count .number {
       font-weight: 600; }
 
-.nav-button.send {
+.nav-button.send, .nav-button.sending {
   border-color: rgba(37, 89, 132, 0.2); }
+
+.nav-button.sending {
+  background-color: #efefef;
+  color: #c0c0c0;
+  display: inline-block;
+  font-weight: 500;
+  padding-left: 28px; }
+  .nav-button.sending:hover {
+    border-color: rgba(37, 89, 132, 0.2);
+    color: #c0c0c0;
+    text-shadow: none; }
+  .nav-button.sending .icon {
+    --fa-primary-opacity: 0.4;
+    --fa-secondary-opacity: 0.4; }
 
 .success {
   color: mediumseagreen;
@@ -551,9 +565,6 @@ label {
     --fa-secondary-opacity: 0.6;
     margin-right: 5px; }
 
-#previewForm {
-  position: relative; }
-
 .emails-loading {
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid #888;
@@ -563,8 +574,8 @@ label {
   left: 35%;
   min-width: 20%;
   padding: 13px 20px;
-  position: absolute;
-  top: -40px;
+  position: fixed;
+  top: 130px;
   z-index: 99999; }
   .emails-loading .spinner {
     --fa-primary-color: #0C6288;

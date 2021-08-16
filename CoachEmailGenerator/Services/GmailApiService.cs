@@ -6,6 +6,7 @@ using Google.Apis.Services;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -88,14 +89,18 @@ namespace CoachEmailGenerator.Services
 
         private MailMessage CreateEmail(string emailBody, string emailSubject, string emailTo)
         {
+            //var filePath = Directory.GetCurrentDirectory() + "\\Data\\Snow College Soccer Schedule Fall 21.pdf";
+            //var attatchment = new Attachment(filePath);
+
             // Create the message first
             var msg = new MailMessage()
             {
                 Subject = emailSubject,
                 //Body = "This is just a test",
                 Body = emailBody,
-                IsBodyHtml = true,
+                IsBodyHtml = true
             };
+            //msg.Attachments.Add(attatchment);
             //msg.To.Add(new MailAddress("coach@school.edu", "Coach Coachy"));
             msg.To.Add(new MailAddress(emailTo));
 

@@ -79,7 +79,13 @@
     $("#previewForm").submit(function (e) {
         e.preventDefault();
 
+        // Show the "Creating emails..." spinner
         $(".emails-loading").removeClass("d-none");
+
+        // Hide the "Send Email" button (and show the "Sending" button)
+        $(".send").addClass("d-none");
+        $(".sending").removeClass("d-none");
+
         this.submit();
         
     });

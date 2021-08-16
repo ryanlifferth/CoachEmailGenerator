@@ -25,8 +25,28 @@
 }
 
 .nav-button {
-    &.send {
+    &.send,
+    &.sending {
         border-color: rgba(37, 89, 132, 0.2)
+    }
+
+    &.sending {
+        background-color: rgb(239, 239, 239);
+        color: #c0c0c0;
+        display: inline-block;
+        font-weight: 500;
+        padding-left: 28px;
+
+        &:hover {
+            border-color: rgba(37, 89, 132, 0.2);
+            color: #c0c0c0;
+            text-shadow: none;
+        }
+
+        .icon {
+            --fa-primary-opacity: 0.4;
+            --fa-secondary-opacity: 0.4;
+        }
     }
 }
 
@@ -51,10 +71,6 @@
     }
 }
 
-#previewForm {
-    position: relative;
-}
-
 .emails-loading {
     background: rgba(255,255,255,0.95);
     border: 1px solid #888;
@@ -64,8 +80,8 @@
     left: 35%;
     min-width: 20%;
     padding: 13px 20px;
-    position: absolute;
-    top: -40px;
+    position: fixed;
+    top: 130px;
     z-index: 99999;
 
     .spinner {
