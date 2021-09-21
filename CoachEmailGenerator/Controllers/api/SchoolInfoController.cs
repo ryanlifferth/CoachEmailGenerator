@@ -1,13 +1,17 @@
 ﻿using CoachEmailGenerator.Helpers;
 using CoachEmailGenerator.Interfaces;
 using CoachEmailGenerator.Models;
+using CoachEmailGenerator.Models.Requests;
 using CoachEmailGenerator.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -20,12 +24,13 @@ namespace CoachEmailGenerator.Controllers.api
 
         private readonly ILogger<HomeController> _logger;
         private IDataService _saveTemplateService;
+        private ISchoolService _schoolService;
 
-        public SchoolInfoController(ILogger<HomeController> logger, IDataService dataService)
+        public SchoolInfoController(ILogger<HomeController> logger, IDataService dataService, ISchoolService schoolService)
         {
             _logger = logger;
             _saveTemplateService = dataService;
-
+            _schoolService = schoolService;
         }
 
         public IActionResult Index()
@@ -117,7 +122,41 @@ namespace CoachEmailGenerator.Controllers.api
             return Ok();
         }
 
+        [HttpPost("GetSchools")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(IEnumerable<School>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public IActionResult GetSchools(string userEmail)
+        {
+            try
+            {
+                var schools = _saveTemplateService.GetEmailTemplateByEmailAddress(userEmail);
+                return Ok(schools);
+            }
+            catch (Exception ex)
+            {
+                return Helper.CreateHttpResponse(ex);
+                //return BadRequest(ex);
+            }
+        }
 
+        [HttpPost("SearchSchools")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(IEnumerable<School>))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public IActionResult SearchSchools([FromBody] CoachesSearchRequest request)
+        {
+            try
+            {
+                var schools = _schoolService.SearchSchools(request);
+                return Ok(schools);
+            }
+            catch (Exception ex)
+            {
+                return Helper.CreateHttpResponse(ex);
+                //return BadRequest(ex);
+            }
+        }
 
     }
 }

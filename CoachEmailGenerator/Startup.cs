@@ -87,6 +87,7 @@ namespace CoachEmailGenerator
             if (Configuration["dataService"] == "Azure")
             {
                 services.AddTransient<IDataService, AzureDataService>();
+                services.AddTransient<ISchoolService, SchoolService>();
             }
             else
             {

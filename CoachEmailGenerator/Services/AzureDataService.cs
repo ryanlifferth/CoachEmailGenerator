@@ -1,4 +1,4 @@
-﻿    using CoachEmailGenerator.Interfaces;
+﻿using CoachEmailGenerator.Interfaces;
 using CoachEmailGenerator.Models;
 using CoachEmailGenerator.Helpers;
 using Microsoft.Extensions.Configuration;
@@ -34,7 +34,7 @@ namespace CoachEmailGenerator.Services
 
             var queryCondition = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, Helper.GetUserNameFromEmail(emailAddress));
 
-            var queryTask = Task.Run(async () => await QueryTable<EmailTemplate>(_cloudTable, queryCondition));
+            var queryTask = Task.Run(async () => await AzureHelper.QueryTable<EmailTemplate>(_cloudTable, queryCondition));
             var result = queryTask.GetAwaiter().GetResult().ToList().FirstOrDefault();
 
             return result;
@@ -47,7 +47,7 @@ namespace CoachEmailGenerator.Services
             var userName = Helper.GetUserNameFromEmail(userEmail);
             var queryCondition = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, userName);
 
-            var queryTask = Task.Run(async () => await QueryTable<School>(_cloudTable, queryCondition));
+            var queryTask = Task.Run(async () => await AzureHelper.QueryTable<School>(_cloudTable, queryCondition));
             var result = queryTask.GetAwaiter().GetResult().ToList();
 
             return result;
@@ -144,28 +144,6 @@ namespace CoachEmailGenerator.Services
             var deleteTask = Task.Run(async () => await _cloudTable.ExecuteAsync(TableOperation.Delete(school)));
             var result = deleteTask.GetAwaiter().GetResult();
         }
-
-
-        private async Task<IEnumerable<T>> QueryTable<T>(CloudTable cloudTable, string filterCondition) where T : TableEntity, new()
-        {
-
-            var results = new List<T>();
-            TableContinuationToken token = null;
-            var cancellationToken = default(CancellationToken);
-
-            var query = new TableQuery<T>().Where(filterCondition);
-
-            do
-            {
-                //var query = new TableQuery<School>().Where(condition);
-                var seg = await cloudTable.ExecuteQuerySegmentedAsync(query, token);
-                token = seg.ContinuationToken;
-                results.AddRange(seg);
-            } while (token != null && !cancellationToken.IsCancellationRequested);
-
-            return results;
-        }
-
 
     }
 }

@@ -17,6 +17,5 @@ namespace CoachEmailGenerator.Interfaces
         public void DeleteSchool(string userEmail, School schools);
 
 
-
     }
 }
