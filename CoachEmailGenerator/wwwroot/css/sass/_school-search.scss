@@ -1,0 +1,94 @@
+﻿.form-group {
+    position: relative;
+
+    label {
+        font-size: 16px;
+        margin-left: 5px;
+    }
+
+    .results-count {
+        color: rgba(0,0,0,0.4);
+        font-size: 14px;
+        position: absolute;
+        right: 5px;
+
+        .count {
+            font-weight: 600;
+        }
+    }
+}
+
+
+.result-row {
+    color: rgba(0, 0, 0, 0.7);
+    display: block;
+
+    .school {
+        align-items: flex-end;
+        display: flex;
+
+
+        .full-name {
+            font-size: 16px;
+            font-weight: 600;
+            //text-transform: uppercase;
+        }
+
+        .short-name {
+            color: rgba(0, 0, 0, 0.4);
+            //display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: -3px;
+            padding-left: 10px;
+        }
+
+        .right-content {
+            margin-left: auto;
+
+            .division {
+                bottom: 2px;
+                color: rgba(0, 0, 0, 0.4);
+                font-size: 13px;
+                font-weight: 600;
+                margin: 0 10px 0 0;
+                position: relative;
+            }
+        }
+    }
+
+    .coach {
+        color: rgba(0, 0, 0, 0.9);
+        font-size: 13px;
+        display: block;
+        margin-left: 20px;
+        //display: grid;
+        //grid-template-columns: repeat(3, 1fr);
+
+        .name {
+            white-space: nowrap;
+        }
+
+        .email, .phone {
+            color: rgba(0, 0, 0, 0.5);
+            margin-left: 20px;
+        }
+    }
+
+
+    &:hover {
+        background-color: rgba(0,0,0,0.02);
+    }
+
+    $result-border-radius: 5px;
+
+    &:first-of-type {
+        border-top-left-radius: $result-border-radius;
+        border-top-right-radius: $result-border-radius;
+    }
+
+    &:last-of-type {
+        border-bottom-left-radius: $result-border-radius;
+        border-bottom-right-radius: $result-border-radius;
+    }
+}

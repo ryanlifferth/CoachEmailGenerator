@@ -141,7 +141,7 @@ namespace CoachEmailGenerator.Controllers.api
         }
 
         [HttpPost("SearchSchools")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(IEnumerable<School>))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(IEnumerable<SearchSchoolResponse>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public IActionResult SearchSchools([FromBody] CoachesSearchRequest request)
@@ -149,13 +149,43 @@ namespace CoachEmailGenerator.Controllers.api
             try
             {
                 var schools = _schoolService.SearchSchools(request);
-                return Ok(schools);
+                // translate to search school response object
+                var translatedSchoolsResponse = TranslateCoachesToSchoolsResponse(schools);
+                return Ok(translatedSchoolsResponse);
             }
             catch (Exception ex)
             {
                 return Helper.CreateHttpResponse(ex);
                 //return BadRequest(ex);
             }
+        }
+
+        private IEnumerable<SearchSchoolResponse> TranslateCoachesToSchoolsResponse(IEnumerable<CoachesResponse> coachesResponse)
+        {
+            //var result = coachesResponse.GroupBy(x => x.SchoolId).ToList();
+
+            IEnumerable<SearchSchoolResponse> schools = coachesResponse
+                            .GroupBy(x => new { x.SchoolId, x.SchoolName, x.SchoolNameShort, x.Sport, x.Division, x.Conference, x.IsEnabled })
+                            .Select(s => new SearchSchoolResponse
+                                {
+                                    SchoolId = s.Key.SchoolId,
+                                    SchoolName = s.Key.SchoolName,
+                                    SchoolNameShort = s.Key.SchoolNameShort,
+                                    Coaches = s.Select(c => new Coach
+                                    {
+                                        Email = c.RowKey.ToString(),
+                                        Name = c.CoachName,
+                                        Title = c.CoachTitle,
+                                        Sport = c.Sport
+                                    }).ToList(),
+                                    Division = s.Key.Division,
+                                    Conference = s.Key.Conference,
+                                    IsEnabled = s.Key.IsEnabled
+                                })
+                            .OrderBy(s => s.SchoolName);
+
+
+            return schools;
         }
 
     }

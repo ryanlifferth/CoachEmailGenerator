@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "School Page";
+    var userEmail = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
+
+}
+
+<form>
+
+    <div class="mb-3 form-group">
+        <label for="schoolName">School</label>
+        <span class="results-count">
+            <span class="count"></span>
+            <span class="found"></span>
+        </span>
+        <input type="text" name="schoolName" id="schoolName" class="form-control" placeholder="School Name" />
+
+    </div>
+
+    <div class="search-results"></div>
+
+
+</form>
+
+
+@section Scripts {
+    <script src="~/js/school-search.js" asp-append-version="true"></script>
+}

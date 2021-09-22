@@ -6,24 +6,26 @@ using System.Threading.Tasks;
 
 namespace CoachEmailGenerator.Models
 {
-    public class CoachesResponse : TableEntity
+    public class SearchSchoolResponse : TableEntity
     {
-        public CoachesResponse(string compoundKey, string coachEmail)
+
+        public SearchSchoolResponse() { }
+
+        public SearchSchoolResponse(string compoundKey, string coachEmail)
         {
             this.PartitionKey = compoundKey;
             this.RowKey = coachEmail;
         }
 
-        public CoachesResponse() { }
-
-        public string CoachName { get; set; }
-        public string CoachTitle { get; set; }
+        public string SchoolId { get; set; }
         public string SchoolName { get; set; }
         public string SchoolNameShort { get; set; }
-        public string SchoolId { get; set; }
-        public string Sport { get; set; }
+
+        public List<Coach> Coaches { get; set; }
+
         public string Division { get; set; }
         public string Conference { get; set; }
         public bool IsEnabled { get; set; }
+
     }
 }

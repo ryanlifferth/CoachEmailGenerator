@@ -13,7 +13,7 @@
 <div class="container status-bar">
     <div class="row">
         <div class="col status-item first @templateDone @(thisController == "emailtemplate" ? "this" : string.Empty)">
-            <a asp-controller="email-template">
+            <a asp-controller="email-template" asp-action="">
                 1.  Create an email template
             </a>
         </div>
@@ -21,12 +21,12 @@
             <span class="first-spacer">&nbsp;</span>
         </div>
         <div class="col status-item middle @schoolDone @(thisController == "school" ? "this" : string.Empty)">
-            <a asp-controller="school">
+            <a asp-controller="school" asp-action="">
                 2.  Add your list of schools/coaches
             </a>
         </div>
         <div class="col status-item last @previewDone @(thisController == "emailpreview" ? "this" : string.Empty)">
-            <a asp-controller="email-preview">
+            <a asp-controller="email-preview" asp-action="">
                 3.  Preview your email
             </a>
         </div>

@@ -61,5 +61,14 @@ namespace CoachEmailGenerator.Controllers
             return View();
         }
 
+        public IActionResult Search()
+        {
+            var userEmail = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
+            var schools = _saveTemplateService.GetSchoolsByEmailAddress(userEmail);
+
+            return View();
+        }
+
+
     }
 }

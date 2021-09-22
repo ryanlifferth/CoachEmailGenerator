@@ -154,7 +154,7 @@ nav.navbar {
       display: block;
       font-size: 18px;
       font-weight: 600;
-      letter-spacing: 8px;
+      letter-spacing: 4px;
       margin-right: -6px;
       margin-top: -5px;
       text-transform: lowercase; }
@@ -515,6 +515,62 @@ label {
   text-align: center; }
   .modal .modal-dialog .modal-content .modal-body img {
     width: 300px; }
+
+.form-group {
+  position: relative; }
+  .form-group label {
+    font-size: 16px;
+    margin-left: 5px; }
+  .form-group .results-count {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 14px;
+    position: absolute;
+    right: 5px; }
+    .form-group .results-count .count {
+      font-weight: 600; }
+
+.result-row {
+  color: rgba(0, 0, 0, 0.7);
+  display: block; }
+  .result-row .school {
+    align-items: flex-end;
+    display: flex; }
+    .result-row .school .full-name {
+      font-size: 16px;
+      font-weight: 600; }
+    .result-row .school .short-name {
+      color: rgba(0, 0, 0, 0.4);
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: -3px;
+      padding-left: 10px; }
+    .result-row .school .right-content {
+      margin-left: auto; }
+      .result-row .school .right-content .division {
+        bottom: 2px;
+        color: rgba(0, 0, 0, 0.4);
+        font-size: 13px;
+        font-weight: 600;
+        margin: 0 10px 0 0;
+        position: relative; }
+  .result-row .coach {
+    color: rgba(0, 0, 0, 0.9);
+    font-size: 13px;
+    display: block;
+    margin-left: 20px; }
+    .result-row .coach .name {
+      white-space: nowrap; }
+    .result-row .coach .email, .result-row .coach .phone {
+      color: rgba(0, 0, 0, 0.5);
+      margin-left: 20px; }
+  .result-row:hover {
+    background-color: rgba(0, 0, 0, 0.02); }
+  .result-row:first-of-type {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px; }
+  .result-row:last-of-type {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px; }
 
 .preview-container {
   margin-bottom: 25px;
