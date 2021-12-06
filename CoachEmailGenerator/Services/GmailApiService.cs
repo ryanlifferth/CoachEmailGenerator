@@ -89,7 +89,7 @@ namespace CoachEmailGenerator.Services
 
         private MailMessage CreateEmail(string emailBody, string emailSubject, string emailTo)
         {
-            //var filePath = Directory.GetCurrentDirectory() + "\\Data\\Snow College Soccer Schedule Fall 21.pdf";
+            //var filePath = Directory.GetCurrentDirectory() + "\\Data\\Player-Profile.pdf";
             //var attatchment = new Attachment(filePath);
 
             // Create the message first
