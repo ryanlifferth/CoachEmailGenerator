@@ -89,9 +89,6 @@ namespace CoachEmailGenerator.Services
 
         private MailMessage CreateEmail(string emailBody, string emailSubject, string emailTo)
         {
-            //var filePath = Directory.GetCurrentDirectory() + "\\Data\\Player-Profile.pdf";
-            //var attatchment = new Attachment(filePath);
-
             // Create the message first
             var msg = new MailMessage()
             {
@@ -100,7 +97,11 @@ namespace CoachEmailGenerator.Services
                 Body = emailBody,
                 IsBodyHtml = true
             };
-            //msg.Attachments.Add(attatchment);
+            
+            var filePath = Directory.GetCurrentDirectory() + "\\Data\\Player-Profile.pdf";
+            var attatchment = new Attachment(filePath); 
+            msg.Attachments.Add(attatchment);
+            
             //msg.To.Add(new MailAddress("coach@school.edu", "Coach Coachy"));
             msg.To.Add(new MailAddress(emailTo));
 

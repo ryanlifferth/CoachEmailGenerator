@@ -44,6 +44,11 @@ namespace CoachEmailGenerator.Controllers
             previewModel.Template = template;
             previewModel.Schools = schools;
 
+            // Check to see if the user has the property role (scope) to create an email
+            // In this list, we are looking for the https://mail.google.com value
+            var scope = HttpContext.GetTokenAsync("scope").Result;
+            TempData["HasGmailRole"] = scope.IndexOf("https://mail.google.com") > -1 ? true : false;
+
             return View(previewModel);
         }
 

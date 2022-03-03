@@ -41,6 +41,26 @@ namespace CoachEmailGenerator.Controllers
             });
         }
 
+        public async Task ChallengeUser(string controllerName)
+        {
+            // check the controller name and give it the route attribute name, where needed
+            if (controllerName.IndexOf("-") != -1)
+            {
+                var updateRouteName = controllerName.ToLowerInvariant() switch
+                {
+                    "emailpreview" => "email-preview",
+                    "emailtemplate" => "email-template",
+                    _ => controllerName
+                };
+                controllerName = updateRouteName;
+            }
+
+            await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme, new AuthenticationProperties()
+            {
+                RedirectUri = "/" + controllerName
+            });
+        }
+
         [Authorize]
         public async Task<IActionResult> Logout()
         {

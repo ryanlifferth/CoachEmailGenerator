@@ -50,6 +50,31 @@
     }
 }
 
+.error {
+    align-items: center;
+    background-color: lightgoldenrodyellow;
+    border: 1px solid darkred;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0px rgb(0 0 0 / 40%);
+    color: darkred;
+    display: flex;
+    margin: 0 auto 30px;
+    padding: 10px 20px;
+    max-width: 80%;
+
+    .icon {
+        margin-right: 10px;
+    }
+
+    .text {
+        a {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
 .success {
     color: mediumseagreen;
     margin: 0 0 30px 0;
@@ -132,7 +157,7 @@
 
     .email-header {
         font-size: 14px;
-        margin-bottom: 30px; 
+        margin-bottom: 30px;
 
         label {
             color: #000;
@@ -157,10 +182,9 @@
         font-weight: 500;
 
         &.hover-val {
-            background-color: #fff!important;
+            background-color: #fff !important;
             //color: #555559!important;
             //font-weight: 400!important;
-
         }
     }
 }

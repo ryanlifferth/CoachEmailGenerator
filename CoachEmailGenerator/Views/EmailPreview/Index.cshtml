@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Preview Emails";
     var pic = User?.Claims.FirstOrDefault(x => x.Type == "urn:google:picture").Value;
+    //var thisController = this.ViewContext.RouteData.Values["controller"].ToString().ToLowerInvariant();
+
+    bool hasGmailRole = bool.Parse(TempData["HasGmailRole"].ToString());
 
     List<School> schools = Model.Schools;
     EmailTemplate template = Model.Template;
@@ -34,6 +37,18 @@
 }
 
 <form asp-route="Index" id="previewForm" method="post">
+
+    @if (!hasGmailRole)
+    {
+        <div class="error">
+            <span class="fad fa-exclamation-triangle fa-2x icon"></span>
+            <span class="text">
+                You haven't granted access to the GMAIL app.<br />
+                <a asp-controller="Home" asp-action="ChallengeUser" asp-route-controllerName="email-preview" class="link">Click here</a> 
+                to prefix permissions, otherwise we won't be able to generate your emails.
+            </span>
+        </div>
+    }
 
     @if (createdSuccessfully)
     {

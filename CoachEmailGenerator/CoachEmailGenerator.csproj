@@ -13,7 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Apis.CloudResourceManager.v1" Version="1.56.0.2565" />
     <PackageReference Include="google.apis.gmail.v1" Version="1.50.0.2235" />
+    <PackageReference Include="Google.Apis.Iam.v1" Version="1.56.0.2604" />
+    <PackageReference Include="Google.Apis.PolicyTroubleshooter.v1" Version="1.56.0.2472" />
     <PackageReference Include="microsoft.aspnetcore.authentication" Version="2.2.0" />
     <PackageReference Include="microsoft.aspnetcore.authentication.google" Version="5.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.4" />
