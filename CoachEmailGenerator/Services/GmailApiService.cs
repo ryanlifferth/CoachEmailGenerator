@@ -98,9 +98,9 @@ namespace CoachEmailGenerator.Services
                 IsBodyHtml = true
             };
             
-            var filePath = Directory.GetCurrentDirectory() + "\\Data\\Player-Profile.pdf";
-            var attatchment = new Attachment(filePath); 
-            msg.Attachments.Add(attatchment);
+            //var filePath = Directory.GetCurrentDirectory() + "\\Data\\Player-Profile.pdf";
+            //var attatchment = new Attachment(filePath); 
+            //msg.Attachments.Add(attatchment);
             
             //msg.To.Add(new MailAddress("coach@school.edu", "Coach Coachy"));
             msg.To.Add(new MailAddress(emailTo));
