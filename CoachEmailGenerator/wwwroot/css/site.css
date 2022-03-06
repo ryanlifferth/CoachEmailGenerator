@@ -737,6 +737,27 @@ label {
 .nav-button.send, .nav-button.sending {
   border-color: rgba(37, 89, 132, 0.2);
 }
+.nav-button.disabled {
+  border-color: rgba(192, 192, 192, 0.5);
+  color: #c0c0c0;
+  font-weight: 500;
+}
+.nav-button.disabled span {
+  --fa-primary-color: auto;
+  --fa-secondary-color: auto;
+  --fa-secondary-opacity: 0.4;
+}
+.nav-button.disabled:hover {
+  border-color: rgba(192, 192, 192, 0.5);
+  color: #c0c0c0;
+  font-weight: 500;
+  text-shadow: none;
+}
+.nav-button.disabled:hover span {
+  --fa-primary-color: auto;
+  --fa-secondary-color: auto;
+  --fa-secondary-opacity: 0.4;
+}
 .nav-button.sending {
   background-color: #efefef;
   color: #c0c0c0;
@@ -754,13 +775,28 @@ label {
   --fa-secondary-opacity: 0.4;
 }
 
+.no-role {
+  color: firebrick;
+  font-size: 13px;
+  font-style: italic;
+  margin-left: auto;
+  width: 85%;
+}
+.no-role .icon {
+  color: indianred;
+  float: left;
+  font-size: 1.2rem;
+  right: -4px;
+  top: 1px;
+}
+
 .error {
   align-items: center;
   background-color: lightgoldenrodyellow;
-  border: 1px solid darkred;
+  border: 1px solid firebrick;
   border-radius: 5px;
   box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.4);
-  color: darkred;
+  color: firebrick;
   display: flex;
   margin: 0 auto 30px;
   padding: 10px 20px;
@@ -768,6 +804,9 @@ label {
 }
 .error .icon {
   margin-right: 10px;
+}
+.error .text a {
+  text-decoration: underline;
 }
 .error .text a:hover {
   text-decoration: underline;

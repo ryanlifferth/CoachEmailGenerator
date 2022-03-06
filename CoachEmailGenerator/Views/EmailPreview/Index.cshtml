@@ -45,7 +45,7 @@
             <span class="text">
                 You haven't granted access to the GMAIL app.<br />
                 <a asp-controller="Home" asp-action="ChallengeUser" asp-route-controllerName="email-preview" class="link">Click here</a> 
-                to prefix permissions, otherwise we won't be able to generate your emails.
+                to grant the proper permissions, otherwise we won't be able to generate your emails.
             </span>
         </div>
     }
@@ -119,10 +119,18 @@
             </a>
         </div>
         <div class="col text-right">
-            <button type="submit" class="nav-button send">
+            <button type="submit" disabled="@(!hasGmailRole ? "disabled" : null)" class="nav-button send @(!hasGmailRole ? "disabled" : null)">
                 SEND EMAIL
                 <span class="fad fa-paper-plane fa-lg"></span>
             </button>
+            @if (!hasGmailRole)
+            {
+                <div class="no-role">
+                    <span class="fad fa-exclamation-triangle icon"></span>
+                    Before you can send the email, you must grant the right permission.  Click the link in the error description at the top of the page to grant access.
+                </div>
+            }
+
             <div class="sending nav-button d-none">
                 SENDING...
                 <span class="fad fa-paper-plane fa-lg icon"></span>
@@ -134,6 +142,4 @@
 
 @section Scripts {
 <script src="~/js/preview.js" asp-append-version="true"></script>
-
-
 }
