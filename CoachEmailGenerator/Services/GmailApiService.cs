@@ -75,6 +75,7 @@ namespace CoachEmailGenerator.Services
             catch (Exception ex)
             {
                 var error = ex.Message;
+                throw;
             }
 
         }
