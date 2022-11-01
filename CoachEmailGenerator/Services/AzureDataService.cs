@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
+using CoachEmailGenerator.Common;
 
 namespace CoachEmailGenerator.Services
 {
@@ -84,30 +85,36 @@ namespace CoachEmailGenerator.Services
             _cloudTable = _cloudTableClient.GetTableReference("Schools");
             var batchOperation = new TableBatchOperation();
 
-            foreach (var school in schools)
+            var batches = schools.Batch(100);
+            foreach (var schoolBatch in batches)
             {
-                // See if this is new or edit
-                if (school.Id == Guid.Empty)
+                batchOperation = new TableBatchOperation();
+
+                foreach (var school in schoolBatch)
                 {
-                    school.Id = Guid.NewGuid();
+                    // See if this is new or edit
+                    if (school.Id == Guid.Empty)
+                    {
+                        school.Id = Guid.NewGuid();
+                    }
+
+                    if (string.IsNullOrEmpty(school.PartitionKey))
+                    {
+                        school.PartitionKey = Helper.GetUserNameFromEmail(userEmail);
+                    }
+
+                    if (string.IsNullOrEmpty(school.RowKey))
+                    {
+                        school.RowKey = school.Id.ToString();
+                    }
+
+                    batchOperation.InsertOrReplace(school);
+                    //var saveTask = Task.Run(async () => await _cloudTable.ExecuteAsync(TableOperation.InsertOrReplace(school)));
                 }
-
-                if (string.IsNullOrEmpty(school.PartitionKey))
-                {
-                    school.PartitionKey = Helper.GetUserNameFromEmail(userEmail);
-                }
-
-                if (string.IsNullOrEmpty(school.RowKey))
-                {
-                    school.RowKey = school.Id.ToString();
-                }
-
-                batchOperation.InsertOrReplace(school);
-                //var saveTask = Task.Run(async () => await _cloudTable.ExecuteAsync(TableOperation.InsertOrReplace(school)));
-
+                var saveTask = Task.Run(async () => await _cloudTable.ExecuteBatchAsync(batchOperation));
+                var result = saveTask.GetAwaiter().GetResult();
             }
-            var saveTask = Task.Run(async () => await _cloudTable.ExecuteBatchAsync(batchOperation));
-            var result = saveTask.GetAwaiter().GetResult();
+
 
         }
 
