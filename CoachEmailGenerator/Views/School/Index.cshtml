@@ -3,7 +3,7 @@
     ViewData["Title"] = "School Page";
     var userEmail = User.Claims.FirstOrDefault(x => x.Type.ToString().IndexOf("emailaddress") > 0)?.Value;
 
-    
+
     var sortValue = String.IsNullOrEmpty(ViewData["Sort"].ToString()) ? "SchoolName" : ViewData["Sort"].ToString();
     var sortList = new List<SelectListItem>
     {
@@ -27,10 +27,7 @@
 
     <input type="hidden" id="userEmail" value="@(userEmail)" />
 
-    
-
     <div class="school-list">
-
 
         <div class="school-list-action-header">
             <div class="sort">
@@ -41,6 +38,17 @@
                 <span class="count">
                     <span class="number">@schools.Count()</span> schools
                     (<span class="number enabled-count">@schools.Where(s => s.IsEnabled).Count()</span> active)
+                </span>
+            </div>
+
+            <div class="enable">
+                <a href="#" class="enable-all" onclick="return false;">enable all</a>
+                <span class="separator">|</span>
+                <a href="#" class="disable-all" onclick="return false;">disable all</a>
+
+                <span class="saving d-none">
+                    <span class="fad fa-spinner fa-pulse"></span>
+                    Saving...
                 </span>
             </div>
 
@@ -91,7 +99,6 @@
 
         @if (Model != null)
         {
-            
             @foreach (var school in schools)
             {
                 <div class="row-wrapper">
@@ -139,7 +146,7 @@
                         </div>
                     </div>
                     <div class="grid-item timestamp">
-                        @school.Timestamp.ToString("dd-MMM-yy HH:mmtt").ToUpper()
+                        @school.Timestamp.ToString("dd-MMM-yy h:mmtt").ToUpper()
                     </div>
 
                     <input type="hidden" asp-for="@school.Id" class="id" />

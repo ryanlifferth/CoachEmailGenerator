@@ -44,7 +44,6 @@
         $(this).siblings(".edit").removeClass("d-none");
     });
 
-
     $(".save").click(function () {
         $(this).siblings(".saving").removeClass("d-none");
 
@@ -139,6 +138,35 @@
 
     });
 
+    $(".enable-all, .disable-all").on("click", function () {
+        var $saving = $(this).siblings(".saving");
+        $saving.removeClass("d-none");
+
+        var isEnabled = $(this).attr("class") === 'enable-all' ? true : false;
+        var userEmail = $("#userEmail").val();
+
+        $(".enabled-checkbox").prop('checked', isEnabled);
+
+        var count = $(".enabled-checkbox").length;
+        $(".enabled-count").text(count);
+
+        // Save the data
+        $.ajax({
+            type: "POST",
+            url: "../api/SchoolInfo/SaveAllIsEnabled" + "?userEmail=" + userEmail + "&isEnabled=" + isEnabled,
+            error: function (msg) {
+                alert('error' + msg);
+            },
+            success: function (data) {
+                // update enabled count
+                if (!isNaN(count)) $(".enabled-count").text(count);
+            },
+            complete: function () {
+                $saving.addClass("d-none");
+            }
+        });
+    });
+
     $(".sort-by").on("change", function () {
         window.location.href = location.href.split("?")[0] + '?sort=' + this.value;
     });
@@ -210,6 +238,5 @@
         $this.addClass("d-none");
         $this.siblings(".edit").removeClass("d-none");
     }
-
 
 });

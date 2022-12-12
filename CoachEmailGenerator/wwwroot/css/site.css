@@ -8,7 +8,7 @@ html {
 }
 
 body {
-  background-color: #f0f2f5;
+  background-color: rgb(240, 242, 245);
   color: #555559;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -422,51 +422,6 @@ label {
   border-color: #ced4da;
 }
 
-.add-new {
-  margin-bottom: 10px;
-  text-align: right;
-}
-.add-new .icon {
-  margin-right: 5px;
-}
-.add-new button {
-  background-color: rgba(12, 99, 136, 0.8);
-  border: 1px solid rgba(12, 99, 136, 0.4);
-  font-size: 14px;
-}
-.add-new button.btn-primary:hover {
-  background-color: rgba(12, 99, 136, 0.7);
-}
-.add-new button.btn-primary:focus, .add-new button.btn-primary.focus {
-  background-color: rgba(12, 99, 136, 0.7);
-  border-color: rgba(12, 99, 136, 0.4);
-  box-shadow: 0 0 0 0.2rem rgba(12, 99, 136, 0.3);
-}
-.add-new button.btn-primary:not(:disabled):not(.disabled):active {
-  background-color: rgba(12, 99, 136, 0.9);
-  border: 1px solid rgba(12, 99, 136, 0.5);
-}
-
-.sort {
-  margin-left: 10px;
-}
-.sort .label {
-  color: rgba(0, 0, 0, 0.4);
-  font-size: 13px;
-}
-.sort select {
-  font-size: 14px;
-  padding: 2px 4px;
-}
-.sort .count {
-  color: rgba(0, 0, 0, 0.4);
-  font-size: 13px;
-  margin-left: 25px;
-}
-.sort .count .number {
-  font-weight: 600;
-}
-
 .school-list {
   display: inline-grid;
   grid-gap: 0;
@@ -489,6 +444,71 @@ label {
   flex-flow: row;
   grid-column: 1/span 5;
   justify-content: space-between;
+}
+.school-list .school-list-action-header .sort {
+  margin-left: 10px;
+}
+.school-list .school-list-action-header .sort .label {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 13px;
+}
+.school-list .school-list-action-header .sort select {
+  font-size: 14px;
+  padding: 2px 4px;
+}
+.school-list .school-list-action-header .sort .count {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 13px;
+  margin-left: 25px;
+}
+.school-list .school-list-action-header .sort .count .number {
+  font-weight: 600;
+}
+.school-list .school-list-action-header .enable {
+  align-items: center;
+  display: flex;
+  font-size: 12px;
+  flex: 1;
+  justify-content: flex-end;
+  margin-right: 80px;
+  position: relative;
+}
+.school-list .school-list-action-header .enable .separator {
+  color: lightgray;
+  display: flex;
+  margin: 0 4px 4px;
+}
+.school-list .school-list-action-header .enable .saving {
+  bottom: -4px;
+  color: cornflowerblue;
+  left: auto;
+  right: 25px;
+  text-align: right;
+  top: auto;
+}
+.school-list .school-list-action-header .add-new {
+  margin-bottom: 10px;
+  text-align: right;
+}
+.school-list .school-list-action-header .add-new .icon {
+  margin-right: 5px;
+}
+.school-list .school-list-action-header .add-new button {
+  background-color: rgba(12, 99, 136, 0.8);
+  border: 1px solid rgba(12, 99, 136, 0.4);
+  font-size: 14px;
+}
+.school-list .school-list-action-header .add-new button.btn-primary:hover {
+  background-color: rgba(12, 99, 136, 0.7);
+}
+.school-list .school-list-action-header .add-new button.btn-primary:focus, .school-list .school-list-action-header .add-new button.btn-primary.focus {
+  background-color: rgba(12, 99, 136, 0.7);
+  border-color: rgba(12, 99, 136, 0.4);
+  box-shadow: 0 0 0 0.2rem rgba(12, 99, 136, 0.3);
+}
+.school-list .school-list-action-header .add-new button.btn-primary:not(:disabled):not(.disabled):active {
+  background-color: rgba(12, 99, 136, 0.9);
+  border: 1px solid rgba(12, 99, 136, 0.5);
 }
 .school-list .grid-item {
   color: rgba(0, 0, 0, 0.7);
@@ -759,7 +779,7 @@ label {
   --fa-secondary-opacity: 0.4;
 }
 .nav-button.sending {
-  background-color: #efefef;
+  background-color: rgb(239, 239, 239);
   color: #c0c0c0;
   display: inline-block;
   font-weight: 500;
@@ -813,7 +833,7 @@ label {
 }
 
 .success {
-  color: mediumseagreen;
+  color: cornflowerblue;
   margin: 0 0 30px 0;
   text-align: center;
 }

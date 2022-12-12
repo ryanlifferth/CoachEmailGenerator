@@ -1,59 +1,4 @@
 ﻿
-.add-new {
-    margin-bottom: 10px;
-    text-align: right;
-    //min-width: 750px;
-
-    .icon {
-        margin-right: 5px;
-    }
-
-    button {
-        background-color: rgba(12, 99, 136, 0.8);
-        border: 1px solid rgba(12, 99, 136, 0.4);
-        font-size: 14px;
-
-        &.btn-primary:hover {
-            background-color: rgba(12, 99, 136, 0.7);
-        }
-
-        &.btn-primary:focus, &.btn-primary.focus {
-            background-color: rgba(12, 99, 136, 0.7);
-            border-color: rgba(12, 99, 136, 0.4);
-            box-shadow: 0 0 0 0.2rem rgba(12, 99, 136, 0.30);
-        }
-
-        &.btn-primary:not(:disabled):not(.disabled):active {
-            background-color: rgba(12, 99, 136, 0.9);
-            border: 1px solid rgba(12, 99, 136, 0.5);
-        }
-    }
-}
-
-.sort {
-    margin-left: 10px; 
-
-    .label {
-        color: rgba(0,0,0,0.4);
-        font-size: 13px;
-    }
-
-    select {
-        font-size: 14px;
-        padding: 2px 4px;
-    }
-
-    .count {
-        color: rgba(0,0,0,0.4);
-        font-size: 13px;
-        margin-left: 25px;
-
-        .number {
-            font-weight: 600;
-        }
-    }
-}
-
 .school-list {
     display: inline-grid;
     grid-gap: 0;
@@ -79,6 +24,86 @@
         flex-flow: row;
         grid-column: 1 / span 5;
         justify-content: space-between;
+
+        .sort {
+            margin-left: 10px;
+
+            .label {
+                color: rgba(0,0,0,0.4);
+                font-size: 13px;
+            }
+
+            select {
+                font-size: 14px;
+                padding: 2px 4px;
+            }
+
+            .count {
+                color: rgba(0,0,0,0.4);
+                font-size: 13px;
+                margin-left: 25px;
+
+                .number {
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .enable {
+            align-items: center;
+            display: flex;
+            font-size: 12px;
+            flex: 1;
+            justify-content: flex-end;
+            margin-right: 80px;
+            position: relative;
+
+            .separator {
+                color: lightgray;
+                display: flex;
+                margin: 0 4px 4px;
+            }
+
+            .saving {
+                bottom: -4px;
+                color: cornflowerblue;
+                left: auto;
+                right: 25px;
+                text-align: right;
+                top: auto;
+            }
+        }
+
+        .add-new {
+            margin-bottom: 10px;
+            text-align: right;
+            //min-width: 750px;
+
+            .icon {
+                margin-right: 5px;
+            }
+
+            button {
+                background-color: rgba(12, 99, 136, 0.8);
+                border: 1px solid rgba(12, 99, 136, 0.4);
+                font-size: 14px;
+
+                &.btn-primary:hover {
+                    background-color: rgba(12, 99, 136, 0.7);
+                }
+
+                &.btn-primary:focus, &.btn-primary.focus {
+                    background-color: rgba(12, 99, 136, 0.7);
+                    border-color: rgba(12, 99, 136, 0.4);
+                    box-shadow: 0 0 0 0.2rem rgba(12, 99, 136, 0.30);
+                }
+
+                &.btn-primary:not(:disabled):not(.disabled):active {
+                    background-color: rgba(12, 99, 136, 0.9);
+                    border: 1px solid rgba(12, 99, 136, 0.5);
+                }
+            }
+        }
     }
 
     .grid-item {

@@ -61,6 +61,27 @@ namespace CoachEmailGenerator.Controllers.api
             //_saveTemplateService.SaveSchools(userEmail, schools);
         }
 
+        [HttpPost("SaveAllIsEnabled")]
+        public IActionResult SaveAllIsEnabled(string userEmail, bool isEnabled)
+        {
+            // Load all schools
+            var schools = _saveTemplateService.GetSchoolsByEmailAddress(userEmail);
+
+            if (schools != null )
+            {
+                foreach (var school in schools)
+                {
+                    school.IsEnabled = isEnabled;
+                }
+                _saveTemplateService.SaveSchools(userEmail, schools);
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         [HttpPost("SaveTheSchool")]
         public IActionResult SaveTheSchool(string userEmail, School school)
         {
