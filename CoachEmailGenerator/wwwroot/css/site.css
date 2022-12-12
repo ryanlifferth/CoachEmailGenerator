@@ -480,11 +480,14 @@ label {
 }
 .school-list .school-list-action-header .enable .saving {
   bottom: -4px;
-  color: cornflowerblue;
+  color: #62B0E8;
   left: auto;
   right: 25px;
   text-align: right;
   top: auto;
+}
+.school-list .school-list-action-header .enable .saving .icon {
+  color: #F47920;
 }
 .school-list .school-list-action-header .add-new {
   margin-bottom: 10px;

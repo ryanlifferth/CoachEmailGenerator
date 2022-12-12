@@ -66,11 +66,15 @@
 
             .saving {
                 bottom: -4px;
-                color: cornflowerblue;
+                color: #62B0E8;
                 left: auto;
                 right: 25px;
                 text-align: right;
                 top: auto;
+
+                .icon {
+                    color: #F47920;
+                }
             }
         }
 
