@@ -9,7 +9,6 @@
             menubar: false,
             //menubar: 'edit insert view format table tools help',
             toolbar: 'undo redo | bold italic underline | outdent indent | coachButton | fontselect fontsizeselect forecolor backcolor | alignleft aligncenter alignright alignjustify formatselect',
-            plugins: 'noneditable',
             //noneditable_editable_class: "non-editable",
             setup: function (editor) {
 
