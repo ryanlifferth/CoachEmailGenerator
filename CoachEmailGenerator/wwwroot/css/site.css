@@ -201,7 +201,6 @@ nav.navbar .navbar-nav {
   flex-direction: row;
   justify-content: normal;
   padding: 12px 10px 0 40px;
-  display: none;
 }
 nav.navbar .navbar-nav a.nav-item {
   border-bottom: 2px solid transparent;
